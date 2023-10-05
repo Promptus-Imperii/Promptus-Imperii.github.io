@@ -11401,11 +11401,6 @@ input#nav-toggle:checked ~ #nav-menu {
   margin-right: calc(0.25rem * var(--tw-space-x-reverse));
   margin-left: calc(0.25rem * calc(1 - var(--tw-space-x-reverse)));
 }
-.space-x-3 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-x-reverse: 0;
-  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
-  margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
-}
 .space-y-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
@@ -11443,10 +11438,6 @@ input#nav-toggle:checked ~ #nav-menu {
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-}
-.bg-primary {
-  --tw-bg-opacity: 1;
-  background-color: rgb(18 18 18 / var(--tw-bg-opacity));
 }
 .bg-theme-light {
   --tw-bg-opacity: 1;
@@ -11499,10 +11490,6 @@ input#nav-toggle:checked ~ #nav-menu {
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
-}
-.py-1\.5 {
-  padding-top: 0.375rem;
-  padding-bottom: 0.375rem;
 }
 .py-10 {
   padding-top: 2.5rem;
@@ -11602,10 +11589,6 @@ input#nav-toggle:checked ~ #nav-menu {
 .text-red-500 {
   --tw-text-opacity: 1;
   color: rgb(239 68 68 / var(--tw-text-opacity));
-}
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 .opacity-0 {
   opacity: 0;
@@ -12683,10 +12666,6 @@ input#nav-toggle:checked ~ #nav-menu {
   --tw-bg-opacity: 1;
   background-color: rgb(18 18 18 / var(--tw-bg-opacity));
 }
-  .hover\:bg-theme-light:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(246 246 246 / var(--tw-bg-opacity));
-}
   .hover\:text-primary:hover {
   --tw-text-opacity: 1;
   color: rgb(18 18 18 / var(--tw-text-opacity));
@@ -12703,10 +12682,6 @@ input#nav-toggle:checked ~ #nav-menu {
   --tw-bg-opacity: 1;
   background-color: rgb(28 28 28 / var(--tw-bg-opacity));
 }
-  :is(.dark .dark\:bg-darkmode-primary) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
   :is(.dark .dark\:bg-darkmode-theme-light) {
   --tw-bg-opacity: 1;
   background-color: rgb(34 34 34 / var(--tw-bg-opacity));
@@ -12718,10 +12693,6 @@ input#nav-toggle:checked ~ #nav-menu {
 }
   :is(.dark .dark\:to-darkmode-theme-light) {
   --tw-gradient-to: #222222 var(--tw-gradient-to-position);
-}
-  :is(.dark .dark\:text-dark) {
-  --tw-text-opacity: 1;
-  color: rgb(4 4 4 / var(--tw-text-opacity));
 }
   :is(.dark .dark\:text-darkmode-dark) {
   --tw-text-opacity: 1;
@@ -12748,10 +12719,6 @@ input#nav-toggle:checked ~ #nav-menu {
   :is(.dark .dark\:hover\:bg-darkmode-primary:hover) {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
-}
-  :is(.dark .dark\:hover\:bg-darkmode-theme-light:hover) {
-  --tw-bg-opacity: 1;
-  background-color: rgb(34 34 34 / var(--tw-bg-opacity));
 }
   :is(.dark .dark\:hover\:text-dark:hover) {
   --tw-text-opacity: 1;
