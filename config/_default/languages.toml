@@ -1,0 +1,6 @@
+################ English language ##################
+[en]
+languageName = "Nl"
+languageCode = "nl-nl"
+contentDir = "content/dutch"
+weight = 1
