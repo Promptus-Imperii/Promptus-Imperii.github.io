@@ -1,0 +1,32 @@
+- id: home
+  translation: Home
+
+- id: read_more
+  translation: Lees meer
+
+- id: send
+  translation: Stuur
+
+- id: related_posts
+  translation: Gerelateerde posts
+
+- id: categories
+  translation: Categorieën
+
+- id: tags
+  translation: Tags
+
+- id: toc
+  translation: Inhoudsopgave
+
+- id: share
+  translation: Delen
+
+- id: search_input_placeholder
+  translation: Zoek Post ...
+
+- id: no_results_for
+  translation: Geen resultaten voor
+
+- id: empty_search_results_placeholder
+  translation: Type een zoekopdracht
