@@ -7,44 +7,19 @@ url = "/"
 weight = 1
 
 [[main]]
-name = "Over"
-url = "about/"
+name = "Activiteiten"
+url = "activities/"
 weight = 2
 
 [[main]]
-name = "Elementen"
-url = "elements/"
+url = "partners_and_sponsors"
+name = "Partners en sponsoren"
 weight = 3
 
 [[main]]
+url = "about/"
+name = "Over ons"
 weight = 4
-name = "Pagina's"
-hasChildren = true
-
-[[main]]
-parent = "Pagina's"
-name = "Blog"
-url = "blog/"
-
-[[main]]
-parent = "Pagina's"
-name = "Contact"
-url = "contact/"
-
-[[main]]
-parent = "Pagina's"
-name = "Auteurs"
-url = "authors/"
-
-[[main]]
-parent = "Paginas"
-name = "Categorieën"
-url = "categories/"
-
-[[main]]
-parent = "Pagina's"
-name = "404 Pagina"
-url = "404/"
 
 
 # footer menu
@@ -59,6 +34,6 @@ url = "elements/"
 weight = 2
 
 [[footer]]
-name = "Privacy Policy"
-url = "privacy-policy/"
+name = "Algemene voorwaarden"
+url = "tos/"
 weight = 3
