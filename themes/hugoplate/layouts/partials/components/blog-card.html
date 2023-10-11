@@ -9,11 +9,13 @@
     </a>
   </h4>
   <ul class="mb-4">
+    {{if .Params.author}}
     <li class="mr-4 inline-block">
       <a href="{{ `authors/` | relLangURL }}{{ .Params.Author | urlize }}/">
         <i class="fa-regular fa-circle-user mr-2"></i>{{ .Params.author }}
       </a>
     </li>
+    {{end}}
     <li class="mr-4 inline-block">
       <i class="fa-regular fa-folder mr-2"></i>
       {{ $categories:= .Params.categories }}
