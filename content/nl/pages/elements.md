@@ -5,7 +5,7 @@ meta_title: ""
 # meta description
 description: "This is meta description"
 # save as draft
-draft: false
+draft: true
 ---
 
 {{< toc >}}
@@ -224,7 +224,7 @@ print s
 
 ### Slider
 
-{{< slider dir="images/gallery" class="max-w-[600px] ml-0" height="400" width="400" webp="true" command="Fit" option="" zoomable="true" >}}
+{{< slider dir="images/gallery" class="max-w-[600px] mx-auto" height="400" width="400" webp="true" resize="true" command="Fit" option="" zoomable="true" >}}
 
 <hr>
 

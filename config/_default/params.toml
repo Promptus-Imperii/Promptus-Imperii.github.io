@@ -18,7 +18,7 @@ navbar_fixed = true
 theme_switcher = true
 theme_default = "dark" # available options [light/dark/system]
 # Main Sections
-mainSections = ["blog"]
+mainSections = ["activities"]
 # contact form action
 contact_form_action = "#" # contact form works with [https://airform.io/] or [https://formspree.io]
 # google tag manager, see https://developers.google.com/tag-manager/
@@ -27,7 +27,7 @@ contact_form_action = "#" # contact form works with [https://airform.io/] or [ht
 # custom script on header, example: custom_script= "<script>console.log(\"Hello World\")</script>"
 custom_script = ""
 # copyright
-copyright = "Designed & Developed by [Zeon Studio](https://zeon.studio)"
+copyright = "Made with ❤️ by Webcomissie"
 
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
@@ -38,15 +38,15 @@ preloader = "" # use jpg, png, svg or gif format.
 # Navigation button
 [navigation_button]
 enable = true
-label = "contact"
-link = "contact"
+label = "Aanmelden"
+link = "Aanmelden"
 
 # search
 # search module: https://github.com/gethugothemes/hugo-modules/tree/master/search
 [search]
-enable = true
+enable = false
 primary_color = "#121212"
-include_sections = ["blog"]
+include_sections = ["activities"]
 show_image = true
 show_description = true
 show_tags = true
