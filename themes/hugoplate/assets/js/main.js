@@ -32,5 +32,29 @@
         slidesPerView: 3,
       },
     },
+    // Additions
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+    },
+  });
+  // Banner slider
+  new Swiper(".banner-slider", {
+    spaceBetween: 24,
+    loop: true,
+    pagination: {
+      el: ".banner-slider-pagination",
+      type: "bullets",
+      clickable: true,
+    },
+    autoplay: true,
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
   });
 })();

@@ -1,33 +1,56 @@
 {{ define "main" }}
-  <!-- Banner -->
-  {{ with .Params.banner }}
-    <section class="section pt-14">
-      <div class="container">
-        <div class="row justify-center">
-          <div class="lg:col-7 mb-8 text-center">
-            <h1 class="mb-4">
-              {{ .title | markdownify }}
-            </h1>
-            <p class="mb-8">
-              {{ .content | markdownify }}
-            </p>
-            {{ with .button }}
-              {{ if .enable }}
-                <a class="btn btn-primary" href="{{ .link | absURL }}">
-                  {{ .label }}
-                  <i class="fa fa-arrow-right pl-2"></i>
-                </a>
+  <!-- New Banner -->
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <div class="w-100">
+          <div class="swiper banner-slider">
+            <div class="swiper-wrapper">
+              {{ range .Params.newbanner.images }}
+                <div class="swiper-slide">
+                  <section class="relative py-24 px-4">
+                    <div class="z-20 relative flex flex-col items-center text-white container mx-auto">
+                      <h1 class="mb-4">{{ $.Params.newbanner.title | markdownify }}</h1>
+                      <p> {{ $.Params.newbanner.subtitle | markdownify }} </p>
+                      <a href="#" class="inline-block">A Call to Action</a>
+                    </div>
+                    <div class="absolute inset-0 h-auto z-10">
+                      {{/*  Gray mask over image  */}}
+                      <div class="absolute inset-0 h-auto z-15 bg-gray-600/50"></div>
+
+                      {{ $image := resources.Get . }}
+                      {{ $image_sm := $image.Fit "510x360"}}
+                      {{ $image_md := $image.Fit "740x370"}}
+                      {{ $image_lg := $image.Fit "992x370"}}
+                      {{ $image_xl := $image.Fit "1250x370"}}
+
+                      <picture>
+                        <source 
+                          media="(max-width: 767px)"
+                          srcset="{{ $image_sm.RelPermalink }}">
+                        <source 
+                          media="(max-width: 1023px)"
+                          srcset="{{ $image_md.RelPermalink }}">
+                        <source 
+                          media="(max-width: 1280px)"
+                          srcset="{{ $image_lg.RelPermalink }}">
+                        <source 
+                          media="(min-width: 1280px)"
+                          srcset="{{ $image_xl.RelPermalink }}">
+                        <img src="{{ $image.RelPermalink }}"
+                        class="h-full w-full object-fit-cover" 
+                        alt="Een foto van de vereniging">
+                      </picture>
+                    </div>
+                  </section>
+                </div>
               {{ end }}
-            {{ end }}
-          </div>
-          <div class="col-12">
-            {{ partial "image" (dict "Src" .image "Alt" "Banner image" "Loading" "eager" "Class" "mx-auto" "Size" "800x") }}
           </div>
         </div>
-      </div>
-    </section>
-  {{ end }}
-  <!-- /Banner -->
+      <div class="banner-slider-pagination mt-9 flex items-center justify-center text-center"></div>
+    </div>
+  </section>
+  <!-- /New banner -->
 
   <!-- Features -->
   {{ range $i, $e:= .Params.features }}
