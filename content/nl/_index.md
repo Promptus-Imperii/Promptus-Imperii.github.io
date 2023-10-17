@@ -9,6 +9,11 @@ banner:
     label: "Get Started For Free"
     link: "https://github.com/zeon-studio/hugoplate"
 
+newbanner:
+  title: "S.V. Promptus Imperii"
+  subtitle: "Dé studievereniging van (Technische) Informatica van Avans Hogschool Breda"
+  images: ["/images/old_banner.png","/images/banner.jpg"]
+
 # Features
 features:
   - title: "What's Included in Hugoplate"
