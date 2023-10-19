@@ -1,18 +1,13 @@
 ---
 # Banner
 banner:
-  title: "The Ultimate Starter Template You Need To Start Your Hugo Project"
-  content: "Hugoplate is a free starter template built with Hugo and TailwindCSS, providing everything you need to jumpstart your Hugo project and save valuable time."
-  image: "/images/banner.png"
-  button:
-    enable: true
-    label: "Get Started For Free"
-    link: "https://github.com/zeon-studio/hugoplate"
-
-newbanner:
   title: "S.V. Promptus Imperii"
   subtitle: "Dé studievereniging van (Technische) Informatica van Avans Hogschool Breda"
   images: ["/images/old_banner.png","/images/banner.jpg"]
+  # Folder where the banner images are, relative to the assets folder. So /assets/images/banner-images-images becomes /images/banner-images
+  # To order the images, number the names: banner-0.jpg, banner-1.jpg etc.
+  banner_images: "/images/banner-images/"
+  call_to_action: "Schrijf je in"
 
 # Features
 features:
