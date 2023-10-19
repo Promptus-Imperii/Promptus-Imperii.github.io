@@ -14,6 +14,10 @@
     });
   });
 
+  // Sliders
+  // See: https://swiperjs.com/
+  // ----------------------------------------
+
   // Testimonial Slider
   // ----------------------------------------
   new Swiper(".testimonial-slider", {
@@ -38,7 +42,9 @@
       onlyInViewport: true,
     },
   });
-  // Banner slider
+
+  // Banner Slider
+  // ----------------------------------------
   new Swiper(".banner-slider", {
     spaceBetween: 24,
     loop: true,
@@ -47,7 +53,14 @@
       type: "bullets",
       clickable: true,
     },
-    autoplay: true,
+    autoplay: {
+      delay: 3000,
+    },
+    speed: 1000,
+    effect: 'fade',
+    fadeEffect: {
+      crossFade: true
+    },
     keyboard: {
       enabled: true,
       onlyInViewport: true,
