@@ -1,11 +1,19 @@
 # backend
 
-## requirements
+## Requirements
 - go >= 1.21.0
-- node >= 18.0.0 (optional)
+
+## Running
+Run with:
+```shell
+go run .
+```
+
+## Testing
+go test
 
 
-## data
+## Data
 the backend accepts a json schema from the signup page in the following format
 
 ```json
@@ -30,7 +38,7 @@ the backend accepts a json schema from the signup page in the following format
         "lastname": "Vries",
         "phone": "+31687654321"
     },
-    "iban": "NL19KNAB123456345678",
+    "iban": "NL18RABO0123459876",
     "account_holder": "J. H. de Vries"
 }
 ```
@@ -40,6 +48,3 @@ the backend accepts a json schema from the signup page in the following format
 it will then validate the phone numbers, postal code and IBAN.
 
 the server returns errors sequentially for each field that is malformatted, and assumes at least some frontend validation has been done
-
-### testuser.js
-this JS script requires node >= v18.0.0  
