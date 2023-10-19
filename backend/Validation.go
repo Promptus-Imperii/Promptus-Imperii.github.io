@@ -58,14 +58,6 @@ func validatePhoneNumber(numberString string) error {
 	return nil
 }
 
-type IBANValidationResponse struct {
-	Valid        bool              `json:"valid"`
-	Messages     []string          `json:"messages"`
-	IBAN         string            `json:"iban"`
-	BankData     map[string]string `json:"bankData"`
-	CheckResults map[string]any    `json:"checkResults"`
-}
-
 // this function takes an IBAN _without_ spaces
 // it then contacts https://openiban.com to check if the IBAN is valid.
 // do note that this API currently only supports the following countries
