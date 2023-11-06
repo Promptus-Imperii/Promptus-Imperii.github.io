@@ -3,7 +3,7 @@ title: "Drukbedrijf"
 meta_title: ""
 description: "this is meta description"
 type: "partner"
-image: "/images/image-placeholder.png"
+image: "/images/sponsor-partner-images/Logo_Drukbedrijf_23-24.png"
 draft: false
 ---
 
