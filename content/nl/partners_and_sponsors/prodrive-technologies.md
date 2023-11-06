@@ -5,7 +5,7 @@ description: "this is meta description"
 type: "sponsor"
 sponsor_type: "Platinum"
 sponsor_time: ["2021 ", "Heden"]
-image: "/images/image-placeholder.png"
+image: "/images/sponsor-partner-images/Logo_ProDrive_Technologies_23-24.png"
 draft: false
 ---
 
