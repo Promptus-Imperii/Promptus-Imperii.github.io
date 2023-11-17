@@ -1,11 +1,8 @@
 ---
 title: Batenburg IAS
-meta_title: ""
-description: "this is meta description"
 type: "sponsor"
 sponsor_type: "Platinum"
 sponsor_time: ["2023 ", "Heden"]
-image: "/images/sponsor-partner-images/Logo_Batenburg_IAS_23-24.png"
 draft: false
 ---
 

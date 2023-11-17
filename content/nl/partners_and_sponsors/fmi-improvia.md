@@ -1,11 +1,8 @@
 ---
 title: "FMI Improvia"
-meta_title: ""
-description: "this is meta description"
 type: "sponsor"
 sponsor_type: "Platinum"
 sponsor_time: ["2021 ", "Heden"]
-image: "/images/sponsor-partner-images/Logo_FMI_Improvia_23-24.png"
 draft: false
 ---
 
