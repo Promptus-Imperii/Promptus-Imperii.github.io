@@ -1,9 +1,6 @@
 ---
 title: "Kamp Beta"
-meta_title: ""
-description: "this is meta description"
 type: "partner"
-image: "/images/sponsor-partner-images/Logo_Kamp_Beta_23-24.png"
 draft: false
 ---
 
