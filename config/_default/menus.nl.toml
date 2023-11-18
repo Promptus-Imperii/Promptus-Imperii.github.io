@@ -12,14 +12,19 @@ url = "activities/"
 weight = 2
 
 [[main]]
-url = "partners_and_sponsors"
+url = "partners_and_sponsors/"
 name = "Partners en sponsoren"
 weight = 3
 
 [[main]]
+url = "https://shop.svpromptusimperii.nl"
+name = "Shop"
+weight = 4
+
+[[main]]
 url = "about/"
 name = "Over ons"
-weight = 4
+weight = 5
 
 
 # footer menu
@@ -29,11 +34,6 @@ url = "about/"
 weight = 1
 
 [[footer]]
-name = "Elementen"
-url = "elements/"
-weight = 2
-
-[[footer]]
 name = "Algemene voorwaarden"
 url = "tos/"
-weight = 3
+weight = 2
