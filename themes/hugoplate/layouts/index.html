@@ -4,7 +4,7 @@
     <div class="container">
       <div class="row">
         <div class="w-100">
-          {{ partial "components/slideshow" (dict "title" .Params.banner.title "subtitle" .Params.banner.subtitle "call_to_action" .Params.banner.call_to_action "banner_images" .Params.banner.banner_images)}}
+          {{ partial "components/slideshow-with-text" (dict "title" .Params.banner.title "subtitle" .Params.banner.subtitle "call_to_action" .Params.banner.call_to_action "banner_images" .Params.banner.banner_images)}}
         </div>
       <div class="banner-slider-pagination mt-9 flex items-center justify-center text-center"></div>
     </div>
