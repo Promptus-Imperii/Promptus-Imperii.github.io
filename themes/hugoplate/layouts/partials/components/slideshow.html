@@ -1,74 +1,49 @@
-<!-- Slideshow partial -->
-<section class="relative py-24">
-    {{/*  Overlayed text  */}}
-    <div class="z-20 relative flex flex-col gap-5 items-center text-center container px-14">
-      <h1>{{ $.title | markdownify }}</h1>
-      <p> {{ $.subtitle | markdownify }} </p>
-      <div class="pt-5">
-        <a href="#" class="btn btn-primary lg:inline-block">{{ $.call_to_action }}</a>
-      </div>
-    </div>
-    <div>
-      {{/*  Swiper next and previous buttons  */}}
-      <svg class="swiper-button-next" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-      </svg>                  
-      <svg class="swiper-button-prev" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-      </svg>
-    </div>
-
-    {{/*  Gray mask over image  */}}
-    <div class="z-10 absolute inset-0 h-auto dark:bg-gray-600/60 bg-gray-50/60"></div>
-
-    {{/* Slideshow */}}
-    {{/*  Swiperjs is ✨special✨ so changing it is a bit of a hassle. Change the javascript in themes/hugoplate/assets/js/main.js.
-    Change the css in assets/scss/custom.scss under "Swiper variables." 
-    Use the docs to see what options to use for the JS and what CSS variables to override in the SCSS file. https://swiperjs.com/swiper-api 
-    */}}
-    <div class="z-0 swiper banner-slider absolute inset-0 h-auto">
-      <div class="swiper-wrapper">
+{{/* Slideshow */}}
+{{/*  Swiperjs is ✨special✨ so changing it is a bit of a hassle. Change the javascript in themes/hugoplate/assets/js/main.js.
+Change the css in assets/scss/custom.scss under "Swiper variables." 
+Use the docs to see what options to use for the JS and what CSS variables to override in the SCSS file. https://swiperjs.com/swiper-api 
+*/}}
+<div class="z-0 swiper banner-slider absolute inset-0 h-auto">
+    <div class="swiper-wrapper">
         {{/*  Prefix folder with the assets folder  */}}
         {{ $folder := (printf "%s%s" "assets/" .banner_images)}}
         {{ if fileExists $folder }}
-          {{ $files := readDir $folder }}
-          {{ range $files }}
-            {{/*  resources.Get reads files from the assets folder on, so we don't prefix the assets folder here  */}}
-            {{ $imagePath := printf "%s%s" $.banner_images .Name }}
-            <div class="swiper-slide">
-              {{ $image := resources.Get $imagePath }}
-              {{ $image_sm := $image.Fit "510x360"}}
-              {{ $image_md := $image.Fit "740x370"}}
-              {{ $image_lg := $image.Fit "992x370"}}
-              {{ $image_xl := $image.Fit "1250x370"}}
+            {{ $files := readDir $folder }}
+            {{ range $files }}
+                {{/*  resources.Get reads files from the assets folder on, so we don't prefix the assets folder here  */}}
+                {{ $imagePath := printf "%s%s" $.banner_images .Name }}
+                <div class="swiper-slide">
+                {{ $image := resources.Get $imagePath }}
+                {{ $image_sm := $image.Fit "510x360"}}
+                {{ $image_md := $image.Fit "740x370"}}
+                {{ $image_lg := $image.Fit "992x370"}}
+                {{ $image_xl := $image.Fit "1250x370"}}
 
-              {{/*  The style attribute makes sure that the alt text is hidden when the page is loading, but still remains visible for screen-readers  */}}
-              <picture style="color: rgba(0, 0, 0, 0) !important;">
-                <source 
-                  media="(max-width: 767px)"
-                  srcset="{{ $image_sm.RelPermalink }}">
-                <source 
-                  media="(max-width: 1023px)"
-                  srcset="{{ $image_md.RelPermalink }}">
-                <source 
-                  media="(max-width: 1280px)"
-                  srcset="{{ $image_lg.RelPermalink }}">
-                <source 
-                  media="(min-width: 1280px)"
-                  srcset="{{ $image_xl.RelPermalink }}">
-                <img
-                src="{{ $image.RelPermalink }}"
-                class="h-full w-full object-fit-cover" 
-                alt="Een foto van de vereniging"
-                loading="lazy">
-              </picture>
+                {{/*  The style attribute makes sure that the alt text is hidden when the page is loading, but still remains visible for screen-readers  */}}
+                <picture style="color: rgba(0, 0, 0, 0) !important;">
+                    <source 
+                    media="(max-width: 767px)"
+                    srcset="{{ $image_sm.RelPermalink }}">
+                    <source 
+                    media="(max-width: 1023px)"
+                    srcset="{{ $image_md.RelPermalink }}">
+                    <source 
+                    media="(max-width: 1280px)"
+                    srcset="{{ $image_lg.RelPermalink }}">
+                    <source 
+                    media="(min-width: 1280px)"
+                    srcset="{{ $image_xl.RelPermalink }}">
+                    <img
+                    src="{{ $image.RelPermalink }}"
+                    class="h-full w-full object-fit-cover" 
+                    alt="Een foto van de vereniging"
+                    loading="lazy">
+                </picture>
 
-            </div>
-          {{ end }}
+                </div>
+            {{ end }}
         {{ else }}
-          {{ errorf "The folder specified for slideshow images does not exist:  %q" .banner_images}}
+            {{ errorf "The folder specified for slideshow images does not exist:  %q" .banner_images}}
         {{ end }}
-      </div>
     </div>
-  </section>
-  <!-- End slideshow partial -->
+</div>
