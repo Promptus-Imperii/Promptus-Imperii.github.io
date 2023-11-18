@@ -9,9 +9,9 @@
         "theme_dark": ""
       },
       "text_color": {
-        "default": "#444444",
-        "dark": "#040404",
-        "light": "#717171"
+        "default": "#1C2541",
+        "dark": "#1C2541",
+        "light": "#1C2541"
       }
     },
     "darkmode": {
@@ -23,9 +23,9 @@
         "theme_dark": ""
       },
       "text_color": {
-        "default": "#B4AFB6",
+        "default": "#fff",
         "dark": "#fff",
-        "light": "#B4AFB6"
+        "light": "#fff"
       }
     }
   },
