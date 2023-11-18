@@ -102,8 +102,8 @@
   {{ with site.GetPage "sections/over-ons.md"}}
   <section class="section">
     <div class="container">
-      <div class="row">
-        <div class="flex flex-col col gap-5 md:col-10 lg:col-8 xl:col-6 mx-auto text-center">
+      <div class="max-sm:flex max-sm:flex-col md:row">
+        <div class="flex flex-col col gap-5 md:col-6 mx-auto text-center">
           <h1>{{ .Title }}</h1>
           <p>{{ .Content }}</p>
         </div>
@@ -111,29 +111,7 @@
           {{ $imagePath := (printf "%s%s" "assets/" .Params.image_path)}}
           {{ if (fileExists $imagePath) }}
             {{ $image := resources.Get .Params.image_path }}
-            {{ $image_sm := $image.Fit "510x360"}}
-            {{ $image_md := $image.Fit "740x370"}}
-            {{ $image_lg := $image.Fit "992x370"}}
-            {{ $image_xl := $image.Fit "1250x370"}}
-            <picture style="color: rgba(0, 0, 0, 0) !important;">
-              <source 
-                media="(max-width: 767px)"
-                srcset="{{ $image_sm.RelPermalink }}">
-              <source 
-                media="(max-width: 1023px)"
-                srcset="{{ $image_md.RelPermalink }}">
-              <source 
-                media="(max-width: 1280px)"
-                srcset="{{ $image_lg.RelPermalink }}">
-              <source 
-                media="(min-width: 1280px)"
-                srcset="{{ $image_xl.RelPermalink }}">
-              <img
-              src="{{ $image.RelPermalink }}"
-              class="h-full w-full object-fit-cover" 
-              alt="Een foto van de vereniging"
-              loading="lazy">
-            </picture>
+            {{ partial "image" (dict "Src" $image "Alt" "Een foto van het huidige bestuur" "Class" "w-full rounded" "Command" "Fit") }}
           {{ end }}
         </div>
       </div>
