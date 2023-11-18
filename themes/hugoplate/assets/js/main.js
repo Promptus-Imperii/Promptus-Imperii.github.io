@@ -14,6 +14,10 @@
     });
   });
 
+  // Sliders
+  // See: https://swiperjs.com/
+  // ----------------------------------------
+
   // Testimonial Slider
   // ----------------------------------------
   new Swiper(".testimonial-slider", {
@@ -31,6 +35,39 @@
       992: {
         slidesPerView: 3,
       },
+    },
+    // Additions
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+    },
+  });
+
+  // Banner Slider
+  // ----------------------------------------
+  new Swiper(".banner-slider", {
+    spaceBetween: 24,
+    loop: true,
+    pagination: {
+      el: ".banner-slider-pagination",
+      type: "bullets",
+      clickable: true,
+    },
+    autoplay: {
+      delay: 3000,
+    },
+    speed: 1000,
+    effect: 'fade',
+    fadeEffect: {
+      crossFade: true
+    },
+    keyboard: {
+      enabled: true,
+      onlyInViewport: true,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
     },
   });
 })();
