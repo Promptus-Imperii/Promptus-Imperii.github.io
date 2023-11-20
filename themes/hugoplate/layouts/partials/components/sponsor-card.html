@@ -1,0 +1,40 @@
+<div class="rounded-lg border-solid border p-4">
+  {{/*  printf "%s%s" concatinates the string. GetMatch matches the file on '/images/sponsor-partner-images/sponsor-name.*' which means that any extention is valid */}}
+  {{ $imagePath := resources.GetMatch (printf "%s%s" (path.Join "/images/sponsor-partner-images" .File.ContentBaseName) ".*") }}
+  {{ if $imagePath }}
+    {{ partial "image" (dict "Src" $imagePath "Alt" .Title "Class" "mb-6 w-full rounded") }}
+  {{ else }}
+    {{ errorf "Cannot find the logo for partner or sponser %s. Please place the logo in images/sponsor-partner-images and give it the same name as your markdown file." .File.ContentBaseName }}
+  {{ end }}
+  <h4 class="mb-3">
+    <a href="{{ .RelPermalink }}">
+      {{ .Title }}
+    </a>
+  </h4>
+  <ul class="mb-4">
+    {{if .Params.sponsor_type}}
+    <li class="mr-4 inline-block">
+        <i class="fa-regular fa-medal mr-2"></i>{{ .Params.sponsor_type }}
+    </li>
+    {{end}}
+
+    {{if .Params.sponsor_time}}
+    <li class="mr-4 inline-block">
+      <i class="fa-regular fa-calendar mr-2"></i>
+      {{ $time:= .Params.sponsor_time }}
+      {{ range $i,$p:= $time }}
+        <a
+          class="ms-1"
+          >{{ . | humanize }}{{ if ne $i (sub (len $time) 1) }}
+            {{ "- " }}
+          {{ end }}
+        </a>
+      {{ end }}
+    </li>
+    {{end}}
+  </ul>
+  <p class="mb-6">{{ .Summary }}</p>
+  <a class="btn btn-outline-primary btn-sm" href="{{ .RelPermalink }}">
+    {{ i18n "read_more_about" }}{{ .Params.Title }}
+  </a>
+</div>

@@ -4,6 +4,9 @@
 - id: read_more
   translation: Lees meer
 
+- id: read_more_about
+  translation: "Lees meer over "
+
 - id: send
   translation: Stuur
 
@@ -30,3 +33,9 @@
 
 - id: empty_search_results_placeholder
   translation: Type een zoekopdracht
+
+- id: sponsors
+  translation: Sponsoren
+
+- id: partners
+  translation: Partners
