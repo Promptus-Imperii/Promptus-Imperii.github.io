@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"net/http"
+	"net/mail"
 	"regexp"
 	"strings"
 
@@ -17,10 +18,6 @@ var (
 	// implemented to https://nl.wikipedia.org/wiki/Postcode#Postcodes_in_Nederland .
 	// lookahead is not currently supported in standard library regex.
 	PostalCodeRegex *regexp.Regexp = regexp.MustCompile(`^[1-9]\d{3}\w{2}$`)
-	// this does not need to be fancy, just needs to check if it is somewhat valid.
-	//
-	// checks for `*@*.*`
-	EmailRegex *regexp.Regexp = regexp.MustCompile(`[\w\d]+@[\w\d]+[.][\w]+`) // jesus christ this is a terrible regex
 )
 
 // ---
@@ -94,14 +91,10 @@ func validateIBAN(iban string) error {
 
 // DISCUSS: should this send the email already?
 func validateEmail(email string) error {
-	if EmailRegex.FindString(email) == "" {
-		return errors.New("email is ongeldig")
+	_, err := mail.ParseAddress(email)
+	if err != nil {
+		return errors.New("email is ongeldig, probeer het zo: voorbeeld@svpromptusimperii.nl")
 	}
-
-	// idk send the verification email?
-	// definitely use a goroutine for that
-	//
-	// go sendVerificationEmail(email)
 
 	return nil
 }
