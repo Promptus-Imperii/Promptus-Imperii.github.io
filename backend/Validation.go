@@ -89,7 +89,6 @@ func validateIBAN(iban string) error {
 	return errors.New("IBAN is ongeldig: controleer of je alles goed hebt overgenomen")
 }
 
-// DISCUSS: should this send the email already?
 func validateEmail(email string) error {
 	_, err := mail.ParseAddress(email)
 	if err != nil {
