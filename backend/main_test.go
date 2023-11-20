@@ -109,3 +109,17 @@ func TestIbanValidationRejectsImproperIban(t *testing.T) {
 		t.FailNow()
 	}
 }
+
+func TestEmailValidationAcceptsValidEmail(t *testing.T) {
+	err := validateEmail("hello@svpromptusimperii.nl")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestEmailValidationRejectsInalidEmail(t *testing.T) {
+	err := validateEmail("@svpromptusimperii.nl")
+	if err == nil {
+		t.FailNow()
+	}
+}
