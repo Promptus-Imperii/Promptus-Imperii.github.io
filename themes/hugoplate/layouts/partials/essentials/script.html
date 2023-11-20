@@ -14,6 +14,7 @@
 
 <!-- main script -->
 {{ $scripts = $scripts | append (resources.Get "js/main.js") }}
+{{ $scripts = $scripts | append (resources.Get "js/submit.js") }}
 {{ $scripts = $scripts | resources.Concat "js/script.js" }}
 {{ if hugo.IsProduction }}
   {{ $scripts = $scripts | minify | fingerprint }}
