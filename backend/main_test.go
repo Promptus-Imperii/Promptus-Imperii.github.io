@@ -80,11 +80,32 @@ func TestSignupShouldReturnErrorWhenPostalCodeIsInvalid(t *testing.T) {
 		WithJSON(userWithIncorrectPostalcodeNumbers).
 		Expect().
 		Status(http.StatusBadRequest).JSON().
-		Object().HasValue("Error", "Postcode is onjuist, probeer het zo: 4818 AJ.")
+		Object().HasValue("Error", "postcode is onjuist, probeer het zo: 4818 AJ")
 
 	e.POST("/signup").
 		WithJSON(userWithIncorrectPostalcodeLetters).
 		Expect().
 		Status(http.StatusBadRequest).JSON().
-		Object().HasValue("Error", "Postcode is onjuist, probeer het zo: 4818 AJ.")
+		Object().HasValue("Error", "postcode is onjuist, probeer het zo: 4818 AJ")
+}
+
+func TestIbanValidationAcceptsValidIban(t *testing.T) {
+	err := validateIBAN("NL12ABNA8803926372")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestIbanValidationRejectsEmptyIban(t *testing.T) {
+	err := validateIBAN("")
+	if err == nil {
+		t.FailNow()
+	}
+}
+
+func TestIbanValidationRejectsImproperIban(t *testing.T) {
+	err := validateIBAN("NL12ABNA88039263")
+	if err == nil {
+		t.FailNow()
+	}
 }
