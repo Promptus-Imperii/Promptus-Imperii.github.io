@@ -6,134 +6,136 @@
   <div class="container">
     <div class="row">
       <div class="md:col-10 lg:col-6 mx-auto">
-        <form action="{{ site.Params.contact_form_action }}" method="POST">
+        <form id="signup-form">
           <div class="mb-6">
             <label for="full_name" class="form-label">
               {{ i18n "full_name" }}
             </label>
-            <input id="full_name" name="full_name" class="form-input" placeholder="Pieter Hendrik" type="text"
+            <input name="full_name" class="form-input" placeholder="Pieter Hendrik" type="text"
               required />
           </div>
           <div class="mb-6">
             <label for="nickname" class="form-label">
               {{ i18n "nickname" }}
             </label>
-            <input id="nickname" name="nickname" class="form-input" placeholder="Piet" type="text" />
+            <input name="nickname" class="form-input" placeholder="Piet" type="text" />
           </div>
           <div class="mb-6">
             <label for="infix" class="form-label">
               {{ i18n "infix" }}
             </label>
-            <input id="infix" name="infix" class="form-input" placeholder="van" type="text" />
+            <input name="infix" class="form-input" placeholder="van" type="text" />
           </div>
           <div class="mb-6">
             <label for="surname" class="form-label">
               {{ i18n "surname" }}
             </label>
-            <input id="surname" name="surname" class="form-input" placeholder="Hendriksen" type="text" required />
+            <input name="surname" class="form-input" placeholder="Hendriksen" type="text" required />
           </div>
           <div class="mb-6">
             <label for="birthday" class="form-label">
               {{ i18n "birthday" }}
             </label>
-            <input id="birthday" name="birthday" class="form-input" placeholder="Hendriksen" type="date" required />
+            <input name="birthday" class="form-input" placeholder="Hendriksen" type="date" required />
           </div>
           <div class="mb-6">
             <label for="address" class="form-label">
               {{ i18n "address" }}
             </label>
-            <input id="address" name="address" class="form-input" placeholder="Lovensdijkstraat 1" type="text"
+            <input name="address" class="form-input" placeholder="Lovensdijkstraat 1" type="text"
               required />
           </div>
           <div class="mb-6">
             <label for="zipcode" class="form-label">
               {{ i18n "zipcode" }}
             </label>
-            <input id="zipcode" name="zipcode" class="form-input" placeholder="1234 AB" type="text" required />
+            <input name="zipcode" class="form-input" placeholder="1234 AB" type="text" required />
           </div>
           <div class="mb-6">
             <label for="city_village" class="form-label">
               {{ i18n "city_village" }}
             </label>
-            <input id="city_village" name="city_village" class="form-input" placeholder="Breda" type="text" required />
+            <input name="city_village" class="form-input" placeholder="Breda" type="text" required />
           </div>
           <div class="mb-6">
             <label for="mail" class="form-label">
               {{ i18n "mail" }}
             </label>
-            <input id="mail" name="mail" class="form-input" placeholder="JohnDoe@outlook.com" type="email" required />
+            <input name="mail" class="form-input" placeholder="JohnDoe@outlook.com" type="email" required />
           </div>
           <div class="mb-6">
             <label for="education" class="form-label">
               {{ i18n "education" }}
             </label>
-            <div class="inline-flex justify-around rounded-md  w-full" role="group">
-              <button type="button" class="w-2/5 btn btn-primary">
-                {{ i18n "computer_science" }}
-              </button>
-              <button type="button" class="w-2/5 btn btn-primary">
-                {{ i18n "software_engineering" }}
-              </button>
+            <div class="flex flex-col justify-around rounded-md  w-full" role="group">
+              <div class="inline-flex items-center gap-2 rounded-md  w-full">
+                <input value="TI" name="education" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                <label for="education">{{ i18n "computer_science" }}</label>
+              </div>
+              <div class="inline-flex items-center gap-2 rounded-md  w-full">
+                <input value="I" name="education" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                <label for="education">{{ i18n "software_engineering" }}</label>
+              </div>
             </div>
           </div>
           <div class="mb-6">
             <label for="phone" class="form-label">
               {{ i18n "phone" }}
             </label>
-            <input id="phone" name="phone" class="form-input" placeholder="+316-12345678" type="tel" />
+            <input name="phone" class="form-input" placeholder="+316-12345678" type="tel" />
           </div>
           <div class="mb-6">
             <label for="cohort_year" class="form-label">
               {{ i18n "cohort_year" }}
             </label>
-            <input id="cohort_year" name="cohort_year" class="form-input" placeholder="2023/2024" type="text" />
+            <input name="cohort_year" class="form-input" placeholder="2023/2024" type="text" />
             <p>{{ i18n "cohort_explanation" }}</p>
           </div>
           <div class="mb-6">
             <label for="emergency_contact_first_name" class="form-label">
               {{ i18n "emergency_contact_first_name" }}
             </label>
-            <input id="emergency_contact_first_name" name="emergency_contact_first_name" class="form-input"
+            <input name="emergency_contact_first_name" class="form-input"
               placeholder="Piet" type="text" required />
           </div>
           <div class="mb-6">
             <label for="emergency_contact_infix" class="form-label">
               {{ i18n "emergency_contact_infix" }}
             </label>
-            <input id="emergency_contact_infix" name="emergency_contact_infix" class="form-input" placeholder="van"
+            <input name="emergency_contact_infix" class="form-input" placeholder="van"
               type="text" required />
           </div>
           <div class="mb-6">
             <label for="emergency_contact_surname" class="form-label">
               {{ i18n "emergency_contact_surname" }}
             </label>
-            <input id="emergency_contact_surname" name="emergency_contact_surname" class="form-input"
+            <input name="emergency_contact_surname" class="form-input"
               placeholder="Pieters" type="text" required />
           </div>
           <div class="mb-6">
             <label for="emergency_contact_phone_number" class="form-label">
               {{ i18n "emergency_contact_phone_number" }}
             </label>
-            <input id="emergency_contact_phone_number" name="emergency_contact_phone_number" class="form-input"
+            <input name="emergency_contact_phone_number" class="form-input"
               placeholder="+316-12345678" type="tel" required />
           </div>
           <div class="mb-6">
             <label for="iban" class="form-label">
               {{ i18n "iban" }}
             </label>
-            <input id="iban" name="iban" class="form-input" placeholder="NL00 AAAA 0000 0000 00" type="text" required />
+            <input name="iban" class="form-input" placeholder="NL00 AAAA 0000 0000 00" type="text" required />
           </div>
           <div class="mb-6">
             <label for="card_holder" class="form-label">
               {{ i18n "card_holder" }}
             </label>
-            <input id="card_holder" name="card_holder" class="form-input" placeholder="J. Doe" type="text" required />
+            <input name="card_holder" class="form-input" placeholder="J. Doe" type="text" required />
           </div>
           <div class="mb-6">
             <label for="contribution" class="form-label">
               {{ i18n "contribution" }}
             </label>
-            <input id="contribution" name="contribution" class="w-4 form-input" type="checkbox" required />
+            <input name="contribution" class="w-4 form-input" type="checkbox" required />
             <label for="approval_contribution" class="font-semibold label">{{ i18n "approval_contribution" }}</label>
             <p>{{ i18n "contribution_agreements" }}</p>
           </div>
@@ -141,12 +143,12 @@
             <label for="terms_and_agreements" class="form-label">
               {{ i18n "terms_and_agreements" }}
             </label>
-            <input id="approval_terms_and_agreements" name="approval_terms_and_agreements" class="w-2 form-input" type="checkbox" required />
+            <input name="approval_terms_and_agreements" class="w-2 form-input" type="checkbox" required />
             <label for="approval_terms_and_agreements" class="font-semibold label">{{ i18n "approval_terms_and_agreements" }}</label>
             <p>{{ i18n "terms_and_agreements_agreements" }}</p>
             <a href="#" class="underline decoration-2">{{ i18n "terms_and_agreements" }}</a>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-primary" onclick="submitSignup()">Submit</button>
         </form>
       </div>
     </div>
@@ -164,17 +166,17 @@
 {{ with site.Params.subscription }}
 {{ if .enable }}
 <!-- subscription form -->
-<form action="{{ .mailchimp_form_action | safeURL }}" method="post" id="mc-embedded-subscribe-form"
-  novalidate="novalidate">
+<form action="{{ .mailchimp_form_action | safeURL }}" method="post" name="mc-embedded-subscribe-form"
+  novalnameate="novalnameate">
   <div class="input-group w-75 mx-auto mb-3">
     <input type="email" name="EMAIL" placeholder="Email" class="form-control required email mce_inline_error"
-      id="mce-EMAIL" aria-required="true" autocomplete="off" required />
-    <button class="input-group-text" name="subscribe" id="mc-embedded-subscribe">
+      name="mce-EMAIL" aria-required="true" autocomplete="off" required />
+    <button class="input-group-text" name="subscribe" name="mc-embedded-subscribe">
       {{ .button_label }}
     </button>
   </div>
-  <input type="hidden" name="EMAILTYPE" id="mce-EMAILTYPE-0" value="html" />
-  <div style="position:absolute;left:-5000px" aria-hidden="true">
+  <input type="hnameden" name="EMAILTYPE" name="mce-EMAILTYPE-0" value="html" />
+  <div style="position:absolute;left:-5000px" aria-hnameden="true">
     <input type="text" name="{{ .name }}" tabindex="-1" />
   </div>
 </form>
@@ -182,7 +184,7 @@
   <div class="response text-white" id="mce-error-response" style="display:none"></div>
   <div class="response text-white" id="mce-success-response" style="display:none"></div>
 </div>
-<script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
+{{/*  <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>  */}}
 <!-- /subscription form -->
 {{ end }}
 {{ end }}
