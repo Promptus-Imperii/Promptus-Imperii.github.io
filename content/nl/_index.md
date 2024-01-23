@@ -13,7 +13,9 @@ verwijzingen:
   - title: "Sponsoren"
     content: "Leer meer over onze sponsoren."
     button: "Sponsoren"
+    link: "/partners_and_sponsors/#sponsors"
   - title: "Partners"
     content: "Leer meer over onze partners."
     button: "Partners"
+    link: "/partners_and_sponsors/#partners"
 ---
