@@ -5,7 +5,9 @@
       <div class="row justify-center">
         <div class="sm:col-10 md:col-8 lg:col-6">
           <h1 class="h2 mb-4">{{ $.Params.successtext }}</h1>
-          <img src="/assets/images/party-popper.gif" alt="Party popper" />
+          <div class="col">
+            {{ partial "image" (dict "Src" .Params.image "Alt" .Title "Class" "mx-auto mb-6 rounded") }}
+          </div>
         </div>
       </div>
     </div>
