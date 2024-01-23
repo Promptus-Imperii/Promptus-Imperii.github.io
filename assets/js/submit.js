@@ -1,13 +1,15 @@
+const URL = "http://localhost:8080/signup" // FIXME: prod URL
 
 function submitSignup(e) {
 
     e.preventDefault();
 
-    const URL = "http://localhost:8080/signup"
-
     let formData = new FormData(e.target);
 
-    let data = {};
+    let data = {
+        member: {},
+        emergency_contact: {}
+    };
 
     data.member = {};
     data.emergency_contact = {};
