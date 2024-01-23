@@ -39,3 +39,84 @@
 
 - id: partners
   translation: Partners
+
+- id: full_name
+  translation: Volledige naam(en) (zoals op paspoort)
+
+- id: nickname
+  translation: Roepnaam (indien anders dan eerste voornaam)
+
+- id: infix
+  translation: Tussenvoegsel
+
+- id: surname
+  translation: Achternaam
+
+- id: birthday
+  translation: Geboortedatum
+
+- id: address
+  translation: Straat + huisnummer
+
+- id: zipcode
+  translation: Postcode
+
+- id: city_village
+  translation: Woonplaats
+
+- id: mail
+  translation: E-mail
+
+- id: education
+  translation: Opleiding
+
+- id: computer_science
+  translation: Technische Informatica
+
+- id: software_engineering
+  translation: Informatica
+
+- id: phone
+  translation: Telefoonnummer
+
+- id: cohort_year
+  translation: Cohortjaar (beginjaar van je studie)
+
+- id: cohort_explanation
+  translation: "Bijv: gestart in sept. 2023 -> 2023/2024"
+
+- id: emergency_contact_first_name
+  translation: In geval van nood - voornaam contactpersoon
+
+- id: emergency_contact_infix
+  translation: In geval van nood - tussenvoegsel contactpersoon
+
+- id: emergency_contact_surname
+  translation: In geval van nood - achternaam contactpersoon
+
+- id: emergency_contact_phone_number
+  translation: In geval van nood - telefoonnummer contactpersoon
+
+- id: iban
+  translation: IBAN
+
+- id: card_holder
+  translation: Naam rekeninghouder
+
+- id: contribution
+  translation: Contributie
+
+- id: approval_contribution
+  translation: Ik ga akkoord met onderstaande
+
+- id: contribution_agreements
+  translation: Lidmaatschap van Promptus Imperii bedraagt 15 euro per jaar. Ik machtig hierbij Promptus Imperii jaarlijks, tot wederopzegging, de contributie van mijn rekening af te schrijven via automatische incasso.
+
+- id: terms_and_agreements
+  translation: Algemene voorwaarden
+
+- id: approval_terms_and_agreements
+  translation: Ik accepteer de algemene voorwaarden
+
+- id: terms_and_agreements_agreements
+  translation: "De algemene voorwaarden zijn hier te vinden: "
