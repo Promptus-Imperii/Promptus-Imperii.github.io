@@ -10,10 +10,7 @@ function submitSignup(e) {
         member: {},
         emergency_contact: {}
     };
-
-    data.member = {};
-    data.emergency_contact = {};
-
+    
     data.legalfirstnames = formData.get("full_name");
 
     data.member.firstname = formData.get("nickname");
