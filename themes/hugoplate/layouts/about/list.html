@@ -1,16 +1,44 @@
 {{ define "main" }}
 {{ partial "page-header" . }}
-
+<section class="section">
+  <div class="container">
+    <div class="flex flex-col col gap-5 md:col-6 mx-auto text-center">
+      <h1 class="mb-6">{{ $.Page.Params.by_whom }}</h1>
+      <p> {{ $.Page.Params.reasoning }} </p>
+      <ol class="">
+        {{ range $.Page.Params.reasons }}
+          <li>
+            {{ . }}
+          </li>
+        {{ end }}
+      </ol>
+    </div>
+  </div>
+</section>
 <section class="section">
   <div class="container">
     <div class="max-sm:flex max-sm:flex-col md:row">
       <div class="flex flex-col col gap-5 md:col-6 mx-auto text-center">
-        <h1>{{ .Title }}</h1>
+        <h1>{{ $.Page.Params.current_bosses }}</h1>
         <p>{{ .Content }}</p>
       </div>
       <div class="col">
         {{ partial "image" (dict "Src" .Params.image "Alt" .Title "Class" "mx-auto mb-6 rounded") }}
       </div>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="flex flex-col col gap-5 md:col-6 mx-auto text-center">
+      <h1 class="mb-6">{{ $.Page.Params.who_are_we }}</h1>
+    </div>
+    <div class="row">
+      {{ range .RegularPages }}
+        <div class="md:col-6 lg:col-4 mb-14">
+          {{ partial "components/author-card" . }}
+        </div>
+      {{ end }}
     </div>
   </div>
 </section>

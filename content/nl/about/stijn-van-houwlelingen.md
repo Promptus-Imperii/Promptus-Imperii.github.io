@@ -1,16 +1,12 @@
 ---
-title: William Jacob
-email: williamjacob@email.com
+title: Stijn van Houwelingen
+email: secretaris@svpromptusimperii.nl
 image: "/images/avatar.png"
 description: this is meta description
 social:
-  - name: github
-    icon: fa-brands fa-github
-    link: https://github.com
-
-  - name: twitter
-    icon: fa-brands fa-twitter
-    link: https://twitter.com
+  - name: mail
+    icon: fa fa-envelope
+    link: "mailto:voorzitter@svpromptusimperii.nl"
 
   - name: linkedin
     icon: fa-brands fa-linkedin
