@@ -37,24 +37,18 @@ tussen zit.
 #### Hoe lang we persoonsgegevens bewaren
 
 Studievereniging Promptus Imperii bewaart uw persoonsgegevens niet langer dan strikt nodig is om de doelen te realiseren waarvoor uw gegevens worden verzameld. Wij hanteren de volgende bewaartermijnen voor de volgende (categorieën) van persoonsgegevens:
-- Voor- en achternaam
-    - Zolang het lidmaatschap voortduurt
-- Geslacht
-    - Zolang het lidmaatschap voortduurt
-- Geboortedatum
-    - Zolang het lidmaatschap voortduurt
-- Adresgegevens
-    - Zolang het lidmaatschap voortduurt
-- Telefoonnummer
-    - Zolang het lidmaatschap voortduurt
-- E-mailadres
-    - Zolang het lidmaatschap voortduurt
-- IBAN
-    - Zolang het lidmaatschap voortduurt
-- Opleiding
-    - Zolang het lidmaatschap voortduurt
-- Beeldmateriaal
-    - Zolang Studievereniging Promptus Imperii bestaat
+
+| Gegeven             | Bewaartermijn                                    |
+| ------------------- | ------------------------------------------------ |
+| Voor- en achternaam | Zolang het lidmaatschap voortduurt               |
+| Geslacht            | Zolang het lidmaatschap voortduurt               |
+| Geboortedatum       | Zolang het lidmaatschap voortduurt               |
+| Adresgegevens       | Zolang het lidmaatschap voortduurt               |
+| Telefoonnummer      | Zolang het lidmaatschap voortduurt               |
+| E-mailadres         | Zolang het lidmaatschap voortduurt               |
+| IBAN                | Zolang het lidmaatschap voortduurt               |
+| Opleiding           | Zolang het lidmaatschap voortduurt               |
+| Beeldmateriaal      | Zolang Studievereniging Promptus Imperii bestaat |
 
 #### Delen van persoonsgegevens met derden
 
