@@ -10,7 +10,7 @@
               <h1>{{ $.Params.banner.title | markdownify }}</h1>
               <p> {{ $.Params.banner.subtitle | markdownify }} </p>
               <div class="pt-5">
-                <a href="#" class="btn btn-primary lg:inline-block">{{ $.Params.banner.call_to_action }}</a>
+                <a href="{{ "/signup" | relURL }}" class="btn btn-primary lg:inline-block">{{ $.Params.banner.call_to_action }}</a>
               </div>
             </div>
             <div>
@@ -87,10 +87,10 @@
     <div class="container">
       <div class="flex gap-5 row">
         {{ range $i, $e:= .Params.verwijzingen }}
-          <div class="flex flex-col gap-5 col bg-theme-light dark:bg-darkmode-theme-light p-5">
+          <div class="col bg-theme-light dark:bg-darkmode-theme-light p-5">
             <h3 class="">{{ .title }}</h3>
             <p>{{ .content }}</p>
-            <button class="btn btn-primary w-36">{{ .button }}</button>
+            <a href="{{ .link | relURL }}" class="btn btn-primary">{{ .button }}</a>
           </div>
         {{ end }}
       </div>
