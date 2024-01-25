@@ -8,13 +8,22 @@
   {{ range $sorted_sections }}
     <section class="section-sm">
       <div class="container flex flex-col gap-10">
-        <h2 class="text-center">{{ .Title }}</h2>
+        <h2 class="h2 text-center">{{ .Title }}</h2>
+        <div class="row justify-center">
+          {{/* By default: first image then text (underneath each-other). On medium screens: text first then image (md:order-x)*/}}
+          <div class="col-12 md:col-5 content md:order-2">
+            {{ partial "image" (dict "Src" .Params.image "Alt" .Params.image_alt "Class" "mx-auto mb-6 rounded-lg border-solid border" "Size" "600x400") }}
+          </div>
+          <div class="col-12 flex justify-center items-center md:col-5 pt-8 md:order-1 content">
+            {{ .Content }}
+          </div>
+        </div>
         <div class="row justify-center">
           {{ $paginator := .Paginate .RegularPages }}
           {{ range $paginator.Pages }}
             <div class="md:col-10 lg:col-5 text-center">
-              {{ partial "image" (dict "Src" .Params.image "Alt" .Params.image_alt "Class" "mx-auto mb-6" "Size" "300x200") }}
-              <h2 class="h3 mb-6">{{ .Title }}</h2>
+              {{ partial "image" (dict "Src" .Params.image "Alt" .Params.image_alt "Class" "mx-auto mb-6 rounded-lg border-solid border" "Size" "300x200") }}
+              <h3 class="h3 mb-6">{{ .Title }}</h3>
               <div class="content">{{ .Content }}</div>
             </div>
           {{ end }}
