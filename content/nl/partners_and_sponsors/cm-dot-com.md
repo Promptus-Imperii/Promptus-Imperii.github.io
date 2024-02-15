@@ -3,7 +3,7 @@ title: CM.com
 type: "sponsor"
 sponsor_type: "Platinum"
 sponsor_time: ["2023 ", "Heden"]
-draft: false
+link: "https://www.cm.com"
 ---
 
 From 2023-2024 CM.com is a proud sponsor of S.V. Promptus Imperii. CM.com (Euronext Amsterdam: CMCOM) is a global leader in cloud software for conversational commerce that enables businesses to deliver a superior customer experience.
