@@ -7,7 +7,7 @@
     {{ errorf "Cannot find the logo for partner or sponser %s. Please place the logo in images/sponsor-partner-images and give it the same name as your markdown file." .File.ContentBaseName }}
   {{ end }}
   <h4 class="mb-3">
-    <a href="{{ .RelPermalink }}">
+    <a href="{{ .Params.link }}" target="_blank">
       {{ .Title }}
     </a>
   </h4>
@@ -34,7 +34,7 @@
     {{end}}
   </ul>
   <p class="mb-6">{{ .Summary }}</p>
-  <a class="btn btn-outline-primary btn-sm" href="{{ .RelPermalink }}">
+  <a class="btn btn-outline-primary btn-sm" href="{{ .Params.link }}" target="_blank">
     {{ i18n "read_more_about" }}{{ .Params.Title }}
   </a>
 </div>
