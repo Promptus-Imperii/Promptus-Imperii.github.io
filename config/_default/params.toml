@@ -32,7 +32,7 @@ copyright = "Made with ❤️ by Webcomissie"
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
 [preloader]
-enable = false
+enable = true
 preloader = "" # use jpg, png, svg or gif format.
 
 # Navigation button
