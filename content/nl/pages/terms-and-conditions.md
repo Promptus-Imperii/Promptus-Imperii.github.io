@@ -1,9 +1,7 @@
 ---
 title: "Algemene voorwaarden"
-# meta title
-meta_title: ""
 # meta description
-description: "This is meta description"
+description: "De algemene voorwaarden van Promptus Imperii"
 # save as draft
 draft: false
 ---
