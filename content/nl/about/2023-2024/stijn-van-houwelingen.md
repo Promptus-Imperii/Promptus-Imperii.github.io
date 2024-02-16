@@ -4,4 +4,6 @@ title: "Stijn van Houwelingen - secretaris"
 image: "/images/about-us/stijn-van-houwelingen-23_24.jpg"
 image_alt: "Een foto van secretaris Stijn van Houwelingen"
 ---
-Hoi, ik ben Stijn van Houwelingen en ben vierdejaars Informatica-student. Ik ben de secretaris van de vereniging. Ik was in 2023 de eerste Informatica-student die lid is geworden van de verening en mijn doel is om Informatica een volwaardig onderdeel te maken van de vereniging. In mijn vrije tijd ben ik meestal bezig aan het sleutelen met Open Source software en/of Linux. Daarnaast luister ik naar allerlei soorten muziek, speel ik gitaar en houd ik van het leren van talen.
+Hoi, ik ben Stijn van Houwelingen en ben vierdejaars Informatica-student. Ik ben de secretaris van de vereniging. Ik was in 2023 de eerste Informatica-student die lid is geworden van de verening en mijn doel is om Informatica een volwaardig onderdeel te maken van de vereniging. 
+
+Daarnaast heb ik de taak als secretaris. Dit houdt in dat ik bij alle vergaderingen notuleer en de papieren en mail op orde houdt. Ik verwerk ook nieuwe aanmeldingen, dus als je je aanmeld voor de vereniging zal je een berichtje van mij ontvangen 😄. In mijn vrije tijd ben ik meestal bezig aan het sleutelen met Open Source software en/of Linux. Daarnaast luister ik naar allerlei soorten muziek, speel ik gitaar en houd ik van het leren van talen.
