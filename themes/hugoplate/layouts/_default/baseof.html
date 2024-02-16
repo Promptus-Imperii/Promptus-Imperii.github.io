@@ -12,7 +12,7 @@
     {{ partialCached "essentials/style.html" . }}
   </head>
 
-  <body>
+  <body id="body">
     <!-- cache partial only in production -->
     {{ if hugo.IsProduction }}
       {{ partialCached "preloader.html" . }}
