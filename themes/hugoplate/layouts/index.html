@@ -10,7 +10,7 @@
               <h1>{{ $.Params.banner.title | markdownify }}</h1>
               <p> {{ $.Params.banner.subtitle | markdownify }} </p>
               <div class="pt-5">
-                <a href="#" class="btn btn-primary lg:inline-block">{{ $.Params.banner.call_to_action }}</a>
+                <a href="{{ "/signup" | relURL }}" class="btn btn-primary lg:inline-block">{{ $.Params.banner.call_to_action }}</a>
               </div>
             </div>
             <div>
@@ -87,10 +87,12 @@
     <div class="container">
       <div class="flex gap-5 row">
         {{ range $i, $e:= .Params.verwijzingen }}
-          <div class="flex flex-col gap-5 col bg-theme-light dark:bg-darkmode-theme-light p-5">
+          <div class="flex flex-col col gap-5 bg-theme-light dark:bg-darkmode-theme-light p-5">
             <h3 class="">{{ .title }}</h3>
             <p>{{ .content }}</p>
-            <button class="btn btn-primary w-36">{{ .button }}</button>
+            <div>
+              <a href="{{ .link | relURL }}" class="btn btn-primary">{{ .button }}</a>
+            </div>
           </div>
         {{ end }}
       </div>
@@ -103,15 +105,18 @@
   <section class="section">
     <div class="container">
       <div class="max-sm:flex max-sm:flex-col md:row">
-        <div class="flex flex-col col gap-5 md:col-6 mx-auto text-center">
-          <h1>{{ .Title }}</h1>
-          <p>{{ .Content }}</p>
+        <div class="col md:col-6 mx-auto content">
+          <h1 class="text-center">{{ .Title }}</h1>
+          {{ .Content }}
         </div>
         <div class="col">
           {{ $imagePath := (printf "%s%s" "assets/" .Params.image_path)}}
           {{ if (fileExists $imagePath) }}
             {{ $image := resources.Get .Params.image_path }}
-            {{ partial "image" (dict "Src" $image "Alt" "Een foto van het huidige bestuur" "Class" "w-full rounded" "Command" "Fit") }}
+            {{ partial "image" (dict "Src" $image "Alt" "Een foto van het huidige bestuur." "Class" "w-full rounded" "Command" "Fit") }}
+            <p class="pt-5 text-center">{{ .Params.image_caption }}</p>
+          {{ else }}
+              {{ errorf "The image specified for the about us section does not exist:  %q" .Params.image_path }}
           {{ end }}
         </div>
       </div>
