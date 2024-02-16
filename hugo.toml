@@ -119,6 +119,8 @@ notAlternative = true
 
 
 ############################# Plugins ##############################
+[[google_map]]
+enable = false
 
 # CSS Plugins
 [[params.plugins.css]]
