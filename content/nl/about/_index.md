@@ -1,5 +1,6 @@
 ---
 title: "Over ons"
+description: "Leer meer over de vereniging en maak kennis met het bestuur."
 ---
 
 De studenten Guilliam Lutz, Martijn de Kam en Luca Brugel misten een studievereniging bij de studie Technische Informatica en hebben daarom in 2021 besloten om er eigenhandig een op te richten. Na een jaar konden de jongens al meer dan 20 leden tellen. Dit succes bleef groeien en omdat er vanuit Informatica ook een wens was voor meer verbinding is er in 2023 besloten Informatica-studenten bij de vereniging te voegen, iets wat al sinds het begin een ambitie was van de vereniging.
