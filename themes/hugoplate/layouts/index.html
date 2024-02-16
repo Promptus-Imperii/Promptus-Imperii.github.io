@@ -37,40 +37,25 @@
                 {{ $folder := (printf "%s%s" "assets/" .Params.banner.banner_images)}}
                 {{ if fileExists $folder }}
                   {{ $files := readDir $folder }}
-                  {{ range $files }}
-                    {{/*  resources.Get reads files from the assets folder on, so we don't prefix the assets folder here  */}}
-                    {{ $imagePath := printf "%s%s" $.Params.banner.banner_images .Name }}
-                    
-                    <div class="swiper-slide">
-                      {{ $image := resources.Get $imagePath }}
-                      {{ $image_sm := $image.Fit "510x360"}}
-                      {{ $image_md := $image.Fit "740x370"}}
-                      {{ $image_lg := $image.Fit "992x370"}}
-                      {{ $image_xl := $image.Fit "1250x370"}}
-        
-                      {{/*  The style attribute makes sure that the alt text is hidden when the page is loading, but still remains visible for screen-readers  */}}
-                      <picture style="color: rgba(0, 0, 0, 0) !important;">
-                        <source 
-                          media="(max-width: 767px)"
-                          srcset="{{ $image_sm.RelPermalink }}">
-                        <source 
-                          media="(max-width: 1023px)"
-                          srcset="{{ $image_md.RelPermalink }}">
-                        <source 
-                          media="(max-width: 1280px)"
-                          srcset="{{ $image_lg.RelPermalink }}">
-                        <source 
-                          media="(min-width: 1280px)"
-                          srcset="{{ $image_xl.RelPermalink }}">
-                        <img
-                        src="{{ $image.RelPermalink }}"
-                        class="h-full w-full object-fit-cover" 
-                        alt="Een foto van de vereniging"
-                        loading="lazy">
-                      </picture>
-
-                    </div>
-                  {{ end }}
+                  {{ range $index, $file := $files }}
+                  {{ $imagePath := printf "%s%s" $.Params.banner.banner_images $file.Name }}
+                
+                  <div class="swiper-slide">
+                    {{ $image := resources.Get $imagePath }}
+                    {{ $image_sm := $image.Fit "510x360 webp" }}
+                    {{ $image_md := $image.Fit "740x370 webp" }}
+                    {{ $image_lg := $image.Fit "992x370 webp" }}
+                    {{ $image_xl := $image.Fit "1250x370 webp" }}
+                    {{/*  The style attribute makes sure that the alt text is hidden when the page is loading, but still remains visible for screen-readers  */}}
+                    <picture style="color: rgba(0, 0, 0, 0) !important;">
+                      <source media="(max-width: 767px)" srcset="{{ $image_sm.RelPermalink }}">
+                      <source media="(max-width: 1023px)" srcset="{{ $image_md.RelPermalink }}">
+                      <source media="(max-width: 1280px)" srcset="{{ $image_lg.RelPermalink }}">
+                      <source media="(min-width: 1280px)" srcset="{{ $image_xl.RelPermalink }}">
+                      <img src="{{ $image.RelPermalink }}" class="h-full w-full object-fit-cover" alt="Een foto van de vereniging"{{ if ne $index 0 }} loading="lazy"{{ end }}>
+                    </picture>
+                  </div>
+                {{ end }}                
                 {{ else }}
                   {{ errorf "The folder specified for slideshow images does not exist:  %q" .Params.banner.banner_images}}
                 {{ end }}
