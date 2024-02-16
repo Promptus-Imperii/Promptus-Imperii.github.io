@@ -147,7 +147,7 @@ link = "js/accordion.js"
 link = "js/tab.js"
 [[params.plugins.js]]
 link = "js/modal.js"
-[[params.plugins.js]]
-link = "plugins/cookie.js"
-[[params.plugins.js]]
-link = "plugins/youtube-lite.js"
+# [[params.plugins.js]]
+# link = "plugins/cookie.js"
+# [[params.plugins.js]]
+# link = "plugins/youtube-lite.js"
