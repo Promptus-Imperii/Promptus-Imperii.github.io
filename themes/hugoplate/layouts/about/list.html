@@ -1,6 +1,14 @@
 
 {{ define "main" }}
   {{ partial "page-header" . }}
+  <div class="section-sm">
+    <div class="container flex flex-col gap-10">
+      <h2 class="h2 text-center">{{ .Title }}</h2>
+        <div class="col [&>h1]:text-center [&>h2]:text-center [&>h3]:text-center [&>h4]:text-center content">
+            {{ .Content }}
+        </div>
+      </div>
+  </div>
 
   {{ $sections := .Sections }}
   {{ $sorted_sections := sort $sections ".Params.rank" "asc"}}

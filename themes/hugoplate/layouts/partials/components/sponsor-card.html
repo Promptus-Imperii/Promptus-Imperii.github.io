@@ -1,4 +1,4 @@
-<div class="rounded-lg border-solid border p-4">
+<div class="flex flex-col rounded-lg border-solid border p-4 flex-1">
   {{/*  printf "%s%s" concatinates the string. GetMatch matches the file on '/images/sponsor-partner-images/sponsor-name.*' which means that any extention is valid */}}
   {{ $imagePath := resources.GetMatch (printf "%s%s" (path.Join "/images/sponsor-partner-images" .File.ContentBaseName) ".*") }}
   {{ if $imagePath }}
@@ -34,7 +34,10 @@
     {{end}}
   </ul>
   <p class="mb-6">{{ .Summary }}</p>
-  <a class="btn btn-outline-primary btn-sm" href="{{ .Params.link }}" target="_blank">
-    {{ i18n "read_more_about" }}{{ .Params.Title }}
-  </a>
+  <div class="mt-auto">
+    <a class="btn btn-outline-primary btn-sm" href="{{ .Params.link }}" target="_blank">
+      {{ i18n "read_more_about" }}{{ .Params.Title }}
+    </a>
+  </div>
+
 </div>

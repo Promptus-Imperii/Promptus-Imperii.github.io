@@ -105,9 +105,11 @@
   <section class="section">
     <div class="container">
       <div class="max-sm:flex max-sm:flex-col md:row">
-        <div class="col md:col-6 mx-auto content">
+        <div class="col md:col-6 mx-auto">
           <h1 class="text-center">{{ .Title }}</h1>
-          {{ .Content }}
+          <div class="content">
+            {{ .Content }}
+          </div>
         </div>
         <div class="col">
           {{ $imagePath := (printf "%s%s" "assets/" .Params.image_path)}}
