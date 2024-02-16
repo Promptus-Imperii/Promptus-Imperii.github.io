@@ -16,7 +16,7 @@
     <!-- cache partial only in production -->
     {{ if hugo.IsProduction }}
       {{ partialCached "preloader.html" . }}
-      {{ partialCached "gtm-noscript.html" . }}
+      {{/*  {{ partialCached "gtm-noscript.html" . }}  */}}
     {{ else }}
       {{ partial "preloader.html" . }}
 
