@@ -17,7 +17,7 @@ main {
 
 // form style
 .form-input {
-  @apply bg-theme-light text-dark placeholder:text-light focus:border-primary dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light w-full rounded border-transparent px-6 py-4 focus:ring-transparent;
+  @apply bg-theme-light text-dark placeholder:text-light dark:placeholder:text-darkmode-light placeholder:opacity-30 focus:border-primary dark:border-darkmode-border dark:bg-darkmode-theme-light dark:text-darkmode-light w-full rounded border-transparent px-6 py-4 focus:ring-transparent;
 }
 
 .form-label {
