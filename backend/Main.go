@@ -3,10 +3,14 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"log"
 	"net/http"
+	"os"
 	"strings"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func initRouter() *gin.Engine {
@@ -17,7 +21,21 @@ func initRouter() *gin.Engine {
 }
 
 func main() {
+
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Failed to load .env file, exiting.")
+	}
+
+	mondayToken = os.Getenv("MONDAYTOKEN")
+
 	r := initRouter()
+
+	// FIXME bad CORS policy
+	c := cors.DefaultConfig()
+	c.AllowAllOrigins = true
+
+	r.Use(cors.New(c))
 	r.Run(":8080")
 }
 
@@ -26,13 +44,10 @@ func handleSignUp(context *gin.Context) {
 
 	err := json.NewDecoder(context.Request.Body).Decode(&signup)
 	if err != nil {
+		log.Println(err.Error())
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-
-	// TODO(jonas): make sure that if a validation fails,
-	// a descriptive error is returned so a clear error message can be
-	// displayed on the page.
 
 	// normalize to save some time on regex :D
 	signup.PostalCode = strings.ReplaceAll(signup.PostalCode, " ", "")
