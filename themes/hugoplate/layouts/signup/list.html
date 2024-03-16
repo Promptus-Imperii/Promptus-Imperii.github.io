@@ -135,27 +135,34 @@
             <label class="form-label">
               {{ i18n "contribution" }}
             </label>
-            <input name="approval_contribution" class="w-4 form-input" type="checkbox" required />
-            <label for="approval_contribution" class="font-semibold label">{{ i18n "approval_contribution" }}</label>
+            <input name="accept_contribution" class="w-4 form-input" type="checkbox" required />
+            <label for="accept_contribution" class="font-semibold label">{{ i18n "accept_contribution" }}</label>
             <p>{{ i18n "contribution_conditions" }}</p>
           </div>
-          <div>
-            <div class="mb-6">
+          <div class="">
             <label for="terms_and_conditions" class="form-label">
               {{ i18n "terms_and_conditions" }}
             </label>
-            <input name="approval_terms_and_conditions" class="w-2 form-input" type="checkbox" required />
-            <label for="approval_terms_and_conditions" class="font-semibold label">{{ i18n "approval_terms_and_conditions" }}</label>
+            <input name="accept_terms_and_conditions" class="w-2 form-input" type="checkbox" required />
+            <label for="accept_terms_and_conditions" class="font-semibold label">{{ i18n "accept_terms_and_conditions" }}</label>
             <p>{{ i18n "terms_and_conditions_link" }}</p>
             <a href="#" class="underline decoration-2">{{ i18n "terms_and_conditions" }}</a>
-            <div class="mt-6">
-              <altcha-widget
-              id="altcha"
-              challengeurl="http://localhost:8080/captcha-challenge"
-            ></altcha-widget>
+          </div>
+          <div id="errorsDiv" class="flex flex-col text-red-400 hidden">
+            <label>{{ i18n "errors" }}</label>
+            <div id="errorsText">
+
             </div>
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <div>
+            <altcha-widget
+            id="altcha"
+            challengeurl="http://localhost:8080/captcha-challenge"
+          ></altcha-widget>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
         </form>
       </div>
     </div>

@@ -107,7 +107,7 @@
 - id: contribution
   translation: Contributie
 
-- id: approval_contribution
+- id: accept_contribution
   translation: Ik ga akkoord met onderstaande
 
 - id: contribution_conditions
@@ -116,8 +116,11 @@
 - id: terms_and_conditions
   translation: Algemene voorwaarden
 
-- id: approval_terms_and_conditions
+- id: accept_terms_and_conditions
   translation: Ik accepteer de algemene voorwaarden
 
 - id: terms_and_conditions_link
   translation: "De algemene voorwaarden zijn hier te vinden: "
+
+- id: errors
+  translation: "Je hebt een aantal velden verkeerd ingevuld:"
