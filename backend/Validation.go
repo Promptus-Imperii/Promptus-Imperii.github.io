@@ -3,10 +3,13 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
+	"log"
 	"net/http"
 	"net/mail"
 	"regexp"
 	"strings"
+	"time"
 
 	"github.com/nyaruka/phonenumbers"
 )
@@ -36,6 +39,15 @@ func validatePostalCode(code string) error {
 		return errors.New("onjuiste postcode")
 	}
 
+	return nil
+}
+
+func validateDate(dateString string) error {
+	_, err := time.Parse("2006-01-02", dateString)
+	if err != nil {
+		log.Println("Error parsing date:", err)
+		return errors.New(fmt.Sprintf("de datum %s is niet correct", dateString))
+	}
 	return nil
 }
 

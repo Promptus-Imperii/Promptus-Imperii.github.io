@@ -1,28 +1,27 @@
 package main
 
-import "time"
-
-type PISignUP struct {
-	LegalFirstNames  string    `json:"legalfirstnames"`
-	Member           Contact   `json:"member"`
-	DateOfBirth      time.Time `json:"date_of_birth"`
-	Address          string    `json:"address"`
-	PostalCode       string    `json:"postal_code"`
-	City             string    `json:"city"`
-	Email            string    `json:"email"`
-	Course           string    `json:"course"`
-	Cohort           string    `json:"cohort"`
-	EmergencyContact Contact   `json:"emergency_contact"`
-	IBAN             string    `json:"iban"`
-	AccountHolder    string    `json:"account_holder"`
-	Altcha           string    `json:"altcha"`
-}
-
-type Contact struct {
-	FirstName   string `json:"firstname"`
-	Infix       string `json:"infix"` // tussenvoegsel (de, van, den etc.)
-	LastName    string `json:"lastname"`
-	PhoneNumber string `json:"phone"`
+type PISignUp struct {
+	LegalFirstNames             string `json:"legal_first_names"`
+	Nickname                    string `json:"nickname"`
+	Infix                       string `json:"infix"`
+	Surname                     string `json:"surname"`
+	Phone                       string `json:"phone"`
+	DateOfBirth                 string `json:"date_of_birth"`
+	Address                     string `json:"address"`
+	PostalCode                  string `json:"postal_code"`
+	City                        string `json:"city"`
+	Email                       string `json:"email"`
+	Education                   string `json:"education"`
+	CohortYear                  string `json:"cohort_year"`
+	EmergencyContactFirstName   string `json:"emergency_contact_first_name"`
+	EmergencyContactInfix       string `json:"emergency_contact_infix"`
+	EmergencyContactSurname     string `json:"emergency_contact_surname"`
+	EmergencyContactPhoneNumber string `json:"emergency_contact_phone_number"`
+	IBAN                        string `json:"iban"`
+	AccountHolder               string `json:"account_holder"`
+	Contribution                string `json:"contribution"`
+	ApprovalTermsAndConditions  string `json:"approval_terms_and_conditions"`
+	Altcha                      string `json:"altcha"`
 }
 
 type IBANValidationResponse struct {

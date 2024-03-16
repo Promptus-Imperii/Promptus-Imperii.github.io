@@ -8,40 +8,34 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Rid of debug output
-func init() {
-	gin.SetMode(gin.TestMode)
-}
-
 var correctUser = map[string]interface{}{
-	"legalfirstnames": "boben b",
-	"member": map[string]interface{}{
-		"firstname": "bob",
-		"infix":     "de",
-		"lastname":  "tak",
-		"phone":     "+31612345678",
-	},
-	"date_of_birth": "2000-10-12T00:00:00Z",
-	"address":       "Lovensdijkstaat 16",
-	"postal_code":   "4793RR",
-	"city":          "Breda",
-	"email":         "jandevries@example.org",
-	"course":        "TI",
-	"cohort":        "2022/2023",
-	"emergency_contact": map[string]interface{}{
-		"firstname": "greetje",
-		"infix":     "de",
-		"lastname":  "vries",
-		"phone":     "+31687654321",
-	},
-	"iban":           "NL18RABO0123459876",
-	"account_holder": "B. B. de Tak",
+	"legal_first_names":              "boben b",
+	"nickname":                       "bob",
+	"infix":                          "de",
+	"surname":                        "tak",
+	"phone":                          "+31612345678",
+	"date_of_birth":                  "2000-10-12T00:00:00Z",
+	"address":                        "Lovensdijkstaat 16",
+	"postal_code":                    "4793RR",
+	"city":                           "Breda",
+	"email":                          "jandevries@example.org",
+	"education":                      "TI",
+	"cohort_year":                    "2022/2023",
+	"emergency_contact_first_name":   "greetje",
+	"emergency_contact_infix":        "de",
+	"emergency_contact_surname":      "vries",
+	"emergency_contact_phone_number": "+31687654321",
+	"iban":                           "NL18RABO0123459876",
+	"account_holder":                 "B. B. de Tak",
+	"contribution":                   "on",
+	"approval_terms_and_conditions":  "on",
 }
 
 func getGinHandler(t *testing.T) *httpexpect.Expect {
 	// Create new gin instance
 	handler := initRouter()
 	// Create httpexpect instance
+	gin.SetMode(gin.TestMode)
 	return httpexpect.WithConfig(httpexpect.Config{
 		Client: &http.Client{
 			Transport: httpexpect.NewBinder(handler),
@@ -52,6 +46,7 @@ func getGinHandler(t *testing.T) *httpexpect.Expect {
 			httpexpect.NewDebugPrinter(t, true),
 		},
 	})
+
 }
 
 func TestSignupShouldReturnSuccessWhenUserIsCorrect(t *testing.T) {

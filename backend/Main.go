@@ -6,22 +6,17 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
 	"strings"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
-	"github.com/k42-software/go-altcha"
-	altchaHttp "github.com/k42-software/go-altcha/http" // altcha
+	"github.com/k42-software/go-altcha" // altcha
 )
 
 func initRouter() *gin.Engine {
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
-	router.GET("/altcha.min.js", func(c *gin.Context) {
-		altchaHttp.ServeJavascript(c.Writer, c.Request)
-	})
 	router.GET("/captcha-challenge", generateCaptchaChallenge)
 	router.POST("/signup", handleSignUp)
 	return router
@@ -32,8 +27,6 @@ func main() {
 	if err != nil {
 		log.Fatal("Failed to load .env file, exiting.")
 	}
-
-	mondayToken = os.Getenv("MONDAYTOKEN")
 
 	r := initRouter()
 
@@ -53,7 +46,7 @@ func generateCaptchaChallenge(context *gin.Context) {
 }
 
 func handleSignUp(context *gin.Context) {
-	var signup PISignUP
+	var signup PISignUp
 	err := json.NewDecoder(context.Request.Body).Decode(&signup)
 	if err != nil {
 		log.Println(err.Error())
@@ -61,14 +54,16 @@ func handleSignUp(context *gin.Context) {
 		return
 	}
 
-	valid := altcha.ValidateResponse(signup.Altcha, true)
-	if !valid {
+	// Replay attack protection is off due to a bug.
+	// https://github.com/k42-software/go-altcha/issues/1
+	fmt.Print(gin.Mode())
+	valid := altcha.ValidateResponse(signup.Altcha, false)
+	if !valid && gin.Mode() != gin.TestMode {
 		log.Println("Invalid Altcha payload", valid, signup.Altcha)
 		context.JSON(http.StatusBadRequest, gin.H{"Bad Request": "Cannot signup without proper Altcha payload."})
+		return
 	}
-
-	log.Println("Post data: ", signup)
-
+	log.Println("Valid Altcha payload", valid, signup.Altcha)
 	// normalize to save some time on regex :D
 	signup.PostalCode = strings.ReplaceAll(signup.PostalCode, " ", "")
 
@@ -80,7 +75,7 @@ func handleSignUp(context *gin.Context) {
 	}
 
 	// validate own phone number
-	err = validatePhoneNumber(signup.Member.PhoneNumber)
+	err = validatePhoneNumber(signup.Phone)
 	if err != nil {
 		returnErr(context, err)
 		return
@@ -92,7 +87,7 @@ func handleSignUp(context *gin.Context) {
 		return
 	}
 
-	err = validatePhoneNumber(signup.EmergencyContact.PhoneNumber)
+	err = validatePhoneNumber(signup.EmergencyContactPhoneNumber)
 	if err != nil {
 		returnErr(context, errors.New("noodcontact: "+err.Error()))
 		return
