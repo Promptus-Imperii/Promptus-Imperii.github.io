@@ -8,10 +8,10 @@
       <div class="md:col-10 lg:col-6 mx-auto">
         <form class="flex flex-col gap-5" id="signup-form">
           <div>
-            <label for="full_name" class="form-label">
-              {{ i18n "full_name" }}
+            <label for="legal_first_names" class="form-label">
+              {{ i18n "legal_first_names" }}
             </label>
-            <input name="full_name" class="form-input" placeholder="Pieter Hendrik" type="text"
+            <input name="legal_first_names" class="form-input" placeholder="Pieter Hendrik" type="text"
               required />
           </div>
           <div>
@@ -33,10 +33,10 @@
             <input name="surname" class="form-input" placeholder="Hendriksen" type="text" required />
           </div>
           <div>
-            <label for="birthday" class="form-label">
-              {{ i18n "birthday" }}
+            <label for="date_of_birth" class="form-label">
+              {{ i18n "date_of_birth" }}
             </label>
-            <input name="birthday" class="form-input" placeholder="Hendriksen" type="date" required />
+            <input name="date_of_birth" class="form-input" placeholder="Hendriksen" type="date" required />
           </div>
           <div>
             <label for="address" class="form-label">
@@ -46,22 +46,22 @@
               required />
           </div>
           <div>
-            <label for="zipcode" class="form-label">
-              {{ i18n "zipcode" }}
+            <label for="postal_code" class="form-label">
+              {{ i18n "postal_code" }}
             </label>
-            <input name="zipcode" class="form-input" placeholder="1234 AB" type="text" required />
+            <input name="postal_code" class="form-input" placeholder="1234 AB" type="text" required />
           </div>
           <div>
-            <label for="city_village" class="form-label">
-              {{ i18n "city_village" }}
+            <label for="city" class="form-label">
+              {{ i18n "city" }}
             </label>
-            <input name="city_village" class="form-input" placeholder="Breda" type="text" required />
+            <input name="city" class="form-input" placeholder="Breda" type="text" required />
           </div>
           <div>
-            <label for="mail" class="form-label">
-              {{ i18n "mail" }}
+            <label for="email" class="form-label">
+              {{ i18n "email" }}
             </label>
-            <input name="mail" class="form-input" placeholder="JohnDoe@outlook.com" type="email" required />
+            <input name="email" class="form-input" placeholder="JohnDoe@outlook.com" type="email" required />
           </div>
           <div>
             <label for="education" class="form-label">
@@ -126,28 +126,28 @@
             <input name="iban" class="form-input" placeholder="NL00 AAAA 0000 0000 00" type="text" required />
           </div>
           <div>
-            <label for="card_holder" class="form-label">
-              {{ i18n "card_holder" }}
+            <label for="account_holder" class="form-label">
+              {{ i18n "account_holder" }}
             </label>
-            <input name="card_holder" class="form-input" placeholder="J. Doe" type="text" required />
+            <input name="account_holder" class="form-input" placeholder="J. Doe" type="text" required />
           </div>
           <div>
-            <label for="contribution" class="form-label">
+            <label class="form-label">
               {{ i18n "contribution" }}
             </label>
-            <input name="contribution" class="w-4 form-input" type="checkbox" required />
+            <input name="approval_contribution" class="w-4 form-input" type="checkbox" required />
             <label for="approval_contribution" class="font-semibold label">{{ i18n "approval_contribution" }}</label>
-            <p>{{ i18n "contribution_agreements" }}</p>
+            <p>{{ i18n "contribution_conditions" }}</p>
           </div>
           <div>
             <div class="mb-6">
-            <label for="terms_and_agreements" class="form-label">
-              {{ i18n "terms_and_agreements" }}
+            <label for="terms_and_conditions" class="form-label">
+              {{ i18n "terms_and_conditions" }}
             </label>
-            <input name="approval_terms_and_agreements" class="w-2 form-input" type="checkbox" required />
-            <label for="approval_terms_and_agreements" class="font-semibold label">{{ i18n "approval_terms_and_agreements" }}</label>
-            <p>{{ i18n "terms_and_agreements_agreements" }}</p>
-            <a href="#" class="underline decoration-2">{{ i18n "terms_and_agreements" }}</a>
+            <input name="approval_terms_and_conditions" class="w-2 form-input" type="checkbox" required />
+            <label for="approval_terms_and_conditions" class="font-semibold label">{{ i18n "approval_terms_and_conditions" }}</label>
+            <p>{{ i18n "terms_and_conditions_link" }}</p>
+            <a href="#" class="underline decoration-2">{{ i18n "terms_and_conditions" }}</a>
             <div class="mt-6">
               <altcha-widget
               id="altcha"
