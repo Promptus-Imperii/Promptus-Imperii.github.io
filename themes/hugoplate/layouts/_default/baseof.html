@@ -12,11 +12,11 @@
     {{ partialCached "essentials/style.html" . }}
   </head>
 
-  <body>
+  <body id="body">
     <!-- cache partial only in production -->
     {{ if hugo.IsProduction }}
       {{ partialCached "preloader.html" . }}
-      {{ partialCached "gtm-noscript.html" . }}
+      {{/*  {{ partialCached "gtm-noscript.html" . }}  */}}
     {{ else }}
       {{ partial "preloader.html" . }}
 

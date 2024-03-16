@@ -5,6 +5,7 @@
     <script
       src="{{ .link | relURL }}"
       type="application/javascript"
+      async
       {{ .attributes | safeHTMLAttr }}></script>
   {{ else }}
     {{ $scripts = $scripts | append (resources.Get .link) }}
@@ -24,6 +25,7 @@
 <script
   crossorigin="anonymous"
   integrity="{{ $scripts.Data.Integrity }}"
+  defer
   src="{{ $scripts.RelPermalink }}"></script>
 
 <!-- progressive web app -->
@@ -31,8 +33,8 @@
 
 
 <!-- cookie consent -->
-{{ partialCached "cookie-consent.html" . }}
+{{/*  {{ partialCached "cookie-consent.html" . }}  */}}
 
 
 <!-- google adsense -->
-{{ partialCached "adsense-script.html" . }}
+{{/*  {{ partialCached "adsense-script.html" . }}  */}}

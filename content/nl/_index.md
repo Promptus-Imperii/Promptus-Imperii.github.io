@@ -1,4 +1,7 @@
 ---
+title: Home
+description: "Promptus Imperii is dé studievereniging voor en door (technische) Informatica-studenten van Avans Hogeschool"
+
 # Banner
 banner:
   title: "S.V. Promptus Imperii"
@@ -13,7 +16,10 @@ verwijzingen:
   - title: "Sponsoren"
     content: "Leer meer over onze sponsoren."
     button: "Sponsoren"
+    link: "/partners_and_sponsors/#sponsors"
   - title: "Partners"
     content: "Leer meer over onze partners."
     button: "Partners"
+    link: "/partners_and_sponsors/#partners"
+
 ---

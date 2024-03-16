@@ -1,5 +1,12 @@
 <meta charset="utf-8" />
 
+<!-- Meta tags -->
+{{ $title := print .Title " - " .Site.Title }} 
+{{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
+<title>{{ $title }}</title>
+<meta name="description" content="{{ .Description }}"/>
+
+
 <!-- responsive meta -->
 <meta
   name="viewport"
@@ -17,11 +24,11 @@
 
 
 <!-- site verifications -->
-{{ partialCached "site-verifications.html" . }}
+{{/*  {{ partialCached "site-verifications.html" . }}  */}}
 
 
 <!-- opengraph and twitter card -->
-{{ partial "basic-seo.html" . }}
+{{/*  {{ partial "basic-seo.html" . }}  */}}
 
 
 <!-- custom script -->
@@ -35,11 +42,11 @@
 
 
 <!-- google tag manager -->
-{{ partialCached "gtm.html" . }}
+{{/*  {{ partialCached "gtm.html" . }}  */}}
 
 
 <!-- search index -->
-{{ partial "search-index.html" . }}
+{{/*  {{ partial "search-index.html" . }}  */}}
 
 
 <!-- matomo analytics -->
