@@ -135,8 +135,8 @@ link = "plugins/font-awesome/v6/solid.css"
 link = "plugins/font-awesome/v6/icons.css"
 
 # JS Plugins
-[[params.plugins.js]]
-link = "js/search.js"
+# [[params.plugins.js]]
+# link = "js/search.js"
 [[params.plugins.js]]
 link = "plugins/swiper/swiper-bundle.js"
 [[params.plugins.js]]
@@ -145,10 +145,10 @@ link = "plugins/glightbox/glightbox.js"
 link = "js/gallery-slider.js"
 [[params.plugins.js]]
 link = "js/accordion.js"
-[[params.plugins.js]]
-link = "js/tab.js"
-[[params.plugins.js]]
-link = "js/modal.js"
+# [[params.plugins.js]]
+# link = "js/tab.js"
+# [[params.plugins.js]]
+# link = "js/modal.js"
 # [[params.plugins.js]]
 # link = "plugins/cookie.js"
 # [[params.plugins.js]]

@@ -36,6 +36,7 @@
     <link
       crossorigin="anonymous"
       media="all"
+      async
       rel="stylesheet"
       href="{{ .link | relURL }}"
       {{ .attributes | safeHTMLAttr }} />
@@ -56,4 +57,5 @@
 <link
   href="{{ $styles.RelPermalink }}"
   integrity="{{ $styles.Data.Integrity }}"
+  async
   rel="stylesheet" />
