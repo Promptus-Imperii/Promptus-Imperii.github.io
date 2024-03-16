@@ -15,6 +15,7 @@ type PISignUP struct {
 	EmergencyContact Contact   `json:"emergency_contact"`
 	IBAN             string    `json:"iban"`
 	AccountHolder    string    `json:"account_holder"`
+	Altcha           string    `json:"altcha"`
 }
 
 type Contact struct {

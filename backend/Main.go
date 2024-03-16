@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -11,17 +12,22 @@ import (
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
+	"github.com/k42-software/go-altcha"
+	altchaHttp "github.com/k42-software/go-altcha/http" // altcha
 )
 
 func initRouter() *gin.Engine {
+	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
-
+	router.GET("/altcha.min.js", func(c *gin.Context) {
+		altchaHttp.ServeJavascript(c.Writer, c.Request)
+	})
+	router.GET("/captcha-challenge", generateCaptchaChallenge)
 	router.POST("/signup", handleSignUp)
 	return router
 }
 
 func main() {
-
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Failed to load .env file, exiting.")
@@ -39,15 +45,29 @@ func main() {
 	r.Run(":8080")
 }
 
+func generateCaptchaChallenge(context *gin.Context) {
+	challenge := altcha.NewChallengeEncoded()
+	fmt.Println(challenge)
+	jsonData := []byte(challenge)
+	context.Data(http.StatusOK, "application/json", jsonData)
+}
+
 func handleSignUp(context *gin.Context) {
 	var signup PISignUP
-
 	err := json.NewDecoder(context.Request.Body).Decode(&signup)
 	if err != nil {
 		log.Println(err.Error())
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
+	valid := altcha.ValidateResponse(signup.Altcha, true)
+	if !valid {
+		log.Println("Invalid Altcha payload", valid, signup.Altcha)
+		context.JSON(http.StatusBadRequest, gin.H{"Bad Request": "Cannot signup without proper Altcha payload."})
+	}
+
+	log.Println("Post data: ", signup)
 
 	// normalize to save some time on regex :D
 	signup.PostalCode = strings.ReplaceAll(signup.PostalCode, " ", "")
