@@ -40,7 +40,8 @@
 - id: partners
   translation: Partners
 
-- id: full_name
+# Signup form
+- id: legal_first_names
   translation: Volledige naam(en) (zoals op paspoort)
 
 - id: nickname
@@ -52,16 +53,16 @@
 - id: surname
   translation: Achternaam
 
-- id: birthday
+- id: date_of_birth
   translation: Geboortedatum
 
 - id: address
   translation: Straat + huisnummer
 
-- id: zipcode
+- id: postalcode
   translation: Postcode
 
-- id: city_village
+- id: city
   translation: Woonplaats
 
 - id: mail
@@ -100,7 +101,7 @@
 - id: iban
   translation: IBAN
 
-- id: card_holder
+- id: account_holder
   translation: Naam rekeninghouder
 
 - id: contribution
@@ -109,14 +110,14 @@
 - id: approval_contribution
   translation: Ik ga akkoord met onderstaande
 
-- id: contribution_agreements
+- id: contribution_conditions
   translation: Lidmaatschap van Promptus Imperii bedraagt 15 euro per jaar. Ik machtig hierbij Promptus Imperii jaarlijks, tot wederopzegging, de contributie van mijn rekening af te schrijven via automatische incasso.
 
-- id: terms_and_agreements
+- id: terms_and_conditions
   translation: Algemene voorwaarden
 
-- id: approval_terms_and_agreements
+- id: approval_terms_and_conditions
   translation: Ik accepteer de algemene voorwaarden
 
-- id: terms_and_agreements_agreements
+- id: terms_and_conditions_link
   translation: "De algemene voorwaarden zijn hier te vinden: "
