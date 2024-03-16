@@ -57,3 +57,14 @@ code {
 blockquote > p {
   @apply my-0 #{!important};
 }
+
+//Sticky header hack https://stackoverflow.com/questions/27490367/sticky-fixed-header-with-anchor-tags-other-solutions-found-not-working
+:target {
+  margin-top: -30px;
+  border-top: 100px solid transparent;
+  background-clip: padding-box;
+}
+
+// html {
+// 	scroll-behavior: smooth !important;
+// }

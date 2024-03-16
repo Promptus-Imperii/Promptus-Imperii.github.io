@@ -8,7 +8,7 @@ theme = "hugoplate"
 # Default time zone for time stamps; use any valid tz database name: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
 timeZone = "Europe/Amsterdam"
 # post pagination
-paginate = 10 # see https://gohugo.io/extras/pagination/
+paginate = 6 # see https://gohugo.io/extras/pagination/
 # post excerpt
 summaryLength = 10 # see https://gohugo.io/content-management/excerpts/
 # google analytics
@@ -119,6 +119,8 @@ notAlternative = true
 
 
 ############################# Plugins ##############################
+[[google_map]]
+enable = false
 
 # CSS Plugins
 [[params.plugins.css]]
@@ -133,8 +135,8 @@ link = "plugins/font-awesome/v6/solid.css"
 link = "plugins/font-awesome/v6/icons.css"
 
 # JS Plugins
-[[params.plugins.js]]
-link = "js/search.js"
+# [[params.plugins.js]]
+# link = "js/search.js"
 [[params.plugins.js]]
 link = "plugins/swiper/swiper-bundle.js"
 [[params.plugins.js]]
@@ -143,11 +145,11 @@ link = "plugins/glightbox/glightbox.js"
 link = "js/gallery-slider.js"
 [[params.plugins.js]]
 link = "js/accordion.js"
-[[params.plugins.js]]
-link = "js/tab.js"
-[[params.plugins.js]]
-link = "js/modal.js"
-[[params.plugins.js]]
-link = "plugins/cookie.js"
-[[params.plugins.js]]
-link = "plugins/youtube-lite.js"
+# [[params.plugins.js]]
+# link = "js/tab.js"
+# [[params.plugins.js]]
+# link = "js/modal.js"
+# [[params.plugins.js]]
+# link = "plugins/cookie.js"
+# [[params.plugins.js]]
+# link = "plugins/youtube-lite.js"

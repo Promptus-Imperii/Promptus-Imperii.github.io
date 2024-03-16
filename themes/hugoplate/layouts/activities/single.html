@@ -3,12 +3,6 @@
     <div class="container">
       <div class="row justify-center">
         <article class="lg:col-10">
-          {{ $image:= .Params.image }}
-          {{ if $image }}
-            <div class="mb-10">
-              {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "w-full rounded") }}
-            </div>
-          {{ end }}
           <h1 class="h2 mb-4">
             {{ .Title }}
           </h1>
@@ -38,6 +32,11 @@
               {{ time.Format ":date_long" .PublishDate }}
             </li>
           </ul>
+          {{ if .Params.gallery_images }}
+            <div class="mb-10">
+              {{ partial "gallery.html" (dict "Dir" .Params.gallery_images) }}
+            </div>
+          {{ end }}
           <div class="content mb-10">
             {{ .Content }}
           </div>
@@ -58,7 +57,7 @@
               </ul>
             </div>
             <div class="lg:col-4 flex items-center">
-              {{ partial "social-share" (dict "Context" . "Class" "share-icons" "Title" (i18n "share") "Whatsapp" false "Telegram" false) }}
+              {{ partial "social-share" (dict "Context" . "Class" "share-icons" "Title" (i18n "share") "Facebook" false "Twitter" false "Reddit" false "Whatsapp" false "Telegram" false "Pinterest" false "Tumblr" false "VK" false) }}
             </div>
           </div>
           <!-- comments -->

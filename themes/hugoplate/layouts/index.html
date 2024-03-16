@@ -10,7 +10,7 @@
               <h1>{{ $.Params.banner.title | markdownify }}</h1>
               <p> {{ $.Params.banner.subtitle | markdownify }} </p>
               <div class="pt-5">
-                <a href="#" class="btn btn-primary lg:inline-block">{{ $.Params.banner.call_to_action }}</a>
+                <a href="{{ "/signup" | relURL }}" class="btn btn-primary lg:inline-block">{{ $.Params.banner.call_to_action }}</a>
               </div>
             </div>
             <div>
@@ -37,40 +37,25 @@
                 {{ $folder := (printf "%s%s" "assets/" .Params.banner.banner_images)}}
                 {{ if fileExists $folder }}
                   {{ $files := readDir $folder }}
-                  {{ range $files }}
-                    {{/*  resources.Get reads files from the assets folder on, so we don't prefix the assets folder here  */}}
-                    {{ $imagePath := printf "%s%s" $.Params.banner.banner_images .Name }}
-                    
-                    <div class="swiper-slide">
-                      {{ $image := resources.Get $imagePath }}
-                      {{ $image_sm := $image.Fit "510x360"}}
-                      {{ $image_md := $image.Fit "740x370"}}
-                      {{ $image_lg := $image.Fit "992x370"}}
-                      {{ $image_xl := $image.Fit "1250x370"}}
-        
-                      {{/*  The style attribute makes sure that the alt text is hidden when the page is loading, but still remains visible for screen-readers  */}}
-                      <picture style="color: rgba(0, 0, 0, 0) !important;">
-                        <source 
-                          media="(max-width: 767px)"
-                          srcset="{{ $image_sm.RelPermalink }}">
-                        <source 
-                          media="(max-width: 1023px)"
-                          srcset="{{ $image_md.RelPermalink }}">
-                        <source 
-                          media="(max-width: 1280px)"
-                          srcset="{{ $image_lg.RelPermalink }}">
-                        <source 
-                          media="(min-width: 1280px)"
-                          srcset="{{ $image_xl.RelPermalink }}">
-                        <img
-                        src="{{ $image.RelPermalink }}"
-                        class="h-full w-full object-fit-cover" 
-                        alt="Een foto van de vereniging"
-                        loading="lazy">
-                      </picture>
+                  {{ range $index, $file := $files }}
+                  {{ $imagePath := printf "%s%s" $.Params.banner.banner_images $file.Name }}
 
-                    </div>
-                  {{ end }}
+                  <div class="swiper-slide">
+                    {{ $image := resources.Get $imagePath }}
+                    {{ $image_sm := $image.Fit "510x360 webp" }}
+                    {{ $image_md := $image.Fit "740x370 webp" }}
+                    {{ $image_lg := $image.Fit "992x370 webp" }}
+                    {{ $image_xl := $image.Fit "1250x370 webp" }}
+                    {{/*  The style attribute makes sure that the alt text is hidden when the page is loading, but still remains visible for screen-readers  */}}
+                    <picture style="color: rgba(0, 0, 0, 0) !important;">
+                      <source media="(max-width: 767px)" srcset="{{ $image_sm.RelPermalink }}">
+                      <source media="(max-width: 1023px)" srcset="{{ $image_md.RelPermalink }}">
+                      <source media="(max-width: 1280px)" srcset="{{ $image_lg.RelPermalink }}">
+                      <source media="(min-width: 1280px)" srcset="{{ $image_xl.RelPermalink }}">
+                      <img src="{{ $image_xl.RelPermalink }}" class="h-full w-full object-fit-cover" alt="Een foto van de vereniging"{{ if ne $index 0 }} loading="lazy" fetchpriority="low" {{ else }}} fetchpriority="high"{{ end }}>
+                    </picture>
+                  </div>
+                {{ end }}                
                 {{ else }}
                   {{ errorf "The folder specified for slideshow images does not exist:  %q" .Params.banner.banner_images}}
                 {{ end }}
@@ -87,10 +72,12 @@
     <div class="container">
       <div class="flex gap-5 row">
         {{ range $i, $e:= .Params.verwijzingen }}
-          <div class="flex flex-col gap-5 col bg-theme-light dark:bg-darkmode-theme-light p-5">
+          <div class="flex flex-col col gap-5 bg-theme-light dark:bg-darkmode-theme-light p-5">
             <h3 class="">{{ .title }}</h3>
             <p>{{ .content }}</p>
-            <button class="btn btn-primary w-36">{{ .button }}</button>
+            <div>
+              <a href="{{ .link | relURL }}" class="btn btn-primary">{{ .button }}</a>
+            </div>
           </div>
         {{ end }}
       </div>
@@ -103,15 +90,20 @@
   <section class="section">
     <div class="container">
       <div class="max-sm:flex max-sm:flex-col md:row">
-        <div class="flex flex-col col gap-5 md:col-6 mx-auto text-center">
-          <h1>{{ .Title }}</h1>
-          <p>{{ .Content }}</p>
+        <div class="col md:col-6 mx-auto">
+          <h1 class="text-center">{{ .Title }}</h1>
+          <div class="content">
+            {{ .Content }}
+          </div>
         </div>
         <div class="col">
           {{ $imagePath := (printf "%s%s" "assets/" .Params.image_path)}}
           {{ if (fileExists $imagePath) }}
             {{ $image := resources.Get .Params.image_path }}
-            {{ partial "image" (dict "Src" $image "Alt" "Een foto van het huidige bestuur" "Class" "w-full rounded" "Command" "Fit") }}
+            {{ partial "image" (dict "Src" $image "Alt" "Een foto van het huidige bestuur." "Class" "w-full rounded" "Command" "Fit") }}
+            <p class="pt-5 text-center">{{ .Params.image_caption }}</p>
+          {{ else }}
+              {{ errorf "The image specified for the about us section does not exist:  %q" .Params.image_path }}
           {{ end }}
         </div>
       </div>

@@ -5,22 +5,25 @@
   <div class="container">
     <div class="row">
       <!-- sponsors -->
-      <h2 class="flex justify-center">{{ i18n "sponsors" }}</h2>
+      <h2 id="sponsors" class="flex justify-center">{{ i18n "sponsors" }}</h2>
       <p class="mb-10 mt-4">{{ .Params.sponsorText }}</p>
-      {{ $paginator:= .Paginate .RegularPages }}
+      {{/*  TLDR: Pagination is cursed in this set-up, better just set the limit very high (to 99)  */}}
+      {{/*  https://stackoverflow.com/questions/74574527/using-multiple-paginate-ranges-with-hugo  */}}
+      {{/*  https://discourse.gohugo.io/t/need-to-render-two-paginate-sections-on-main-page/6627/3  */}}
+      {{ $paginator:= .Paginate .RegularPages 99}}
       {{ range where $paginator.Pages "Params.type" "sponsor" }}
-      <div class="md:col-6 lg:col-4 mb-14">
+      <div class="flex md:col-6 lg:col-4 mb-14">
         {{ partial "components/sponsor-card" . }}
       </div>
       {{ end }}
       {{ partial "components/pagination.html" . }}
 
       <!-- partners -->
-      <h2 class="flex justify-center">{{ i18n "partners" }}</h2>
+      <h2 id="partners" class="flex justify-center">{{ i18n "partners" }}</h2>
       <p class="mb-10 mt-4">{{ .Params.partnerText }}</p>
       {{ $paginator:= .Paginate .RegularPages }}
       {{ range where $paginator.Pages "Params.type" "partner" }}
-      <div class="md:col-6 lg:col-4 mb-14">
+      <div class="flex md:col-6 lg:col-4 mb-14">
         {{ partial "components/sponsor-card" . }}
       </div>
       {{ end }}
