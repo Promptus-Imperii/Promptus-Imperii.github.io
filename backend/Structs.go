@@ -19,8 +19,8 @@ type PISignUp struct {
 	EmergencyContactPhoneNumber string `json:"emergency_contact_phone_number"`
 	IBAN                        string `json:"iban"`
 	AccountHolder               string `json:"account_holder"`
-	Contribution                string `json:"contribution"`
-	ApprovalTermsAndConditions  string `json:"approval_terms_and_conditions"`
+	Contribution                string `json:"accept_contribution"`
+	ApprovalTermsAndConditions  string `json:"accept_terms_and_conditions"`
 	Altcha                      string `json:"altcha"`
 }
 

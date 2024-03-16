@@ -2,11 +2,9 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
-	"strings"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -56,46 +54,29 @@ func handleSignUp(context *gin.Context) {
 
 	// Replay attack protection is off due to a bug.
 	// https://github.com/k42-software/go-altcha/issues/1
-	fmt.Print(gin.Mode())
 	valid := altcha.ValidateResponse(signup.Altcha, false)
+
 	if !valid && gin.Mode() != gin.TestMode {
-		log.Println("Invalid Altcha payload", valid, signup.Altcha)
-		context.JSON(http.StatusBadRequest, gin.H{"Bad Request": "Cannot signup without proper Altcha payload."})
+		log.Println("Invalid Altcha payload", valid)
+		context.JSON(http.StatusBadRequest, gin.H{"Errors": []string{"een captcha is vereist"}})
 		return
 	}
+
 	log.Println("Valid Altcha payload", valid, signup.Altcha)
-	// normalize to save some time on regex :D
-	signup.PostalCode = strings.ReplaceAll(signup.PostalCode, " ", "")
+
+	var errors []string
 
 	// oh boy i love validating
-	err = validatePostalCode(signup.PostalCode)
-	if err != nil {
-		returnErr(context, err)
-		return
-	}
+	errors = appendError(errors, validatePostalCode(signup.PostalCode))
+	errors = appendError(errors, validateDate(signup.DateOfBirth))
+	errors = appendError(errors, validatePhoneNumber(signup.Phone, "Jouw telefoonnummer"))
+	errors = appendError(errors, validateIBAN(signup.IBAN))
+	errors = appendError(errors, validatePhoneNumber(signup.EmergencyContactPhoneNumber, "Het telefoonnummer van je noodcontact"))
+	errors = appendError(errors, validateEmail(signup.Email))
 
-	// validate own phone number
-	err = validatePhoneNumber(signup.Phone)
-	if err != nil {
-		returnErr(context, err)
-		return
-	}
-
-	err = validateIBAN(signup.IBAN)
-	if err != nil {
-		returnErr(context, err)
-		return
-	}
-
-	err = validatePhoneNumber(signup.EmergencyContactPhoneNumber)
-	if err != nil {
-		returnErr(context, errors.New("noodcontact: "+err.Error()))
-		return
-	}
-
-	err = validateEmail(signup.Email)
-	if err != nil {
-		returnErr(context, err)
+	fmt.Println(len(errors))
+	if len(errors) != 0 {
+		context.JSON(http.StatusBadRequest, gin.H{"Errors": errors})
 		return
 	}
 
@@ -105,6 +86,9 @@ func handleSignUp(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"Success": "Registration successful."})
 }
 
-func returnErr(c *gin.Context, err error) {
-	c.JSON(http.StatusBadRequest, gin.H{"Error": err.Error()})
+func appendError(errorList []string, err error) []string {
+	if err != nil {
+		errorList = append(errorList, err.Error())
+	}
+	return errorList
 }

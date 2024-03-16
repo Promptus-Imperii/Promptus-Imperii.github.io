@@ -18,9 +18,10 @@ import (
 // regexes
 // ---
 var (
-	// implemented to https://nl.wikipedia.org/wiki/Postcode#Postcodes_in_Nederland .
-	// lookahead is not currently supported in standard library regex.
-	PostalCodeRegex *regexp.Regexp = regexp.MustCompile(`^[1-9]\d{3}\w{2}$`)
+	// Based on https://stackoverflow.com/a/17898538
+	// Lookahead is not currently supported in standard library regex, so banned letters are not checked.
+	DutchPostalCodeRegex   *regexp.Regexp = regexp.MustCompile(`^[1-9][0-9]{3}[A-Z]{2}$`)
+	BelgianPostalCodeRegex *regexp.Regexp = regexp.MustCompile(`^\d{4}$`)
 )
 
 // ---
@@ -30,13 +31,15 @@ var (
 // this function takes a postal code and throws a regex at it to see if it is a dutch postal code
 //
 // it is possible to first check if it is just 4 numbers, making it belgian, but that might be beyond the scope
-func validatePostalCode(code string) error {
-	if PostalCodeRegex.FindString(code) == "" {
-		return errors.New("postcode is onjuist, probeer het zo: 4818 AJ")
-	}
-
-	if code[len(code)-2] == 'S' && strings.ContainsAny(string(code[len(code)-1]), "ADS") {
-		return errors.New("onjuiste postcode")
+func validatePostalCode(postalCode string) error {
+	// Normalize postal codes: capitalize all letters and remove all spaces
+	postalCode = strings.ToUpper(postalCode)
+	postalCode = strings.ReplaceAll(postalCode, " ", "")
+	fmt.Println(postalCode)
+	fmt.Println(DutchPostalCodeRegex.FindString(postalCode))
+	fmt.Println(BelgianPostalCodeRegex.FindString(postalCode))
+	if DutchPostalCodeRegex.FindString(postalCode) != "" && BelgianPostalCodeRegex.FindString(postalCode) != "" {
+		return errors.New("postcode is onjuist. Geldige postcode voor Nederland is 1234AB, voor België 1234")
 	}
 
 	return nil
@@ -46,21 +49,17 @@ func validateDate(dateString string) error {
 	_, err := time.Parse("2006-01-02", dateString)
 	if err != nil {
 		log.Println("Error parsing date:", err)
-		return errors.New(fmt.Sprintf("de datum %s is niet correct", dateString))
+		return fmt.Errorf("de datum %s is niet correct", dateString)
 	}
 	return nil
 }
 
 // TODO make this function support non-dutch phone numbers too
-func validatePhoneNumber(numberString string) error {
+func validatePhoneNumber(numberString string, label string) error {
 	// assume the number is dutch in the first place
-	number, err := phonenumbers.Parse(numberString, "NL")
+	_, err := phonenumbers.Parse(numberString, "NL")
 	if err != nil {
-		return errors.New("dit is geen telefoonnummer")
-	}
-
-	if !phonenumbers.IsValidNumberForRegion(number, "NL") {
-		return errors.New("geen geldig Nederlands nummer")
+		return fmt.Errorf("%s is niet correct", label)
 	}
 
 	return nil
@@ -80,7 +79,7 @@ func validatePhoneNumber(numberString string) error {
 func validateIBAN(iban string) error {
 
 	if iban == "" {
-		return errors.New("geen IBAN gevonden")
+		return errors.New("IBAN-nummer is niet ingevuld")
 	}
 
 	resp, err := http.Get("https://openiban.com/validate/" + iban)
@@ -91,7 +90,7 @@ func validateIBAN(iban string) error {
 
 	err = json.NewDecoder(resp.Body).Decode(&ibanval)
 	if err != nil {
-		return errors.New("kon IBAN niet valideren (fout bij externe service)")
+		return errors.New("serverfout tijdens het valideren van de IBAN. Neem contact op met de vereniging")
 	}
 
 	if ibanval.Valid {
