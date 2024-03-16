@@ -6,64 +6,64 @@
   <div class="container">
     <div class="row">
       <div class="md:col-10 lg:col-6 mx-auto">
-        <form id="signup-form">
-          <div class="mb-6">
+        <form class="flex flex-col gap-5" id="signup-form">
+          <div>
             <label for="full_name" class="form-label">
               {{ i18n "full_name" }}
             </label>
             <input name="full_name" class="form-input" placeholder="Pieter Hendrik" type="text"
               required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="nickname" class="form-label">
               {{ i18n "nickname" }}
             </label>
             <input name="nickname" class="form-input" placeholder="Piet" type="text" />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="infix" class="form-label">
               {{ i18n "infix" }}
             </label>
             <input name="infix" class="form-input" placeholder="van" type="text" />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="surname" class="form-label">
               {{ i18n "surname" }}
             </label>
             <input name="surname" class="form-input" placeholder="Hendriksen" type="text" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="birthday" class="form-label">
               {{ i18n "birthday" }}
             </label>
             <input name="birthday" class="form-input" placeholder="Hendriksen" type="date" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="address" class="form-label">
               {{ i18n "address" }}
             </label>
             <input name="address" class="form-input" placeholder="Lovensdijkstraat 1" type="text"
               required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="zipcode" class="form-label">
               {{ i18n "zipcode" }}
             </label>
             <input name="zipcode" class="form-input" placeholder="1234 AB" type="text" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="city_village" class="form-label">
               {{ i18n "city_village" }}
             </label>
             <input name="city_village" class="form-input" placeholder="Breda" type="text" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="mail" class="form-label">
               {{ i18n "mail" }}
             </label>
             <input name="mail" class="form-input" placeholder="JohnDoe@outlook.com" type="email" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="education" class="form-label">
               {{ i18n "education" }}
             </label>
@@ -78,60 +78,60 @@
               </div>
             </div>
           </div>
-          <div class="mb-6">
+          <div>
             <label for="phone" class="form-label">
               {{ i18n "phone" }}
             </label>
             <input name="phone" class="form-input" placeholder="+316-12345678" type="tel" />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="cohort_year" class="form-label">
               {{ i18n "cohort_year" }}
             </label>
             <input name="cohort_year" class="form-input" placeholder="2023/2024" type="text" />
             <p>{{ i18n "cohort_explanation" }}</p>
           </div>
-          <div class="mb-6">
+          <div>
             <label for="emergency_contact_first_name" class="form-label">
               {{ i18n "emergency_contact_first_name" }}
             </label>
             <input name="emergency_contact_first_name" class="form-input"
               placeholder="Piet" type="text" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="emergency_contact_infix" class="form-label">
               {{ i18n "emergency_contact_infix" }}
             </label>
             <input name="emergency_contact_infix" class="form-input" placeholder="van"
               type="text" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="emergency_contact_surname" class="form-label">
               {{ i18n "emergency_contact_surname" }}
             </label>
             <input name="emergency_contact_surname" class="form-input"
               placeholder="Pieters" type="text" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="emergency_contact_phone_number" class="form-label">
               {{ i18n "emergency_contact_phone_number" }}
             </label>
             <input name="emergency_contact_phone_number" class="form-input"
               placeholder="+316-12345678" type="tel" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="iban" class="form-label">
               {{ i18n "iban" }}
             </label>
             <input name="iban" class="form-input" placeholder="NL00 AAAA 0000 0000 00" type="text" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="card_holder" class="form-label">
               {{ i18n "card_holder" }}
             </label>
             <input name="card_holder" class="form-input" placeholder="J. Doe" type="text" required />
           </div>
-          <div class="mb-6">
+          <div>
             <label for="contribution" class="form-label">
               {{ i18n "contribution" }}
             </label>
@@ -139,7 +139,8 @@
             <label for="approval_contribution" class="font-semibold label">{{ i18n "approval_contribution" }}</label>
             <p>{{ i18n "contribution_agreements" }}</p>
           </div>
-          <div class="mb-6">
+          <div>
+            <div class="mb-6">
             <label for="terms_and_agreements" class="form-label">
               {{ i18n "terms_and_agreements" }}
             </label>
@@ -147,8 +148,14 @@
             <label for="approval_terms_and_agreements" class="font-semibold label">{{ i18n "approval_terms_and_agreements" }}</label>
             <p>{{ i18n "terms_and_agreements_agreements" }}</p>
             <a href="#" class="underline decoration-2">{{ i18n "terms_and_agreements" }}</a>
+            <div class="mt-6">
+              <altcha-widget
+              id="altcha"
+              challengeurl="http://localhost:8080/captcha-challenge"
+            ></altcha-widget>
+            </div>
           </div>
-          <button type="submit" class="btn btn-primary" onclick="submitSignup()">Submit</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
         </form>
       </div>
     </div>
@@ -188,6 +195,9 @@
 <!-- /subscription form -->
 {{ end }}
 {{ end }}
+
+{{ $altcha:= resources.Get "js/altcha.js" }}
+<script async defer src="{{ $altcha.RelPermalink }}" type="module"></script>
 
 {{ if site.Params.google_map.enable }}
 {{ $gmap:= resources.Get "plugins/maps/google-map.js" }}

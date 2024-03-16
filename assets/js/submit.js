@@ -1,5 +1,11 @@
 const URL = "http://localhost:8080/signup" // FIXME: prod URL
 
+// your form
+var form = document.getElementById("signup-form");
+
+// attach event listener
+form.addEventListener("submit", submitSignup, true);
+
 function submitSignup(e) {
 
     e.preventDefault();
@@ -37,6 +43,13 @@ function submitSignup(e) {
     data.iban = formData.get("iban");
     data.account_holder = formData.get("card_holder");
 
+    data.altcha = formData.get("altcha");
+
+    if (data.altcha == null) {
+        return
+    }
+    console.log(data)
+
     fetch(URL, {
         method: "POST",
         body: JSON.stringify(data),
@@ -44,8 +57,5 @@ function submitSignup(e) {
     }).then((a) => {
         // TODO: redirect to success page
         console.log(a.body);
-        console.log("very good very nice");
     });
 }
-
-document.getElementById("signup-form").addEventListener("submit", submitSignup);

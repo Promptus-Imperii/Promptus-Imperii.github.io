@@ -6,6 +6,7 @@
       src="{{ .link | relURL }}"
       type="application/javascript"
       async
+      defer
       {{ .attributes | safeHTMLAttr }}></script>
   {{ else }}
     {{ $scripts = $scripts | append (resources.Get .link) }}
@@ -25,6 +26,7 @@
 <script
   crossorigin="anonymous"
   integrity="{{ $scripts.Data.Integrity }}"
+  async
   defer
   src="{{ $scripts.RelPermalink }}"></script>
 
