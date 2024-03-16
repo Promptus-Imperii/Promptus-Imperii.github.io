@@ -1,10 +1,13 @@
 const URL = "http://localhost:8080/signup" // FIXME: prod URL
 
 // your form
-var form = document.getElementById("signup-form");
+const formElement = document.getElementById("signup-form");
+
+const errorsElement = document.getElementById("errorsDiv");
+
 
 // // attach event listener
-form.addEventListener("submit", submitSignup, true);
+formElement.addEventListener("submit", submitSignup, true);
 
 function submitSignup(e) {
 
@@ -12,7 +15,7 @@ function submitSignup(e) {
 
     let formData = new FormData(e.target);
 
-    var data = {};
+    let data = {};
     formData.forEach(function(value, key){
         data[key] = value;
     });
@@ -25,9 +28,31 @@ function submitSignup(e) {
     fetch(URL, {
         method: "POST",
         body: JSON.stringify(data),
-        mode: "no-cors"
-    }).then((a) => {
-        // TODO: redirect to success page
-        console.log(a.body);
-    });
+    }).then((response) => {
+        console.log(response)
+        if (response.status === 200) {
+            // TODO: Redirect to success page
+            console.log("Great success")
+            return
+        }
+        if (response.status === 400) {
+            response.json().then((body) => {
+                const errors = body["Errors"]
+                const errorsTextElement = document.getElementById("errorsText");
+                errorsTextElement.innerHTML = ""; // Clear previous errors
+                // Remove Tailwind "hidden" class
+                if (errorsElement.classList.contains('hidden')) {
+                    errorsElement.classList.remove('hidden');
+                }
+                errors.forEach((error) => {
+                    // Make string look nice
+                    error = error.charAt(0).toUpperCase() + error.slice(1);
+                    error = error + '.'
+                    var p = document.createElement("p");
+                    p.textContent = error;
+                    errorsTextElement.appendChild(p);
+                });
+            });
+        }
+    })
 }
