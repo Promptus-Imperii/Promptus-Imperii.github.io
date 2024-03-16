@@ -39,7 +39,7 @@
                   {{ $files := readDir $folder }}
                   {{ range $index, $file := $files }}
                   {{ $imagePath := printf "%s%s" $.Params.banner.banner_images $file.Name }}
-                
+
                   <div class="swiper-slide">
                     {{ $image := resources.Get $imagePath }}
                     {{ $image_sm := $image.Fit "510x360 webp" }}
@@ -52,7 +52,7 @@
                       <source media="(max-width: 1023px)" srcset="{{ $image_md.RelPermalink }}">
                       <source media="(max-width: 1280px)" srcset="{{ $image_lg.RelPermalink }}">
                       <source media="(min-width: 1280px)" srcset="{{ $image_xl.RelPermalink }}">
-                      <img src="{{ $image.RelPermalink }}" class="h-full w-full object-fit-cover" alt="Een foto van de vereniging"{{ if ne $index 0 }} loading="lazy"{{ end }}>
+                      <img src="{{ $image_xl.RelPermalink }}" class="h-full w-full object-fit-cover" alt="Een foto van de vereniging"{{ if ne $index 0 }} loading="lazy" fetchpriority="low" {{ else }}} fetchpriority="high"{{ end }}>
                     </picture>
                   </div>
                 {{ end }}                
