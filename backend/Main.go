@@ -8,11 +8,11 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 	"github.com/k42-software/go-altcha" // altcha
 )
 
 func initRouter() *gin.Engine {
+	testSendMail()
 	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	router.GET("/captcha-challenge", generateCaptchaChallenge)
@@ -21,11 +21,6 @@ func initRouter() *gin.Engine {
 }
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Failed to load .env file, exiting.")
-	}
-
 	r := initRouter()
 
 	// FIXME bad CORS policy
