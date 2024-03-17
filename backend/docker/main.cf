@@ -3,7 +3,7 @@ mydomain = svpromptusimperii.nl
 myorigin = svpromptusimperii.nl
 inet_interfaces = loopback-only
 # Enable logging to a file
-maillog_file = /var/log/maillog
+# maillog_file = /var/log/maillog
 
 # Set the logging level (optional)
 debug_peer_list = 127.0.0.1

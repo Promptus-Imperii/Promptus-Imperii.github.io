@@ -23,20 +23,20 @@ func testSendMail() {
 }
 
 func submitMail(m *gomail.Message) (err error) {
-	const sendmail = "/usr/bin/sendemail"
+	const sendmail = "/usr/bin/msmtp"
 	cmd := exec.Command(sendmail, "-t")
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
 	pw, err := cmd.StdinPipe()
 	if err != nil {
-		fmt.Println("error")
+		fmt.Println("error", err)
 		return
 	}
 
 	err = cmd.Start()
 	if err != nil {
-		fmt.Println("error")
+		fmt.Println("error", err)
 		return
 	}
 
@@ -46,7 +46,7 @@ func submitMail(m *gomail.Message) (err error) {
 	errs[2] = cmd.Wait()
 	for _, err = range errs {
 		if err != nil {
-			fmt.Println("error")
+			fmt.Println("error", err)
 			return
 		}
 	}
