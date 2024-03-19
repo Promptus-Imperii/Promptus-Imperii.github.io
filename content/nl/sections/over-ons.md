@@ -14,4 +14,4 @@ Als vereniging hebben we een aantal kernwaarden:
 
 - Het verbeteren en aanvullen van de studie (Technische) Informatica. Omdat we een studievereniging door en voor studenten zijn, kunnen wij dingen doen die een opleiding niet kan of wil doen, zoals uitjes en borrels.
 - Het verbinden van de studenten en het promoten van sociale competenties. We willen een gezellige vereniging zijn waar mensen andere studenten kunnen leren kennen en vrienden binnen de opleidingen kunnen maken.
-- Een connectie leggen tussen student en het werkveld. Via bedrijvendagen en bederijfsbezoeken geven we je de mogelijkheid om een kijkje in de keuken te nemen bij IT-bedrijven in de buurt. Daarnaast zorgt de mix van oudejaars en jongerejaars ervoor dat het makkelijker is om in contact te komen met een bedrijf.
+- Een connectie leggen tussen student en het werkveld. Via bedrijvendagen en bedrijfsbezoeken geven we je de mogelijkheid om een kijkje in de keuken te nemen bij IT-bedrijven in de buurt. Daarnaast zorgt de mix van oudejaars en jongerejaars ervoor dat het makkelijker is om in contact te komen met een bedrijf.
