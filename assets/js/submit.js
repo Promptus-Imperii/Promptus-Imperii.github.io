@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/signup" // FIXME: prod URL
+const URL = window.location.protocol + "//" + window.location.hostname + ":8080/signup"
 
 // your form
 const formElement = document.getElementById("signup-form");
@@ -24,7 +24,11 @@ function submitSignup(e) {
         return
     }
     console.log(data)
-
+    try {
+        
+    } catch (error) {
+        
+    }
     fetch(URL, {
         method: "POST",
         body: JSON.stringify(data),
@@ -32,6 +36,7 @@ function submitSignup(e) {
         console.log(response)
         if (response.status === 200) {
             // TODO: Redirect to success page
+            window.location.href = "/signup_success/";
             console.log("Great success")
             return
         }
@@ -54,5 +59,15 @@ function submitSignup(e) {
                 });
             });
         }
+    }).catch(() => {
+        const errorsTextElement = document.getElementById("errorsText");
+        errorsTextElement.innerHTML = ""; // Clear previous errors
+        // Remove Tailwind "hidden" class
+        if (errorsElement.classList.contains('hidden')) {
+            errorsElement.classList.remove('hidden');
+        }
+        var p = document.createElement("p");
+        p.textContent = "Er is iets foutgegaan. Probeer het opnieuw of neem contact met ons op.";
+        errorsTextElement.appendChild(p);
     })
 }

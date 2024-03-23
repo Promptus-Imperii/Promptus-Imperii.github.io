@@ -59,13 +59,24 @@
 - id: address
   translation: Straat + huisnummer
 
-- id: postalcode
+- id: postal_code
   translation: Postcode
 
 - id: city
   translation: Woonplaats
 
-- id: mail
+- id: country
+  translation: Land
+
+- id: NL
+  translation: Nederland
+
+- id: BE
+  translation: België
+
+
+
+- id: email
   translation: E-mail
 
 - id: education
@@ -84,7 +95,7 @@
   translation: Cohortjaar (beginjaar van je studie)
 
 - id: cohort_explanation
-  translation: "Bijv: gestart in sept. 2023 -> 2023/2024"
+  translation: "Bijv: gestart in september 2023 -> 2023/2024"
 
 - id: emergency_contact_first_name
   translation: In geval van nood - voornaam contactpersoon
