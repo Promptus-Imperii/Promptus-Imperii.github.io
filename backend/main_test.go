@@ -54,7 +54,7 @@ func TestSignupShouldReturnSuccessWhenUserIsCorrect(t *testing.T) {
 	e := getGinHandler(t)
 
 	// Act & Assert
-	e.POST("/signup").
+	e.POST("/api/signup").
 		WithJSON(correctUser).
 		Expect().
 		Status(http.StatusOK).JSON().
@@ -71,13 +71,13 @@ func TestSignupShouldReturnErrorWhenPostalCodeIsInvalid(t *testing.T) {
 	userWithIncorrectPostalcodeLetters["postal_code"] = "1323N"
 
 	// Act & Assert
-	e.POST("/signup").
+	e.POST("/api/signup").
 		WithJSON(userWithIncorrectPostalcodeNumbers).
 		Expect().
 		Status(http.StatusBadRequest).JSON().Object().
 		HasValue("Errors", []string{"postcode is onjuist. Geldige postcode voor Nederland is 1234AB, voor België 1234"})
 
-	e.POST("/signup").
+	e.POST("/api/signup").
 		WithJSON(userWithIncorrectPostalcodeLetters).
 		Expect().
 		Status(http.StatusBadRequest).JSON().Object().
