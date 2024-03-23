@@ -1,4 +1,4 @@
-const URL = window.location.protocol + "//" + window.location.hostname + ":8080/signup"
+const URL = window.location.protocol + "//" + window.location.hostname + ":8080/api/signup"
 
 // your form
 const formElement = document.getElementById("signup-form");
