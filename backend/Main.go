@@ -12,8 +12,6 @@ import (
 )
 
 func initRouter() *gin.Engine {
-	testSendMail()
-	gin.SetMode(gin.ReleaseMode)
 	router := gin.Default()
 	router.GET("/captcha-challenge", generateCaptchaChallenge)
 	router.POST("/signup", handleSignUp)
@@ -39,8 +37,8 @@ func generateCaptchaChallenge(context *gin.Context) {
 }
 
 func handleSignUp(context *gin.Context) {
-	var signup PISignUp
-	err := json.NewDecoder(context.Request.Body).Decode(&signup)
+	var member PISignUp
+	err := json.NewDecoder(context.Request.Body).Decode(&member)
 	if err != nil {
 		log.Println(err.Error())
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -49,25 +47,26 @@ func handleSignUp(context *gin.Context) {
 
 	// Replay attack protection is off due to a bug.
 	// https://github.com/k42-software/go-altcha/issues/1
-	valid := altcha.ValidateResponse(signup.Altcha, false)
+	valid := altcha.ValidateResponse(member.Altcha, false)
 
 	if !valid && gin.Mode() != gin.TestMode {
 		log.Println("Invalid Altcha payload", valid)
-		context.JSON(http.StatusBadRequest, gin.H{"Errors": []string{"een captcha is vereist"}})
+		context.JSON(http.StatusBadRequest, gin.H{"Errors": []string{"een geldige captcha is vereist. Probeer de pagina te herladen (je formuliervelden blijven bestaan)"}})
 		return
 	}
 
-	log.Println("Valid Altcha payload", valid, signup.Altcha)
+	log.Println("Valid Altcha payload", valid, member.Altcha)
 
 	var errors []string
-
 	// oh boy i love validating
-	errors = appendError(errors, validatePostalCode(signup.PostalCode))
-	errors = appendError(errors, validateDate(signup.DateOfBirth))
-	errors = appendError(errors, validatePhoneNumber(signup.Phone, "Jouw telefoonnummer"))
-	errors = appendError(errors, validateIBAN(signup.IBAN))
-	errors = appendError(errors, validatePhoneNumber(signup.EmergencyContactPhoneNumber, "Het telefoonnummer van je noodcontact"))
-	errors = appendError(errors, validateEmail(signup.Email))
+	member.PostalCode, err = validatePostalCode(member.PostalCode)
+	errors = appendError(errors, err)
+	errors = appendError(errors, validateDate(member.DateOfBirth))
+	errors = appendError(errors, validatePhoneNumber(member.Phone, "Jouw telefoonnummer"))
+	errors = appendError(errors, validateIBAN(member.IBAN))
+	errors = appendError(errors, validatePhoneNumber(member.EmergencyContactPhoneNumber, "Het telefoonnummer van je noodcontact"))
+	errors = appendError(errors, validateEmail(member.Email))
+	errors = appendError(errors, validateCohortYear(member.CohortYear))
 
 	fmt.Println(len(errors))
 	if len(errors) != 0 {
@@ -77,6 +76,9 @@ func handleSignUp(context *gin.Context) {
 
 	// at this point everything *should* be okay
 	// sending the message already might be early
+	if gin.Mode() != gin.TestMode {
+		SendMember(member)
+	}
 
 	context.JSON(http.StatusOK, gin.H{"Success": "Registration successful."})
 }

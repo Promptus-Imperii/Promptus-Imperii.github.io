@@ -10,7 +10,6 @@ COPY go.mod go.sum ./
 COPY *.go ./
 
 # Build
-# -ldflags "-s -w"
 RUN go mod download && CGO_ENABLED=0 GOOS=linux go build
 
 FROM alpine AS run
@@ -28,10 +27,10 @@ COPY docker/main.cf /etc/postfix/main.cf
 # Copy start.sh
 COPY docker/start.sh .
 
-RUN chmod +x start.sh
+RUN mkdir /app/inschrijvingen && chmod +x start.sh
 
-# Expose SMTP port, port for msmtp and for the golang server
-EXPOSE 25 587 8080
+# Expose SMTP port and golang server port
+EXPOSE 25 8080
 
 # Run
 # Start Postfix service and sm

@@ -14,9 +14,9 @@ var correctUser = map[string]interface{}{
 	"infix":                          "de",
 	"surname":                        "tak",
 	"phone":                          "+31612345678",
-	"date_of_birth":                  "2000-10-12T00:00:00Z",
+	"date_of_birth":                  "2024-03-23",
 	"address":                        "Lovensdijkstaat 16",
-	"postal_code":                    "4793RR",
+	"postal_code":                    "4793AB",
 	"city":                           "Breda",
 	"email":                          "jandevries@example.org",
 	"education":                      "TI",
@@ -74,14 +74,14 @@ func TestSignupShouldReturnErrorWhenPostalCodeIsInvalid(t *testing.T) {
 	e.POST("/signup").
 		WithJSON(userWithIncorrectPostalcodeNumbers).
 		Expect().
-		Status(http.StatusBadRequest).JSON().
-		Object().HasValue("Error", "postcode is onjuist, probeer het zo: 4818 AJ")
+		Status(http.StatusBadRequest).JSON().Object().
+		HasValue("Errors", []string{"postcode is onjuist. Geldige postcode voor Nederland is 1234AB, voor België 1234"})
 
 	e.POST("/signup").
 		WithJSON(userWithIncorrectPostalcodeLetters).
 		Expect().
-		Status(http.StatusBadRequest).JSON().
-		Object().HasValue("Error", "postcode is onjuist, probeer het zo: 4818 AJ")
+		Status(http.StatusBadRequest).JSON().Object().
+		HasValue("Errors", []string{"postcode is onjuist. Geldige postcode voor Nederland is 1234AB, voor België 1234"})
 }
 
 func TestIbanValidationAcceptsValidIban(t *testing.T) {
@@ -112,8 +112,97 @@ func TestEmailValidationAcceptsValidEmail(t *testing.T) {
 	}
 }
 
-func TestEmailValidationRejectsInalidEmail(t *testing.T) {
+func TestEmailValidationRejectsInvalidEmail(t *testing.T) {
 	err := validateEmail("@svpromptusimperii.nl")
+	if err == nil {
+		t.FailNow()
+	}
+}
+
+func TestCohortYearValidationAcceptsValidCohortYear(t *testing.T) {
+	err := validateCohortYear("2023/2024")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestCohortYearValidationRejectsInalidCohortYear(t *testing.T) {
+	err := validateCohortYear("23/24")
+	if err == nil {
+		t.FailNow()
+	}
+}
+
+func TestValidatePostalCodeWithValidDutchPostalCode1(t *testing.T) {
+	_, err := validatePostalCode("1234AB")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestValidatePostalCodeWithValidDutchPostalCode2(t *testing.T) {
+	_, err := validatePostalCode("1234 AB")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestValidatePostalCodeWithCorrectBelgianPostalCode(t *testing.T) {
+	_, err := validatePostalCode("1234")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestValidateDateWithValidDateFormat(t *testing.T) {
+	err := validateDate("2024-03-23")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestValidateDateWithInvalidDateFormat(t *testing.T) {
+	err := validateDate("23/03/2024")
+	if err == nil {
+		t.FailNow()
+	}
+}
+
+func TestValidatePhoneNumberWithValidDutchPhoneNumber(t *testing.T) {
+	err := validatePhoneNumber("+31612345678", "Phone")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestValidatePhoneNumberWithInvalidDutchPhoneNumberFormat(t *testing.T) {
+	err := validatePhoneNumber("12345678", "Phone")
+	if err == nil {
+		t.FailNow()
+	}
+}
+func TestValidatePhoneNumberWithInvalidDutchPhoneNumberFormat2(t *testing.T) {
+	err := validatePhoneNumber("0612345678", "Phone")
+	if err == nil {
+		t.FailNow()
+	}
+}
+func TestValidatePhoneNumberWithValidBelgianPhoneNumber(t *testing.T) {
+	err := validatePhoneNumber("+32466117160", "Phone")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestValidateCohortYearWithValidCohortYearFormat(t *testing.T) {
+	err := validateCohortYear("2023/2024")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestValidateCohortYearWithInvalidCohortYearFormat(t *testing.T) {
+	err := validateCohortYear("23/24")
 	if err == nil {
 		t.FailNow()
 	}

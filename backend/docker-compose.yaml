@@ -6,4 +6,4 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-      - "10000:25"  # Map port 80 of the container to port 8080 on localhost
+      - "25:25"  # Map port 80 of the container to port 8080 on localhost
