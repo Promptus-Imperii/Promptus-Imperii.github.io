@@ -1,122 +1,231 @@
 {{ define "main" }}
-  {{ partial "page-header" . }}
+{{ partial "page-header" . }}
 
 
-  <section class="section-sm">
-    <div class="container">
-      <div class="row">
-        <div class="md:col-10 lg:col-6 mx-auto">
-          <form action="{{ site.Params.contact_form_action }}" method="POST">
-            <div class="mb-6">
-              <label for="name" class="form-label">
-                Full Name
-              </label>
-              <input
-                id="name"
-                name="name"
-                class="form-input"
-                placeholder="John Doe"
-                type="text"
-                required />
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="md:col-10 lg:col-6 mx-auto">
+        <form class="flex flex-col gap-5" id="signup-form">
+          <div>
+            <label for="legal_first_names" class="form-label">
+              {{ i18n "legal_first_names" }}
+            </label>
+            <input name="legal_first_names" class="form-input" placeholder="Hendrikus Johannes" type="text"
+              required />
+          </div>
+          <div>
+            <label for="nickname" class="form-label">
+              {{ i18n "nickname" }}
+            </label>
+            <input name="nickname" class="form-input" placeholder="Hendrik" type="text" />
+          </div>
+          <div>
+            <label for="infix" class="form-label">
+              {{ i18n "infix" }}
+            </label>
+            <input name="infix" class="form-input" placeholder="de" type="text" />
+          </div>
+          <div>
+            <label for="surname" class="form-label">
+              {{ i18n "surname" }}
+            </label>
+            <input name="surname" class="form-input" placeholder="Jong" type="text" required />
+          </div>
+          <div>
+            <label for="date_of_birth" class="form-label">
+              {{ i18n "date_of_birth" }}
+            </label>
+            <input name="date_of_birth" class="form-input" placeholder="01-01-2005" type="date" required />
+          </div>
+          <div>
+            <label for="address" class="form-label">
+              {{ i18n "address" }}
+            </label>
+            <input name="address" class="form-input" placeholder="Lovensdijkstraat 61" type="text"
+              required />
+          </div>
+          <div>
+            <label for="postal_code" class="form-label">
+              {{ i18n "postal_code" }}
+            </label>
+            <input name="postal_code" class="form-input" placeholder="4818 AJ" type="text" required />
+          </div>
+          <div>
+            <label for="city" class="form-label">
+              {{ i18n "city" }}
+            </label>
+            <input name="city" class="form-input" placeholder="Breda" type="text" required />
+          </div>
+          <div>
+            <label for="country" class="form-label">
+              {{ i18n "country" }}
+            </label>
+            <div class="flex flex-col justify-around rounded-md  w-full" role="group">
+              <div class="inline-flex items-center gap-2 rounded-md  w-full">
+                <input value="NL" name="country" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                <label for="country">{{ i18n "NL" }}</label>
+              </div>
+              <div class="inline-flex items-center gap-2 rounded-md  w-full">
+                <input value="BE" name="country" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                <label for="country">{{ i18n "BE" }}</label>
+              </div>
             </div>
-            <div class="mb-6">
-              <label for="email" class="form-label">
-                Working Mail
-              </label>
-              <input
-                id="email"
-                name="email"
-                class="form-input"
-                placeholder="john.doe@email.com"
-                type="email"
-                required />
+          </div>
+          <div>
+            <label for="email" class="form-label">
+              {{ i18n "email" }}
+            </label>
+            <input name="email" class="form-input" placeholder="hendrikdejong@gmail.com" type="email" required />
+          </div>
+          <div>
+            <label for="education" class="form-label">
+              {{ i18n "education" }}
+            </label>
+            <div class="flex flex-col justify-around rounded-md  w-full" role="group">
+              <div class="inline-flex items-center gap-2 rounded-md  w-full">
+                <input value="I" name="education" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                <label for="education">{{ i18n "software_engineering" }}</label>
+              </div>
+              <div class="inline-flex items-center gap-2 rounded-md  w-full">
+                <input value="TI" name="education" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                <label for="education">{{ i18n "computer_science" }}</label>
+              </div>
             </div>
-            <div class="mb-6">
-              <label for="message" class="form-label">
-                Anything else? <span class="text-red-500">*</span>
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                class="form-input"
-                placeholder="Message goes here..."
-                rows="8"></textarea>
+          </div>
+          <div>
+            <label for="phone" class="form-label">
+              {{ i18n "phone" }}
+            </label>
+            <input name="phone" class="form-input" placeholder="+31612345678" type="tel" />
+          </div>
+          <div>
+            <label for="cohort_year" class="form-label">
+              {{ i18n "cohort_year" }}
+            </label>
+            <input name="cohort_year" class="form-input" placeholder="2023/2024" type="text" />
+            <p>{{ i18n "cohort_explanation" }}</p>
+          </div>
+          <div>
+            <label for="emergency_contact_first_name" class="form-label">
+              {{ i18n "emergency_contact_first_name" }}
+            </label>
+            <input name="emergency_contact_first_name" class="form-input"
+              placeholder="Piet" type="text" required />
+          </div>
+          <div>
+            <label for="emergency_contact_infix" class="form-label">
+              {{ i18n "emergency_contact_infix" }}
+            </label>
+            <input name="emergency_contact_infix" class="form-input" placeholder="de"
+              type="text" />
+          </div>
+          <div>
+            <label for="emergency_contact_surname" class="form-label">
+              {{ i18n "emergency_contact_surname" }}
+            </label>
+            <input name="emergency_contact_surname" class="form-input"
+              placeholder="Jong" type="text" required />
+          </div>
+          <div>
+            <label for="emergency_contact_phone_number" class="form-label">
+              {{ i18n "emergency_contact_phone_number" }}
+            </label>
+            <input name="emergency_contact_phone_number" class="form-input"
+              placeholder="+31612345678" type="tel" required />
+          </div>
+          <div>
+            <label for="iban" class="form-label">
+              {{ i18n "iban" }}
+            </label>
+            <input name="iban" class="form-input" placeholder="NL00 AAAA 0000 0000 00" type="text" required />
+          </div>
+          <div>
+            <label for="account_holder" class="form-label">
+              {{ i18n "account_holder" }}
+            </label>
+            <input name="account_holder" class="form-input" placeholder="HJ. de Jong" type="text" required />
+          </div>
+          <div>
+            <label class="form-label">
+              {{ i18n "contribution" }}
+            </label>
+            <input name="accept_contribution" class="w-4 form-input" type="checkbox" required />
+            <label for="accept_contribution" class="font-semibold label">{{ i18n "accept_contribution" }}</label>
+            <p>{{ i18n "contribution_conditions" }}</p>
+          </div>
+          <div class="">
+            <label for="terms_and_conditions" class="form-label">
+              {{ i18n "terms_and_conditions" }}
+            </label>
+            <input name="accept_terms_and_conditions" class="w-2 form-input" type="checkbox" required />
+            <label for="accept_terms_and_conditions" class="font-semibold label">{{ i18n "accept_terms_and_conditions" }}</label>
+            <p>{{ i18n "terms_and_conditions_link" }}</p>
+            <a href="#" class="underline decoration-2">{{ i18n "terms_and_conditions" }}</a>
+          </div>
+          <div id="errorsDiv" class="flex flex-col text-red-400 hidden">
+            <label>{{ i18n "errors" }}</label>
+            <div id="errorsText">
+
             </div>
+          </div>
+          <div>
+            <altcha-widget
+            id="altcha"
+            challengeurl="http://localhost:8080/api/captcha-challenge"
+          ></altcha-widget>
+          </div>
+          <div>
             <button type="submit" class="btn btn-primary">Submit</button>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- google map -->
-  {{ with site.Params.google_map }}
-    {{ if .enable }}
-      <div
-        id="map"
-        style="height: 400px;"
-        data-latitude="{{ .map_latitude }}"
-        data-longitude="{{ .map_longitude }}"
-        data-marker="{{ .map_marker | relURL }}"
-        data-marker-name="{{ site.Title }}"></div>
-    {{ end }}
-  {{ end }}
+<!-- google map -->
+{{ with site.Params.google_map }}
+{{ if .enable }}
+<div id="map" style="height: 400px;" data-latitude="{{ .map_latitude }}" data-longitude="{{ .map_longitude }}"
+  data-marker="{{ .map_marker | relURL }}" data-marker-name="{{ site.Title }}"></div>
+{{ end }}
+{{ end }}
 
-  {{ with site.Params.subscription }}
-    {{ if .enable }}
-      <!-- subscription form -->
-      <form
-        action="{{ .mailchimp_form_action | safeURL }}"
-        method="post"
-        id="mc-embedded-subscribe-form"
-        novalidate="novalidate">
-        <div class="input-group w-75 mx-auto mb-3">
-          <input
-            type="email"
-            name="EMAIL"
-            placeholder="Email"
-            class="form-control required email mce_inline_error"
-            id="mce-EMAIL"
-            aria-required="true"
-            autocomplete="off"
-            required />
-          <button
-            class="input-group-text"
-            name="subscribe"
-            id="mc-embedded-subscribe">
-            {{ .button_label }}
-          </button>
-        </div>
-        <input
-          type="hidden"
-          name="EMAILTYPE"
-          id="mce-EMAILTYPE-0"
-          value="html" />
-        <div style="position:absolute;left:-5000px" aria-hidden="true">
-          <input type="text" name="{{ .name }}" tabindex="-1" />
-        </div>
-      </form>
-      <div id="mce-responses" class="clear">
-        <div
-          class="response text-white"
-          id="mce-error-response"
-          style="display:none"></div>
-        <div
-          class="response text-white"
-          id="mce-success-response"
-          style="display:none"></div>
-      </div>
-      <script
-        type="text/javascript"
-        src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-      <!-- /subscription form -->
-    {{ end }}
-  {{ end }}
+{{ with site.Params.subscription }}
+{{ if .enable }}
+<!-- subscription form -->
+<form action="{{ .mailchimp_form_action | safeURL }}" method="post" name="mc-embedded-subscribe-form"
+  novalnameate="novalnameate">
+  <div class="input-group w-75 mx-auto mb-3">
+    <input type="email" name="EMAIL" placeholder="Email" class="form-control required email mce_inline_error"
+      name="mce-EMAIL" aria-required="true" autocomplete="off" required />
+    <button class="input-group-text" name="subscribe" name="mc-embedded-subscribe">
+      {{ .button_label }}
+    </button>
+  </div>
+  <input type="hnameden" name="EMAILTYPE" name="mce-EMAILTYPE-0" value="html" />
+  <div style="position:absolute;left:-5000px" aria-hnameden="true">
+    <input type="text" name="{{ .name }}" tabindex="-1" />
+  </div>
+</form>
+<div id="mce-responses" class="clear">
+  <div class="response text-white" id="mce-error-response" style="display:none"></div>
+  <div class="response text-white" id="mce-success-response" style="display:none"></div>
+</div>
+{{/*  <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>  */}}
+<!-- /subscription form -->
+{{ end }}
+{{ end }}
 
-  {{ if site.Params.google_map.enable }}
-    {{ $gmap:= resources.Get "plugins/maps/google-map.js" }}
-    <script defer src="{{ $gmap.RelPermalink }}"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key={{ site.Params.google_map.map_api_key }}&libraries=places"></script>
-  {{ end }}
+{{ $altcha:= resources.Get "js/altcha.js" }}
+<script async defer src="{{ $altcha.RelPermalink }}" type="module"></script>
+
+{{ if site.Params.google_map.enable }}
+{{ $gmap:= resources.Get "plugins/maps/google-map.js" }}
+<script defer src="{{ $gmap.RelPermalink }}"></script>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key={{ site.Params.google_map.map_api_key }}&libraries=places"></script>
+{{ end }}
 
 {{ end }}
