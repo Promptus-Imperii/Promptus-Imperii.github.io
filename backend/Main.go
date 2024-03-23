@@ -13,8 +13,9 @@ import (
 
 func initRouter() *gin.Engine {
 	router := gin.Default()
-	router.GET("/captcha-challenge", generateCaptchaChallenge)
-	router.POST("/signup", handleSignUp)
+	api := router.Group("/api")
+	api.GET("/captcha-challenge", generateCaptchaChallenge)
+	api.POST("/signup", handleSignUp)
 	return router
 }
 
