@@ -2,79 +2,91 @@ package main
 
 import (
 	"encoding/json"
-	"errors"
+	"fmt"
+	"log"
 	"net/http"
-	"strings"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/k42-software/go-altcha" // altcha
 )
 
 func initRouter() *gin.Engine {
 	router := gin.Default()
-
-	router.POST("/signup", handleSignUp)
+	api := router.Group("/api")
+	api.GET("/captcha-challenge", generateCaptchaChallenge)
+	api.POST("/signup", handleSignUp)
 	return router
 }
 
 func main() {
 	r := initRouter()
+
+	// FIXME bad CORS policy
+	c := cors.DefaultConfig()
+	c.AllowAllOrigins = true
+
+	r.Use(cors.New(c))
 	r.Run(":8080")
 }
 
-func handleSignUp(context *gin.Context) {
-	var signup PISignUP
+func generateCaptchaChallenge(context *gin.Context) {
+	challenge := altcha.NewChallengeEncoded()
+	fmt.Println(challenge)
+	jsonData := []byte(challenge)
+	context.Data(http.StatusOK, "application/json", jsonData)
+}
 
-	err := json.NewDecoder(context.Request.Body).Decode(&signup)
+func handleSignUp(context *gin.Context) {
+	var member PISignUp
+	err := json.NewDecoder(context.Request.Body).Decode(&member)
 	if err != nil {
+		log.Println(err.Error())
 		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	// TODO(jonas): make sure that if a validation fails,
-	// a descriptive error is returned so a clear error message can be
-	// displayed on the page.
+	// Replay attack protection is off due to a bug.
+	// https://github.com/k42-software/go-altcha/issues/1
+	valid := altcha.ValidateResponse(member.Altcha, false)
 
-	// normalize to save some time on regex :D
-	signup.PostalCode = strings.ReplaceAll(signup.PostalCode, " ", "")
+	if !valid && gin.Mode() != gin.TestMode {
+		log.Println("Invalid Altcha payload", valid)
+		context.JSON(http.StatusBadRequest, gin.H{"Errors": []string{"een geldige captcha is vereist. Probeer de pagina te herladen (je formuliervelden blijven bestaan)"}})
+		return
+	}
 
+	log.Println("Valid Altcha payload", valid, member.Altcha)
+
+	var errors []string
 	// oh boy i love validating
-	err = validatePostalCode(signup.PostalCode)
-	if err != nil {
-		returnErr(context, err)
-		return
-	}
+	member.PostalCode, err = validatePostalCode(member.PostalCode)
+	errors = appendError(errors, err)
+	errors = appendError(errors, validateDate(member.DateOfBirth))
+	errors = appendError(errors, validatePhoneNumber(member.Phone, "Jouw telefoonnummer"))
+	errors = appendError(errors, validateIBAN(member.IBAN))
+	errors = appendError(errors, validatePhoneNumber(member.EmergencyContactPhoneNumber, "Het telefoonnummer van je noodcontact"))
+	errors = appendError(errors, validateEmail(member.Email))
+	errors = appendError(errors, validateCohortYear(member.CohortYear))
 
-	// validate own phone number
-	err = validatePhoneNumber(signup.Member.PhoneNumber)
-	if err != nil {
-		returnErr(context, err)
-		return
-	}
-
-	err = validateIBAN(signup.IBAN)
-	if err != nil {
-		returnErr(context, err)
-		return
-	}
-
-	err = validatePhoneNumber(signup.EmergencyContact.PhoneNumber)
-	if err != nil {
-		returnErr(context, errors.New("noodcontact: "+err.Error()))
-		return
-	}
-
-	err = validateEmail(signup.Email)
-	if err != nil {
-		returnErr(context, err)
+	fmt.Println(len(errors))
+	if len(errors) != 0 {
+		context.JSON(http.StatusBadRequest, gin.H{"Errors": errors})
 		return
 	}
 
 	// at this point everything *should* be okay
 	// sending the message already might be early
+	if gin.Mode() != gin.TestMode {
+		SendMember(member)
+	}
 
 	context.JSON(http.StatusOK, gin.H{"Success": "Registration successful."})
 }
 
-func returnErr(c *gin.Context, err error) {
-	c.JSON(http.StatusBadRequest, gin.H{"Error": err.Error()})
+func appendError(errorList []string, err error) []string {
+	if err != nil {
+		errorList = append(errorList, err.Error())
+	}
+	return errorList
 }
