@@ -42,7 +42,8 @@ path = "github.com/gethugothemes/hugo-modules/tab"
 path = "github.com/gethugothemes/hugo-modules/modal"
 
 [[imports]]
-path = "github.com/gethugothemes/hugo-modules/gallery-slider"
+# TODO! Please replace once this is merged: https://github.com/gethugothemes/hugo-modules/pull/56
+path = "github.com/teadrinkingprogrammer/hugo-modules/gallery-slider"
 
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/components/preloader"

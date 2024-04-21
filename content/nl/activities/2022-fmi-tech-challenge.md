@@ -5,10 +5,11 @@ description: "Promptus Imperii-leden hebben bij FMI ImProvia een challenge gedaa
 date: 2023-12-05T00:00:00
 # This path is relative to the assets folder. Create a folder that is assets/images/activities/file-name
 # IMPORTANT! The file name/folder name may not contain capital letters!
-gallery_images: "images/activities/2022-fmi-tech-challenge"
+image_folder: "images/activities/2022-fmi-tech-challenge"
+image: "1__IMG-20221122-WA0032.jpg"
 # Don't forget capital letters in the categories and tags. Also check all categories and tags by loading the activities page and looking at the list.
 categories: ["Bedrijfsbezoek"]
-tags: ["FMI ImProvia", "Tech Challenge", "snakerobot", "ExRobotics", "S.V Motus"]
+tags: ["FMI ImProvia", "Tech Challenge", "Snakerobot", "ExRobotics", "S.V Motus"]
 draft: false
 ---
 
