@@ -1,7 +1,7 @@
 ---
 title: Batenburg IAS
 type: "sponsor"
-sponsor_type: "Platinum"
+sponsor_type: "Zilver"
 sponsor_time: ["2023 ", "Heden"]
 link: "https://batenburg-industrialautomation.nl/batenburg-ias/"
 ---
