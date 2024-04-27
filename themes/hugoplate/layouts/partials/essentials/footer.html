@@ -10,7 +10,9 @@
         </a>
       </div>
       <div class="lg:col-6 mb-8 text-center lg:mb-0">
-        <ul>
+        <ul
+        role="navigation"
+        aria-label="Footer">
           {{ range site.Menus.footer }}
             <li class="m-3 inline-block">
               <a
@@ -31,7 +33,10 @@
         </ul>
       </div>
       <div class="lg:col-3 mb-8 text-center lg:mb-0 lg:mt-0 lg:text-right">
-        <ul class="social-icons">
+        <ul
+        class="social-icons"
+        role="navigation"
+        aria-label="Social Media">
           {{ range site.Data.social.main }}
             <li>
               <a

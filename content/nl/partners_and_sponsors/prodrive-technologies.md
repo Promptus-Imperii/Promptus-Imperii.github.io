@@ -1,7 +1,7 @@
 ---
 title: "Prodrive Technologies"
 type: "sponsor"
-sponsor_type: "Platinum"
+sponsor_type: "Zilver"
 sponsor_time: ["2021 ", "Heden"]
 link: "https://prodrive-technologies.com/"
 ---

@@ -1,7 +1,7 @@
 ---
 title: "FMI Improvia"
 type: "sponsor"
-sponsor_type: "Platinum"
+sponsor_type: "Goud"
 sponsor_time: ["2021 ", "Heden"]
 link: "https://www.fmi-improvia.com/"
 ---

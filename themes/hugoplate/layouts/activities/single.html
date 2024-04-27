@@ -8,13 +8,6 @@
           </h1>
           <ul class="mb-4">
             <li class="mr-4 inline-block">
-              <a
-                href="{{ `authors/` | relLangURL }}{{ .Params.Author | urlize }}/">
-                <i class="fa-regular fa-circle-user mr-2"></i
-                >{{ .Params.author }}
-              </a>
-            </li>
-            <li class="mr-4 inline-block">
               <i class="fa-regular fa-folder mr-2"></i>
               {{ $categories:= .Params.categories }}
               {{ range $i,$p:= $categories }}
@@ -32,9 +25,9 @@
               {{ time.Format ":date_long" .PublishDate }}
             </li>
           </ul>
-          {{ if .Params.gallery_images }}
+          {{ if .Params.image_folder }}
             <div class="mb-10">
-              {{ partial "gallery.html" (dict "Dir" .Params.gallery_images) }}
+              {{ partial "gallery.html" (dict "Dir" .Params.image_folder) }}
             </div>
           {{ end }}
           <div class="content mb-10">
@@ -57,7 +50,7 @@
               </ul>
             </div>
             <div class="lg:col-4 flex items-center">
-              {{ partial "social-share" (dict "Context" . "Class" "share-icons" "Title" (i18n "share") "Facebook" false "Twitter" false "Reddit" false "Whatsapp" false "Telegram" false "Pinterest" false "Tumblr" false "VK" false) }}
+              {{ partial "social-share" (dict "Context" . "Class" "share-icons" "Title" (i18n "share") "Facebook" false "Twitter" false "Reddit" false "Whatsapp" true "Telegram" false "Pinterest" false "Tumblr" false "Vk" false) }}
             </div>
           </div>
           <!-- comments -->
@@ -75,7 +68,7 @@
       {{ with $related }}
         <div class="section pb-0">
           <h2 class="h3 mb-12">{{ i18n "related_posts" }}</h2>
-          <div class="row">
+          <div class="row gap-4">
             {{ range . }}
               <div class="lg:col-4">
                 {{ partial "components/blog-card" . }}

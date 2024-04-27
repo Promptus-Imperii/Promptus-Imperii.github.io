@@ -1,9 +1,11 @@
 <div class="bg-body dark:bg-darkmode-body rounded-lg border-solid border p-4">
-  {{ $image:= .Params.image }}
-  {{ if $image }}
+  {{ if .Params.image }}
+    {{ $image := path.Join .Params.image_folder .Params.image}}
     {{ partial "image" (dict "Src" $image "Alt" .Title "Class" "mb-6 w-full rounded") }}
+  {{ else }}
+    {{ errorf "An image was not defined for a blogpost:  %q" .Params.image}}
   {{ end }}
-  <h4 class="mb-3">
+  <h2 class="mb-3">
     <a href="{{ .RelPermalink }}">
       {{ .Title }}
     </a>
@@ -17,7 +19,7 @@
     </li>
     {{end}}
     <li class="mr-4 inline-block">
-      <i class="fa-regular fa-folder mr-2"></i>
+      <i class="fa-regular fa-folder mr-2" aria-label="Categorieën"></i>
       {{ $categories:= .Params.categories }}
       {{ range $i,$p:= $categories }}
         <a

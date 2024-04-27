@@ -218,8 +218,19 @@
 {{ end }}
 {{ end }}
 
-{{ $altcha:= resources.Get "js/altcha.js" }}
+{{ $altcha := resources.Get "js/altcha.js" }}
 <script async defer src="{{ $altcha.RelPermalink }}" type="module"></script>
+
+{{ $formScript := resources.Get "js/submit.js" }}
+{{ if hugo.IsProduction }}
+  {{ $formScript = $formScript | minify | fingerprint }}
+{{ end }}
+<script 
+  crossorigin="anonymous"
+  integrity="{{ $formScript.Data.Integrity }}"
+  async 
+  defer 
+  src="{{ $formScript.RelPermalink }}"></script>
 
 {{ if site.Params.google_map.enable }}
 {{ $gmap:= resources.Get "plugins/maps/google-map.js" }}

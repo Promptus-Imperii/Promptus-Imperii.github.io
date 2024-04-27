@@ -1,7 +1,7 @@
 ---
 title: CM.com
 type: "sponsor"
-sponsor_type: "Platinum"
+sponsor_type: "Goud"
 sponsor_time: ["2023 ", "Heden"]
 link: "https://www.cm.com"
 ---
