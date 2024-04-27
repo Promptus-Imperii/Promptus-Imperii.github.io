@@ -73,7 +73,9 @@ home = ["HTML", "RSS", "WebAppManifest", "SearchIndex"]
 # Default JPEG or WebP quality setting. Default is 75.
 quality = 90
 resampleFilter = "Lanczos"
-
+  [imaging.exif]
+    disableDate = true
+    disableLatLong = true
 ############################ Caches ##############################
 [caches]
 [caches.images]
@@ -135,6 +137,7 @@ link = "plugins/font-awesome/v6/solid.css"
 link = "plugins/font-awesome/v6/icons.css"
 
 # JS Plugins
+# https://github.com/gethugothemes/hugo-modules/
 # [[params.plugins.js]]
 # link = "js/search.js"
 [[params.plugins.js]]

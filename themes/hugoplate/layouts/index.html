@@ -73,7 +73,7 @@
       <div class="flex gap-5 row">
         {{ range $i, $e:= .Params.verwijzingen }}
           <div class="flex flex-col col gap-5 bg-theme-light dark:bg-darkmode-theme-light p-5">
-            <h3 class="">{{ .title }}</h3>
+            <h2 class="">{{ .title }}</h2>
             <p>{{ .content }}</p>
             <div>
               <a href="{{ .link | relURL }}" class="btn btn-primary">{{ .button }}</a>
