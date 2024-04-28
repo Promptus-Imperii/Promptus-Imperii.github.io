@@ -13,6 +13,7 @@ import (
 
 func initRouter() *gin.Engine {
 	router := gin.Default()
+	router.SetTrustedProxies(nil)
 	api := router.Group("/api")
 	api.GET("/captcha-challenge", generateCaptchaChallenge)
 	api.POST("/signup", handleSignUp)

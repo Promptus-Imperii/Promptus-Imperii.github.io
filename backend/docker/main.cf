@@ -10,3 +10,4 @@ debug_peer_list = 127.0.0.1
 debug_peer_level = 3
 
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
+compatibility_level = 3.6
