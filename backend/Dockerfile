@@ -30,7 +30,7 @@ COPY docker/start.sh .
 RUN mkdir /app/inschrijvingen && chmod +x start.sh
 
 # Expose SMTP port and golang server port
-EXPOSE 25 8080
+EXPOSE 25 443
 
 # Run
 # Start Postfix service and sm

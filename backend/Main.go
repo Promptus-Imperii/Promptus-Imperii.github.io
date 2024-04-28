@@ -28,7 +28,7 @@ func main() {
 	c.AllowAllOrigins = true
 
 	r.Use(cors.New(c))
-	r.Run(":8080")
+	r.Run(":443")
 }
 
 func generateCaptchaChallenge(context *gin.Context) {
