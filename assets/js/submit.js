@@ -1,4 +1,4 @@
-const URL = window.location.protocol + "//" + window.location.hostname + ":8080/api/signup"
+const URL = "https://api.svpromptusimperii.nl/api/signup"
 
 // your form
 const formElement = document.getElementById("signup-form");
@@ -40,9 +40,9 @@ function submitSignup(e) {
             console.log("Great success")
             return
         }
-        if (response.status === 400) {
-            response.json().then((body) => {
-                const errors = body["Errors"]
+        response.json().then((body) => {
+            const errors = body["Errors"]
+            if (errors !== null) {
                 const errorsTextElement = document.getElementById("errorsText");
                 errorsTextElement.innerHTML = ""; // Clear previous errors
                 // Remove Tailwind "hidden" class
@@ -57,17 +57,22 @@ function submitSignup(e) {
                     p.textContent = error;
                     errorsTextElement.appendChild(p);
                 });
-            });
-        }
-    }).catch(() => {
-        const errorsTextElement = document.getElementById("errorsText");
-        errorsTextElement.innerHTML = ""; // Clear previous errors
-        // Remove Tailwind "hidden" class
-        if (errorsElement.classList.contains('hidden')) {
-            errorsElement.classList.remove('hidden');
-        }
-        var p = document.createElement("p");
-        p.textContent = "Er is iets foutgegaan. Probeer het opnieuw of neem contact met ons op.";
-        errorsTextElement.appendChild(p);
-    })
+                return
+            }
+            displayGenericError()
+        }).catch(displayGenericError())
+    }).catch(displayGenericError())
+
+}
+
+function displayGenericError() {
+    const errorsTextElement = document.getElementById("errorsText");
+    errorsTextElement.innerHTML = ""; // Clear previous errors
+    // Remove Tailwind "hidden" class
+    if (errorsElement.classList.contains('hidden')) {
+        errorsElement.classList.remove('hidden');
+    }
+    var p = document.createElement("p");
+    p.textContent = "Er is iets foutgegaan. Probeer het opnieuw of neem contact met ons op.";
+    errorsTextElement.appendChild(p);
 }
