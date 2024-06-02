@@ -1,11 +1,17 @@
 version: '3'
 services:
-  my_service:
+  goserver:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "443:443"
-      - "25:25"  # Map port 80 of the container to port 8080 on localhost
-    environment:
-      - GIN_MODE=release
+      - "587:587"  # For sending emails
+    # environment:
+    #   - GIN_MODE=release
+  caddy:
+    image: caddy:2.8-alpine
+    restart: unless-stopped
+    ports:
+      - "443:443"  # Server
+    volumes:
+      -$PWD/Caddyfile:/etc/caddy/Caddyfile
