@@ -13,13 +13,14 @@ var correctUser = map[string]interface{}{
 	"nickname":                       "bob",
 	"infix":                          "de",
 	"surname":                        "tak",
-	"phone":                          "+31612345678",
 	"date_of_birth":                  "2024-03-23",
 	"address":                        "Lovensdijkstaat 16",
 	"postal_code":                    "4793AB",
 	"city":                           "Breda",
+	"country":                        "NL",
 	"email":                          "jandevries@example.org",
 	"education":                      "TI",
+	"phone":                          "+31612345678",
 	"cohort_year":                    "2022/2023",
 	"emergency_contact_first_name":   "greetje",
 	"emergency_contact_infix":        "de",
@@ -27,8 +28,8 @@ var correctUser = map[string]interface{}{
 	"emergency_contact_phone_number": "+31687654321",
 	"iban":                           "NL18RABO0123459876",
 	"account_holder":                 "B. B. de Tak",
-	"contribution":                   "on",
-	"approval_terms_and_conditions":  "on",
+	"accept_contribution":            "on",
+	"accept_terms_and_conditions":    "on",
 }
 
 func getGinHandler(t *testing.T) *httpexpect.Expect {

@@ -1,0 +1,11 @@
+services:
+  goserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - path: ./.env
+        required: true
+    ports:
+      - "587:587"  # For sending emails
+      - "8080:8080"  # Server

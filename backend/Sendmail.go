@@ -8,10 +8,15 @@ import (
 	"os"
 
 	gomail "github.com/Shopify/gomail"
+	"github.com/gin-gonic/gin"
 	"github.com/gocarina/gocsv"
 )
 
 func SendMember(member PISignUp) error {
+	if gin.Mode() == gin.TestMode {
+		log.Println("Testing mode: email will not be sent")
+		return nil
+	}
 	csv_bytes, err := WriteCSV(member)
 	if err != nil {
 		return err
