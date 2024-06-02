@@ -1,0 +1,3 @@
+api.svpromptusimperii.nl {
+    reverse_proxy goserver:443
+}

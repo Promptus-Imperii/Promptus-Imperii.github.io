@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 	"github.com/k42-software/go-altcha" // altcha
 )
 
@@ -17,17 +19,32 @@ func initRouter() *gin.Engine {
 	api := router.Group("/api")
 	api.GET("/captcha-challenge", generateCaptchaChallenge)
 	api.POST("/signup", handleSignUp)
+	// if gin.Mode() != gin.TestMode {
+	// 	// log.Fatal(autotls.Run(router, "api.svpromptusimperii.nl"))
+	// }
 	return router
 }
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatalf("error loading dotenv files: %v", err)
+	}
+	f, err := os.OpenFile("logfile", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	if err != nil {
+		log.Fatalf("error opening file: %v", err)
+	}
+	defer f.Close()
+
+	log.SetOutput(f)
+	log.Println("App has started, logging to file.")
 	r := initRouter()
 
-	// FIXME bad CORS policy
 	c := cors.DefaultConfig()
 	c.AllowAllOrigins = true
 
 	r.Use(cors.New(c))
+
 	r.Run(":443")
 }
 
@@ -76,10 +93,12 @@ func handleSignUp(context *gin.Context) {
 		return
 	}
 
-	// at this point everything *should* be okay
-	// sending the message already might be early
-	if gin.Mode() != gin.TestMode {
-		SendMember(member)
+	exception_mail := os.Getenv("EXCEPTION_EMAIL")
+	err = SendMember(member)
+	if err != nil {
+		log.Println(err.Error())
+		context.JSON(http.StatusInternalServerError, gin.H{"Errors": []string{fmt.Sprintf("Er is iets fout gegaan tijdens het verwerken van je aanmelden. Meld jezelf aan via %s", exception_mail)}})
+		return
 	}
 
 	context.JSON(http.StatusOK, gin.H{"Success": "Registration successful."})

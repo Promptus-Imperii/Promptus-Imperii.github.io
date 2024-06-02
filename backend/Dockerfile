@@ -1,4 +1,4 @@
-FROM golang:alpine AS build
+FROM golang:1.22-alpine AS build
 # Set destination for COPY
 WORKDIR /app
 
@@ -10,28 +10,18 @@ COPY go.mod go.sum ./
 COPY *.go ./
 
 # Build
-RUN go mod download && CGO_ENABLED=0 GOOS=linux go build
+RUN go mod download && CGO_ENABLED=0 GOOS=linux go build -ldflags="-s -w"
 
+# The run docker image does not need any buildtools, so we can use a plain Alpine Linux image.
 FROM alpine AS run
 
 WORKDIR /app
-# Install msmtp and postfix: msmtp is the CLI mail client, postfix is the smtp server
-RUN apk add --no-cache msmtp postfix
 
+# Copy the binary from the "build" image.
 COPY --from=build /app/backend .
 
-# Copy msmtp and postfix configuration file
-COPY docker/msmtp.conf /etc/msmtprc
-COPY docker/main.cf /etc/postfix/main.cf
-
-# Copy start.sh
-COPY docker/start.sh .
-
-RUN mkdir /app/inschrijvingen && chmod +x start.sh
-
-# Expose SMTP port and golang server port
-EXPOSE 25 443
+# Expose SMTP send port and golang server port
+EXPOSE 443 587
 
 # Run
-# Start Postfix service and sm
-CMD ["./start.sh"]
+CMD ["./backend"]
