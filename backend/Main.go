@@ -26,10 +26,14 @@ func initRouter() *gin.Engine {
 }
 
 func main() {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatalf("error loading dotenv files: %v", err)
+	// May fail if there the env variables are already loaded
+	godotenv.Load()
+	_, emailAddressExists := os.LookupEnv("EMAIL_ADDRESS")
+	_, emailPasswordExists := os.LookupEnv("EMAIL_PASSWORD")
+	if !(emailAddressExists && emailPasswordExists) {
+		log.Fatalf("Emailadress and/or emailpassword environmentvariables not set")
 	}
+
 	f, err := os.OpenFile("logfile", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		log.Fatalf("error opening file: %v", err)
@@ -37,7 +41,7 @@ func main() {
 	defer f.Close()
 
 	log.SetOutput(f)
-	log.Println("App has started, logging to file.")
+	log.Printf("App has started, logging to file. Gin running in %s mode", gin.Mode())
 	r := initRouter()
 
 	c := cors.DefaultConfig()
@@ -45,7 +49,7 @@ func main() {
 
 	r.Use(cors.New(c))
 
-	r.Run(":443")
+	r.Run(":3000")
 }
 
 func generateCaptchaChallenge(context *gin.Context) {
@@ -93,7 +97,7 @@ func handleSignUp(context *gin.Context) {
 		return
 	}
 
-	exception_mail := os.Getenv("EXCEPTION_EMAIL")
+	exception_mail := os.Getenv("EMAIL_ADDRESS")
 	err = SendMember(member)
 	if err != nil {
 		log.Println(err.Error())

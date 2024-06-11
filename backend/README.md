@@ -1,12 +1,20 @@
 # backend
 
-## Requirements
+# Requirements
 - go >= 1.21.0
+- Docker compose >= 2.24.0
 
-## Running
+# Running
+
+## Development
 Run with:
 ```shell
-go run .
+docker compose -f docker-compose-dev.yaml up --build
+```
+
+## Production
+```shell
+docker compose up
 ```
 
 ## Testing
