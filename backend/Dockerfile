@@ -21,7 +21,7 @@ WORKDIR /app
 COPY --from=build /app/backend .
 
 # Expose SMTP send port and golang server port
-EXPOSE 443 587
+EXPOSE 8080 587
 
 # Run
 CMD ["./backend"]
