@@ -49,7 +49,7 @@ func main() {
 
 	r.Use(cors.New(c))
 
-	r.Run(":8080")
+	r.Run(":3000")
 }
 
 func generateCaptchaChallenge(context *gin.Context) {
