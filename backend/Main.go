@@ -16,12 +16,12 @@ import (
 func initRouter() *gin.Engine {
 	router := gin.Default()
 	router.SetTrustedProxies(nil)
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"https://beta.svpromptusimperii.nl", "https://svpromptusimperii.nl"}
+	router.Use(cors.New(config))
 	api := router.Group("/api")
 	api.GET("/captcha-challenge", generateCaptchaChallenge)
 	api.POST("/signup", handleSignUp)
-	// if gin.Mode() != gin.TestMode {
-	// 	// log.Fatal(autotls.Run(router, "api.svpromptusimperii.nl"))
-	// }
 	return router
 }
 
