@@ -1,12 +1,9 @@
 const purgecss = {
-  content: ["./hugo_stats.json"],
+  content: ['./**/*.html'],
   defaultExtractor: (content) => {
-    const elements = JSON.parse(content).htmlElements;
-    return [
-      ...(elements.tags || []),
-      ...(elements.classes || []),
-      ...(elements.ids || []),
-    ];
+    const defaultSelectors = content.match(/[A-Za-z0-9_-]+/g) || [];
+    const extendedSelectors = content.match(/[^<>"=\s]+/g) || [];
+    return defaultSelectors.concat(extendedSelectors);
   },
   safelist: [
     /^swiper-/,
