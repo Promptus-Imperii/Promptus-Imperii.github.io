@@ -30,7 +30,7 @@ custom_script = ""
 copyright = "Made with ❤️ by Webcomissie"
 
 # Server url. Change to "localhost:8080" when testing offline. Also change in submit.js
-serverURL = "https://api.svpromptusimperii.nl/"
+serverURL = "https://api.svpromptusimperii.nl"
 
 # Preloader
 # preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
