@@ -1,5 +1,5 @@
 ---
-title: "Sam de Craen - Voorzitter"
+title: "Sam de Craen - voorzitter"
 # Image aspect ration needs to be 1:1 and at least 200*200
 image: "/images/about-us/sam-de-craen-23_24.jpg"
 image_alt: "Een foto van voorzitter Sam de Craen"
