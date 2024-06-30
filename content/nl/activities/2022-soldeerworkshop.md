@@ -2,7 +2,7 @@
 title: "Soldeerworkshop"
 # Please add a good description and title (see the about us page). Google uses it to recommend the website
 description: "Soldeerworkshop."
-date: 2023-11-29T00:00:00
+date: 2022-11-29T00:00:00
 # This path is relative to the assets folder. Create a folder that is assets/images/activities/file-name
 # IMPORTANT! The file name/folder name may not contain capital letters!
 image_folder: "images/activities/2022-soldeerworkshop"

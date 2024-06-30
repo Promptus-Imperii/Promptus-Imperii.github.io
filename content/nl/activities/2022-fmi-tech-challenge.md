@@ -2,7 +2,7 @@
 title: "Challenge Event FMI"
 # Please add a good description and title (see the about us page). Google uses it to recommend the website
 description: "Promptus Imperii-leden hebben bij FMI ImProvia een challenge gedaan waarbij ze een kop van een snakerobot mochten ontwerpen."
-date: 2023-12-05T00:00:00
+date: 2022-12-05T00:00:00
 # This path is relative to the assets folder. Create a folder that is assets/images/activities/file-name
 # IMPORTANT! The file name/folder name may not contain capital letters!
 image_folder: "images/activities/2022-fmi-tech-challenge"
