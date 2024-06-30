@@ -2,10 +2,10 @@
 title: "PLC-lezing Batenburg IAS"
 # Please add a good description and title (see the about us page). Google uses it to recommend the website
 description: "PLC-lezing Batenburg IAS"
-date: 2023-10-20T00:00:00
+date: 2022-10-20T00:00:00
 # This path is relative to the assets folder. Create a folder that is assets/images/activities/file-name
 # IMPORTANT! The file name/folder name may not contain capital letters!
-image_folder: "images/activities/2023-plc-lezing-batenburg-ias"
+image_folder: "images/activities/2022-plc-lezing-batenburg-ias"
 image: "1__IMG-20230517-WA0037.jpg"
 # Don't forget capital letters in the categories and tags. Also check all categories and tags by loading the activities page and looking at the list.
 categories: ["Bedrijfsbezoek"]

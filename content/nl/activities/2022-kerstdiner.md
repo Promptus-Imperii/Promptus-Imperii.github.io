@@ -2,7 +2,7 @@
 title: "Promptus Imperii Kerstdiner en -gala 2022"
 # Please add a good description and title (see the about us page). Google uses it to recommend the website
 description: "Promptus Imperii Kerstdiner en -gala 2022"
-date: 2023-12-23T00:00:00
+date: 2022-12-23T00:00:00
 # This path is relative to the assets folder. Create a folder that is assets/images/activities/file-name
 # IMPORTANT! The file name/folder name may not contain capital letters!
 image_folder: "images/activities/2022-kerstdiner"
