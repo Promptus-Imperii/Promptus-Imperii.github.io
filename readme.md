@@ -1,6 +1,13 @@
 # Promptusimperii
 The new website of the Promptus Imperii study association.
 
+## Technologies
+If you want to work on this website there is a few technologies to study:
+- Hugo
+- Tailwind (with the plug-ins)
+- Golang Templates
+
+If you can't find some code for partials for example, check the go.mod file to see the dependencies that are loaded in from external sources.
 
 ## Post instructies
 - Om een post te maken, kopieer een bestaande post die lijkt op degene die je wilt maken. Voorbeeld: maak een post voor een bedrijfsbezoek, kopieer een ander bedrijfsbezoek.
