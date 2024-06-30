@@ -2,23 +2,17 @@
 
 # Requirements
 - go >= 1.21.0
-- Docker compose >= 2.24.0
 
 # Running
 
 ## Development
-Run with:
-```shell
-docker compose -f docker-compose-dev.yaml up --build
-```
+- `go run .`
 
 ## Production
-```shell
-docker compose up
-```
+- Uses Nixpacks default set-up in Coolify.
 
 ## Testing
-go test
+- `go test`
 
 
 ## Data
