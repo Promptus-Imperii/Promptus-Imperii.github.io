@@ -27,7 +27,7 @@
           </ul>
           {{ if .Params.image_folder }}
             <div class="mb-10">
-              {{ partial "gallery.html" (dict "Dir" .Params.image_folder) }}
+              {{ partial "gallery.html" (dict "Dir" .Params.image_folder "Height" 1080) }}
             </div>
           {{ end }}
           <div class="content mb-10">
