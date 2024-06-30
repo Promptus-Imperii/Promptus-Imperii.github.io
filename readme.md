@@ -2,7 +2,32 @@
 The new website of the Promptus Imperii study association.
 
 
-## Post instructies
+# Technologies
+This website is built on the following libraries/frameworks are used in this project:
+- Hugo (uses Golang Templates).
+- A heavily edited version of [Hugoplate](https://github.com/zeon-studio/hugoplate), which uses:
+    - A few components (see go.mod), mainly [hugo-modules](https://github.com/TeaDrinkingProgrammer/hugo-modules). A fork is used from the main version due to [this](https://github.com/gethugothemes/hugo-modules/pull/56).
+    - The pages have been changed to suit the needs of the study association.
+    - All tracking has been stripped out.
+    - A signup page was added (see the backend project).
+- Tailwind with a few plug-ins (see tailwind.config.js)
+- Some build tools to build the [Tailwind CSS](https://tailwindcss.com/).
+- The hosting uses [Coolify](https://coolify.io/).
+
+# Set-up
+- Install any NPM-like package manager: since it is only used for building Tailwind and launching scripts, you can probably use any package manager (NPM, Bun, Yarn, etc.). Just make sure to use the latest (LTS) version.
+- To run the website locally, run `npm run dev` or equivalent.
+- To build the website, run `npm run build` or equivalent.
+
+# Developing with the backend
+When testing the backend, start the backend by following the instructions on that repo. Change the following variables:
+- `serverURL` in config/params.toml
+- `URL` in assets/js/submit.js
+
+**Make sure to not commit these changes!**
+
+
+# Post instructies
 - Om een post te maken, kopieer een bestaande post die lijkt op degene die je wilt maken. Voorbeeld: maak een post voor een bedrijfsbezoek, kopieer een ander bedrijfsbezoek.
 - Vul de volgende velden in:
 ```yaml
