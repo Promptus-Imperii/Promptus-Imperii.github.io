@@ -62,9 +62,10 @@ func SendNotificationEmail(member PISignUp) error {
 
 	// Set subject and body
 	m.SetHeader("Subject", "No-reply: Bevestiging aanmelding S.V Promptus Imperii.")
-	m.SetBody("text/plain", fmt.Sprintf(`Beste,
-	Bedankt voor je aanmelding bij S.V Promptus Imperii. De secretaris zal jouw aanmelding zo snel mogelijk in behandeling nemen. Dit kan een paar dagen duren, aangezien het een handmatig proces is.
-	Als je na een week nog steeds niets gehoord hebt, aarzel dan niet om contact op te nemen met %s.`, os.Getenv("EMAIL_ADDRESS")))
+	m.SetBody("text/plain", fmt.Sprintf("Beste,\n"+
+		"\n"+
+		"Bedankt voor je aanmelding bij S.V Promptus Imperii. De secretaris zal jouw aanmelding zo snel mogelijk in behandeling nemen. Dit kan een paar dagen duren, aangezien het een handmatig proces is.\n"+
+		"Als je na een week nog steeds niets gehoord hebt, aarzel dan niet om contact op te nemen met %s.", os.Getenv("EMAIL_ADDRESS")))
 
 	email_password := os.Getenv("EMAIL_PASSWORD")
 	d := gomail.NewDialer("smtp.office365.com", 587, "signup@svpromptusimperii.nl", email_password)
@@ -97,7 +98,7 @@ func getFullName(member PISignUp) string {
 	var fullName string
 	var firstName string
 
-	if member.Nickname == "" {
+	if member.Nickname != "" {
 		firstName = member.Nickname
 	} else {
 		firstName = member.LegalFirstNames
