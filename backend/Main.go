@@ -98,8 +98,10 @@ func handleSignUp(context *gin.Context) {
 	}
 
 	exception_mail := os.Getenv("EMAIL_ADDRESS")
-	err = SendMember(member)
-	if err != nil {
+	memberErr := SendMemberInfoEmail(member)
+	confirmationErr := SendNotificationEmail(member)
+
+	if memberErr != nil || confirmationErr != nil {
 		log.Println(err.Error())
 		context.JSON(http.StatusInternalServerError, gin.H{"Errors": []string{fmt.Sprintf("Er is iets fout gegaan tijdens het verwerken van je aanmelden. Meld jezelf aan via %s", exception_mail)}})
 		return
