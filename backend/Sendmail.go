@@ -62,10 +62,19 @@ func WriteCSV(member PISignUp) ([]byte, error) {
 
 func getFullName(member PISignUp) string {
 	var fullName string
-	if member.Infix != "" {
-		fullName = member.Nickname + " " + member.Infix + " " + member.Surname
+	var firstName string
+
+	if member.Nickname == "" {
+		firstName = member.Nickname
 	} else {
-		fullName = member.Nickname + " " + member.Surname
+		firstName = member.LegalFirstNames
 	}
+
+	if member.Infix != "" {
+		fullName = firstName + " " + member.Infix + " " + member.Surname
+	} else {
+		fullName = firstName + " " + member.Surname
+	}
+
 	return fullName
 }
