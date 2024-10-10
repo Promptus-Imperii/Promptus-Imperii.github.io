@@ -48,8 +48,8 @@ func SendMemberInfoEmail(member PISignUp) error {
 }
 
 func SendNotificationEmail(member PISignUp) error {
-	if gin.Mode() == gin.TestMode {
-		log.Println("Testing mode: email will not be sent")
+	if gin.Mode() == gin.TestMode || gin.Mode() == gin.DebugMode {
+		log.Println("Testing or debug mode: email will not be sent")
 		return nil
 	}
 

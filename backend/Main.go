@@ -17,11 +17,16 @@ func initRouter() *gin.Engine {
 	router := gin.Default()
 	router.SetTrustedProxies(nil)
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"https://beta.svpromptusimperii.nl", "https://svpromptusimperii.nl"}
+	if gin.Mode() == gin.DebugMode {
+		config.AllowOrigins = []string{"*"}
+	} else {
+		config.AllowOrigins = []string{"https://beta.svpromptusimperii.nl", "https://svpromptusimperii.nl"}
+	}
 	router.Use(cors.New(config))
 	api := router.Group("/api")
 	api.GET("/captcha-challenge", generateCaptchaChallenge)
 	api.POST("/signup", handleSignUp)
+	api.POST("/email", getEmail)
 	return router
 }
 
@@ -59,6 +64,21 @@ func generateCaptchaChallenge(context *gin.Context) {
 	context.Data(http.StatusOK, "application/json", jsonData)
 }
 
+func getEmail(context *gin.Context) {
+	var req EmailRequest
+	err := json.NewDecoder(context.Request.Body).Decode(&req)
+	if err != nil {
+		log.Println(err.Error())
+		context.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+
+	altchaGuard(context, req.Altcha)
+
+	email, _ := os.LookupEnv("EMAIL_ADDRESS")
+	context.Data(http.StatusOK, "text/plain", []byte(email))
+}
+
 func handleSignUp(context *gin.Context) {
 	var member PISignUp
 	err := json.NewDecoder(context.Request.Body).Decode(&member)
@@ -68,17 +88,7 @@ func handleSignUp(context *gin.Context) {
 		return
 	}
 
-	// Replay attack protection is off due to a bug.
-	// https://github.com/k42-software/go-altcha/issues/1
-	valid := altcha.ValidateResponse(member.Altcha, false)
-
-	if !valid && gin.Mode() != gin.TestMode {
-		log.Println("Invalid Altcha payload", valid)
-		context.JSON(http.StatusBadRequest, gin.H{"Errors": []string{"een geldige captcha is vereist. Probeer de pagina te herladen (je formuliervelden blijven bestaan)"}})
-		return
-	}
-
-	log.Println("Valid Altcha payload", valid, member.Altcha)
+	altchaGuard(context, member.Altcha)
 
 	var errors []string
 	// oh boy i love validating
@@ -108,6 +118,18 @@ func handleSignUp(context *gin.Context) {
 	}
 
 	context.JSON(http.StatusOK, gin.H{"Success": "Registration successful."})
+}
+
+func altchaGuard(context *gin.Context, payload string) {
+	valid := altcha.ValidateResponse(payload, true)
+
+	if !valid && gin.Mode() != gin.TestMode {
+		log.Println("Invalid Altcha payload", valid)
+		context.JSON(http.StatusBadRequest, gin.H{"Errors": []string{"een geldige captcha is vereist. Probeer de pagina te herladen (je formuliervelden blijven bestaan)"}})
+		return
+	}
+
+	log.Println("Valid Altcha payload", valid, payload)
 }
 
 func appendError(errorList []string, err error) []string {
