@@ -31,7 +31,7 @@
   </section>
 
   {{ $altcha := resources.Get "js/altcha.js" }}
-  <script async defer src="{{ $altcha.RelPermalink }}" type="module"></script>
+  <script src="{{ $altcha.RelPermalink }}" type="module"></script>
 
   {{ $formScript := resources.Get "js/email.js" }}
   {{ if hugo.IsProduction }}
@@ -40,8 +40,6 @@
   <script 
     crossorigin="anonymous"
     integrity="{{ $formScript.Data.Integrity }}"
-    async 
-    defer 
     src="{{ $formScript.RelPermalink }}"></script>
 
 {{ end }}

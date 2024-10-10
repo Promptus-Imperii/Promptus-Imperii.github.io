@@ -7,8 +7,10 @@ const formElement = document.getElementById("signup-form");
 const errorsElement = document.getElementById("errorsDiv");
 
 
-// // attach event listener
-formElement.addEventListener("submit", submitSignup, true);
+// attach event listener after DOM has loaded to prevent issues with browsers other than Firefox.
+document.addEventListener('DOMContentLoaded', function () {
+    formElement.addEventListener("submit", submitSignup, true);
+})
 
 function submitSignup(e) {
 
