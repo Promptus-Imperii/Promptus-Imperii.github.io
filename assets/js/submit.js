@@ -1,4 +1,5 @@
 const URL = "https://api.svpromptusimperii.nl/api/signup"
+// const URL = "http://localhost:3000/api/signup"
 
 // your form
 const formElement = document.getElementById("signup-form");
@@ -24,18 +25,12 @@ function submitSignup(e) {
         return
     }
     console.log(data)
-    try {
-        
-    } catch (error) {
-        
-    }
     fetch(URL, {
         method: "POST",
         body: JSON.stringify(data),
     }).then((response) => {
         console.log(response)
         if (response.status === 200) {
-            // TODO: Redirect to success page
             window.location.href = "/signup_success/";
             console.log("Great success")
             return
@@ -59,13 +54,14 @@ function submitSignup(e) {
                 });
                 return
             }
-            displayGenericError()
-        }).catch(displayGenericError())
-    }).catch(displayGenericError())
+            displayGenericError(body)
+        }).catch(displayGenericError)
+    }).catch(displayGenericError)
 
 }
 
-function displayGenericError() {
+function displayGenericError(error) {
+    console.log(error)
     const errorsTextElement = document.getElementById("errorsText");
     errorsTextElement.innerHTML = ""; // Clear previous errors
     // Remove Tailwind "hidden" class
