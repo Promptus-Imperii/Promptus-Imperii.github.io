@@ -26,6 +26,10 @@ url = "about/"
 name = "Over ons"
 weight = 5
 
+[[main]]
+url = "contact/"
+name = "Contact"
+weight = 5
 
 # footer menu
 [[footer]]
@@ -33,7 +37,13 @@ name = "Over"
 url = "about/"
 weight = 1
 
+# footer menu
+[[footer]]
+name = "Contact"
+url = "contact/"
+weight = 2
+
 [[footer]]
 name = "Algemene voorwaarden"
 url = "terms-and-conditions/"
-weight = 2
+weight = 3
