@@ -1,5 +1,9 @@
 package main
 
+type EmailRequest struct {
+	Altcha string `json:"altcha"`
+}
+
 type PISignUp struct {
 	LegalFirstNames             string `json:"legal_first_names"`
 	Nickname                    string `json:"nickname"`
