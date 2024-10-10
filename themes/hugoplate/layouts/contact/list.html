@@ -1,0 +1,47 @@
+{{ define "main" }}
+  {{ partial "page-header" . }}
+
+
+  <section class="section-sm">
+    <div class="container">
+      <div class="row justify-center">
+        <div class="md:col-10 lg:col-6 mx-auto">
+          <div class="flex flex-col gap-2">
+            <div class="content">
+              {{ .Content }}
+            </div>
+            <div class="pt-2" id="email-block">
+              <form class="flex flex-col gap-5" id="email-form">
+                <altcha-widget
+                id="altcha"
+                challengeurl="{{ .Site.Params.serverURL }}/api/captcha-challenge"
+                strings="{&quot;label&quot;:&quot;Verkrijg email&quot;}"
+                ></altcha-widget>
+              </form>
+            </div>
+            <div id="errorsDiv" class="flex flex-col text-red-400 hidden">
+              <label>{{ i18n "errors" }}</label>
+              <div id="errorsText">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {{ $altcha := resources.Get "js/altcha.js" }}
+  <script async defer src="{{ $altcha.RelPermalink }}" type="module"></script>
+
+  {{ $formScript := resources.Get "js/email.js" }}
+  {{ if hugo.IsProduction }}
+    {{ $formScript = $formScript | minify | fingerprint }}
+  {{ end }}
+  <script 
+    crossorigin="anonymous"
+    integrity="{{ $formScript.Data.Integrity }}"
+    async 
+    defer 
+    src="{{ $formScript.RelPermalink }}"></script>
+
+{{ end }}
