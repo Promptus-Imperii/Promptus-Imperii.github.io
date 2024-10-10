@@ -73,7 +73,9 @@ func getEmail(context *gin.Context) {
 		return
 	}
 
-	altchaGuard(context, req.Altcha)
+	if !altchaGuard(context, req.Altcha) {
+		return
+	}
 
 	email, _ := os.LookupEnv("EMAIL_ADDRESS")
 	context.Data(http.StatusOK, "text/plain", []byte(email))
@@ -88,7 +90,9 @@ func handleSignUp(context *gin.Context) {
 		return
 	}
 
-	altchaGuard(context, member.Altcha)
+	if !altchaGuard(context, member.Altcha) {
+		return
+	}
 
 	var errors []string
 	// oh boy i love validating
@@ -120,16 +124,17 @@ func handleSignUp(context *gin.Context) {
 	context.JSON(http.StatusOK, gin.H{"Success": "Registration successful."})
 }
 
-func altchaGuard(context *gin.Context, payload string) {
-	valid := altcha.ValidateResponse(payload, true)
+func altchaGuard(context *gin.Context, payload string) bool {
+	valid := altcha.ValidateResponse(payload, false)
 
 	if !valid && gin.Mode() != gin.TestMode {
 		log.Println("Invalid Altcha payload", valid)
 		context.JSON(http.StatusBadRequest, gin.H{"Errors": []string{"een geldige captcha is vereist. Probeer de pagina te herladen (je formuliervelden blijven bestaan)"}})
-		return
+		return false
 	}
 
 	log.Println("Valid Altcha payload", valid, payload)
+	return true
 }
 
 func appendError(errorList []string, err error) []string {
