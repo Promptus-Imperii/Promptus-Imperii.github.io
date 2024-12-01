@@ -29,8 +29,8 @@ Tip: use `http://www.randomiban.com/?country=Netherlands` to test with IBAN numb
 
 ## Adding new activity posts
 - Adding a new activity happens in two folders: [content/nl/activities](content/nl/activities) and [assets/images/activities](assets/images/activities).
-- To create a new activity post: use the template provided below or copy an existing file in the linked **content** folder. Warning: folder and file names may not contain capital letters. Use the **yyyy-mm-dd-my-activity** template to prevent duplicate activity entries over time and allow for sorting the files by date.
-- To add pictures: create a folder with the same name as the corresponding file in the linked **assets** folder. All of the activity's images are placed here. To force a specific image order in the gallery: prefix the filenames with **N__** where **N** indicates the position of an image. Downscale de foto's eerst naar 1080p als ze 4k zijn (gebruik bijv. https://imageresizer.com/), om de grootte van de Git repo laag te houden (without Git Large File Storage). Comprimeer ze hier niet! Dit doet de website zelf al.
+- To create a new activity post: use the template provided below or copy an existing file in the linked **content** folder. Warning: folder and file names may not contain capital letters. Use the `yyyy-mm-dd-my-activity` template to prevent duplicate activity entries over time and allow for sorting the files by date.
+- To add pictures: create a folder with the same name as the corresponding file in the linked **assets** folder. All of the activity's images are placed here. To force a specific image order in the gallery: prefix the filenames with `N__` where **N** indicates the position of an image. Downscale de foto's eerst naar 1080p als ze 4k zijn (gebruik bijv. https://imageresizer.com/), om de grootte van de Git repo laag te houden (without Git Large File Storage). Comprimeer ze hier niet! Dit doet de website zelf al.
 - When finished: start the website and check if
   - The gallery works
   - Pictures are not rotated*
