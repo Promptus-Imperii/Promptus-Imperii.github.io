@@ -3,7 +3,7 @@ title: "Contact"
 draft: false
 ---
 
-Wil je je aanmelden voor de vereniging? Dat kan via het aanmeldformulier via de knop "aanmelden".
+Aanmelden voor de vereniging? Dat kan door middel van het aanmeldformulier via de knop "Aanmelden".
 
-Wil je ons bereiken voor andere redenen, bijvoorbeeld voor een samenwerking of sponsoring? Klik dan op de knop hieronder om het emailadres te krijgen.
+Wil je ons bereiken voor een andere reden, zoals een samenwerking of sponsoring? Klik dan op de knop hieronder om ons emailadres te krijgen.
 
