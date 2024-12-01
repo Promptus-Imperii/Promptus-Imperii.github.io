@@ -27,7 +27,7 @@ contact_form_action = "#" # contact form works with [https://airform.io/] or [ht
 # custom script on header, example: custom_script= "<script>console.log(\"Hello World\")</script>"
 custom_script = ""
 # copyright
-copyright = "Made with ❤️ by Webcomissie"
+copyright = "Made with ❤️ by Webcommissie"
 
 # Server url. Change to second line when testing offline. Also change in submit.js and email.js
 serverURL = "https://api.svpromptusimperii.nl"
@@ -60,7 +60,7 @@ show_categories = true
 # seo meta data for OpenGraph / Twitter Card
 # seo module: https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/basic-seo
 [metadata]
-keywords = ["Studivereniging"]
+keywords = ["Studievereniging"]
 description = "Studieveriniging Promptus Imperii"
 author = "Promptus Imperii"
 image = "images/og-image.png"

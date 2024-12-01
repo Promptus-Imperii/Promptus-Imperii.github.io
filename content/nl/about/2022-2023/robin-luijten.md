@@ -4,5 +4,5 @@ title: "Robin Luijten - penningmeester"
 image: "/images/about-us/robin-luijten-22_23.jpg"
 image_alt: "Een foto van Penningmeester Robin Luijten"
 ---
-Hoi, Mijn naam is Robin, 22 jaar oud en derde jaars student Technische Informatica.
+Hoi, mijn naam is Robin. Ik ben 22 jaar oud en derdejaars student Technische Informatica.
 Ik ben momenteel de penningmeester van SV Promptus Imperii.
