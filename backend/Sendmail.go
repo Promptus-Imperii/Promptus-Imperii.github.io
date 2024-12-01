@@ -2,13 +2,12 @@ package main
 
 import (
 	"bytes"
-	"crypto/tls"
 	"fmt"
 	"log"
 
-	gomail "github.com/Shopify/gomail"
 	"github.com/gin-gonic/gin"
 	"github.com/gocarina/gocsv"
+	"github.com/wneessen/go-mail"
 )
 
 func SendMemberInfoEmail(member PISignUp, serverEmailCredentials ServerEmailCredentials, correspondanceEmail string) error {
@@ -18,27 +17,29 @@ func SendMemberInfoEmail(member PISignUp, serverEmailCredentials ServerEmailCred
 	}
 
 	// Write member info to a CSV file
-	csv_bytes, err := WriteToCSV(member)
+	csvBytes, err := WriteToCSV(member)
 	if err != nil {
 		return err
 	}
 
-	// Create a new message
-	m := gomail.NewMessage()
+	// Create a new email message
+	m := mail.NewMsg()
 
 	// Set sender and recipient
-	m.SetHeader("From", serverEmailCredentials.email)
-	m.SetHeader("To", correspondanceEmail)
+	m.From(serverEmailCredentials.email)
+	m.To(correspondanceEmail)
 
 	// Set subject and body
-	m.SetHeader("Subject", fmt.Sprintf("[Server] Nieuwe aanmelding lid: %s", getFullName(member)))
-	m.SetBody("text/plain", "Nieuw lid aangemeld, zie bijlage.")
-	m.AttachReader("nieuw_lid.csv", bytes.NewReader(csv_bytes))
+	m.Subject(fmt.Sprintf("[Server] Nieuwe aanmelding lid: %s", getFullName(member)))
+	m.SetBodyString(mail.TypeTextPlain, "Nieuw lid aangemeld, zie bijlage.")
 
+	// Attach the CSV file
+	m.AttachReader("nieuw_lid.csv", bytes.NewReader(csvBytes))
+
+	// Send the email
 	err = SendEmail(serverEmailCredentials, m)
-
 	if err != nil {
-		log.Println("Error sending email to contact email ", err)
+		log.Println("Error sending email to contact email:", err)
 		return err
 	}
 
@@ -52,40 +53,49 @@ func SendNotificationEmail(member PISignUp, serverEmailCredentials ServerEmailCr
 		return nil
 	}
 
-	// Create a new message
-	m := gomail.NewMessage()
+	// Create a new email message
+	m := mail.NewMsg()
 
 	// Set sender and recipient
-	m.SetHeader("From", serverEmailCredentials.email)
-	m.SetHeader("To", member.Email)
+	m.From(serverEmailCredentials.email)
+	m.To(member.Email)
 
 	// Set subject and body
-	m.SetHeader("Subject", "No-reply: Bevestiging aanmelding S.V Promptus Imperii.")
-	m.SetBody("text/plain", fmt.Sprintf("Beste,\n"+
-		"\n"+
-		"Bedankt voor je aanmelding bij S.V Promptus Imperii. De secretaris zal jouw aanmelding zo snel mogelijk in behandeling nemen. Dit kan een paar dagen duren, aangezien het een handmatig proces is.\n"+
-		"Als je na een week nog steeds niets gehoord hebt, aarzel dan niet om contact op te nemen met %s.", correspondanceEmail))
+	m.Subject("No-reply: Bevestiging aanmelding S.V Promptus Imperii.")
+	body := fmt.Sprintf(
+		"Beste,\n\nBedankt voor je aanmelding bij S.V Promptus Imperii. De secretaris zal jouw aanmelding zo snel mogelijk in behandeling nemen. Dit kan een paar dagen duren, aangezien het een handmatig proces is.\nAls je na een week nog steeds niets gehoord hebt, aarzel dan niet om contact op te nemen met %s.",
+		correspondanceEmail,
+	)
+	m.SetBodyString(mail.TypeTextPlain, body)
 
+	// Send the email
 	err := SendEmail(serverEmailCredentials, m)
-
 	if err != nil {
-		log.Println("Error writing confirmation email to ", member.Email, err)
+		log.Println("Error writing confirmation email to", member.Email, err)
 		return err
 	}
+
 	log.Println("Confirmation email sent")
 	return nil
 }
 
-func SendEmail(serverEmailCredentials ServerEmailCredentials, message *gomail.Message) error {
-
-	// Send via server email/office365
-	d := gomail.NewDialer("smtp.office365.com", 587, serverEmailCredentials.email, serverEmailCredentials.password)
-
-	d.TLSConfig = &tls.Config{ServerName: "smtp.office365.com"}
-	err := d.DialAndSend(message)
-
+func SendEmail(serverEmailCredentials ServerEmailCredentials, message *mail.Msg) error {
+	// Configure the email client
+	client, err := mail.NewClient(
+		"smtp.office365.com",
+		mail.WithPort(587),
+		mail.WithSMTPAuth(mail.SMTPAuthLogin),
+		mail.WithUsername(serverEmailCredentials.email),
+		mail.WithPassword(serverEmailCredentials.password),
+		mail.WithTLSPortPolicy(mail.TLSMandatory),
+	)
 	if err != nil {
-		return err
+		return fmt.Errorf("error creating mail client: %w", err)
+	}
+
+	// Send the email
+	if err := client.DialAndSend(message); err != nil {
+		return fmt.Errorf("error sending email: %w", err)
 	}
 
 	return nil
@@ -94,14 +104,14 @@ func SendEmail(serverEmailCredentials ServerEmailCredentials, message *gomail.Me
 func WriteToCSV(member PISignUp) ([]byte, error) {
 	array := []*PISignUpExport{}
 	array = append(array, member.ToPISignUpExport())
-	csv_bytes, err := gocsv.MarshalBytes(array)
+	csvBytes, err := gocsv.MarshalBytes(array)
 
 	if err != nil {
 		log.Println("Error writing csv:", err)
 		return nil, err
 	}
 	log.Println("CSV file created successfully")
-	return csv_bytes, nil
+	return csvBytes, nil
 }
 
 func getFullName(member PISignUp) string {
