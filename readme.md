@@ -28,7 +28,6 @@ Tip: use `http://www.randomiban.com/?country=Netherlands` to test with IBAN numb
 **Make sure to not commit these changes!**
 
 ## Maintainance
-
 ### Frontend
 - `npm update` and test the website. TODO: Migrate to masonary layout when it is stable.
 
