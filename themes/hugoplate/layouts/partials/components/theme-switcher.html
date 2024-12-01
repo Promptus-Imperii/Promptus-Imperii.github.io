@@ -1,14 +1,14 @@
 <!-- theme switcher -->
 {{ $class := .Class }}
 {{ if site.Params.theme_switcher }}
-  <div class="theme-switcher {{ $class }}">
+  <div class="theme-switcher {{ $class }} hidden">
     <input id="theme-switcher" data-theme-switcher type="checkbox" />
     <label for="theme-switcher">
       <span class="sr-only">theme switcher</span>
       <span>
         <!-- sun -->
         <svg
-          class="absolute left-[4px] top-[4px] z-10 opacity-100 dark:opacity-0"
+          class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-100 dark:opacity-0"
           viewBox="0 0 56 56"
           fill="#fff"
           height="16"
@@ -18,7 +18,7 @@
         </svg>
         <!-- moon -->
         <svg
-          class="absolute left-[4px] top-[4px] z-10 opacity-0 dark:opacity-100"
+          class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 opacity-0 dark:opacity-100"
           viewBox="0 0 24 24"
           fill="none"
           height="16"
@@ -34,7 +34,6 @@
   </div>
 
   <!-- theme switcher -->
-  {{ if site.Params.theme_switcher }}
   <script>
     var darkMode = {{if eq site.Params.theme_default "dark"}}true{{else}}false{{end}};
 
@@ -44,12 +43,17 @@
 
     if (localStorage.getItem("theme") === "dark"){darkMode = true}
     else if (localStorage.getItem("theme") === "light"){darkMode = false}
-    if (darkMode){document.documentElement.classList.toggle("dark")}
-    var themeSwitch = document.querySelectorAll("[data-theme-switcher]");
 
+    if (darkMode){document.documentElement.classList.add("dark")}
+    else {document.documentElement.classList.remove("dark")}
+
+    // Show theme switcher after applying theme
     document.addEventListener("DOMContentLoaded", () => {
+      var themeSwitch = document.querySelectorAll("[data-theme-switcher]");
+      var themeSwitcherContainer = document.querySelector('.theme-switcher');
+
       [].forEach.call(themeSwitch, function (ts) {
-        ts.checked = darkMode ? true : false;
+        ts.checked = darkMode;
         ts.addEventListener("click", () => {
           document.documentElement.classList.toggle("dark");
           localStorage.setItem(
@@ -58,8 +62,9 @@
           );
         });
       });
+
+      // Now make the switcher visible
+      themeSwitcherContainer.classList.remove('hidden');
     });
   </script>
-  {{ end }}
-
 {{ end }}
