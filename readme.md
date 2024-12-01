@@ -22,9 +22,23 @@ This website is built on the following libraries/frameworks are used in this pro
 # Developing with the backend
 When testing the backend, start the backend by following the instructions on that repo. Change the following variables:
 - `serverURL` in config/params.toml
-- `URL` in assets/js/submit.js
+- `URL` in assets/js/submit.js and assets/js/email.js
+
+Tip: use `http://www.randomiban.com/?country=Netherlands` to test with IBAN numbers
 
 **Make sure to not commit these changes!**
+
+
+# Maintainance
+
+## Frontend
+- `npm update` and test the website. TODO: Migrate to masonary layout when it is stable
+
+## Backend
+- `go get -u -all` and test the endpoint by submitting a form with the frontend
+
+## Both
+Check every once in a while if the dependencies are still maintained and switch to update ones where possible (especially with the backend)
 
 
 # Post instructies
