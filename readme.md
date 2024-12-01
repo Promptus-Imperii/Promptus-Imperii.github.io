@@ -23,9 +23,20 @@ When testing the backend, start the backend by following the instructions on tha
 - `serverURL` in config/params.toml
 - `URL` in assets/js/submit.js and assets/js/email.js
 
-Tip: use `http://www.randomiban.com/?country=Netherlands` to test with IBAN numbers
+Tip: use `http://www.randomiban.com/?country=Netherlands` to test with IBAN numbers.
 
 **Make sure to not commit these changes!**
+
+## Maintainance
+
+### Frontend
+- `npm update` and test the website. TODO: Migrate to masonary layout when it is stable.
+
+### Backend
+- `go get -u -all` and test the endpoint by submitting a form with the frontend.
+
+### Both
+Check every once in a while if the dependencies are still maintained and switch to updated ones where possible (especially with the backend).
 
 ## Adding new activity posts
 - Adding a new activity happens in two folders: [content/nl/activities](content/nl/activities) and [assets/images/activities](assets/images/activities).
