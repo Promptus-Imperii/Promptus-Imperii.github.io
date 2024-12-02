@@ -1,5 +1,5 @@
 ---
-title: "Breda Robotics Stagemark"
+title: "Breda Robotics Stagemarkt"
 description: "Dit jaar waren wij weer welkom bij de stagemarkt van Breda Robotics."
 date: 2022-11-03T00:00:00
 image_folder: "images/activities/2022-11-03-breda-robotics-stagemarkt"
