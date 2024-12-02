@@ -14,8 +14,14 @@ This website is built on the following libraries/frameworks are used in this pro
 - The hosting uses [Coolify](https://coolify.io/).
 
 ## Set-up
+- Install Hugo: https://gohugo.io/installation/. For Windows, use [winget](https://gohugo.io/installation/windows/#winget) for the easiest install.
+- Install [GoLang](https://go.dev/dl/)
 - Install any NPM-like package manager: since it is only used for building Tailwind and launching scripts, you can probably use any package manager (NPM, Bun, Yarn, etc.). Just make sure to use the latest (LTS) version.
-- To run the website locally, run `npm run dev` or equivalent.
+  - If you don't have npm installed, I recommend [nvm](https://github.com/nvm-sh/nvm) for Linux/MacOs and [nvm-windows](https://github.com/coreybutler/nvm-windows) for Windows
+  - After installing nvm(-windows), run `nvm install --lts` (MacOs/Linux) or `nvm install lts` (windows) and activate the downloaded version with `nvm use --lts` (MacOs/Linux) or `nvm use <version-number>` (Windows)
+  - On windows, run `Set-ExecutionPolicy RemoteSigned -Scope CurrentUser` in Powershell to allow the running of PowerShell scripts
+- To install the npm packages, run `npm install`
+- To run the website locally, run `npm run dev` or equivalent. The first time can take a while.
 - To build the website, run `npm run build` or equivalent.
 
 ## Developing with the backend
