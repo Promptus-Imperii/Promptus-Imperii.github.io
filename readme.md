@@ -63,10 +63,12 @@ Check every once in a while if the dependencies are still maintained and switch 
 
 # Post instructies
 - Om een post te maken, kopieer een bestaande post die lijkt op degene die je wilt maken. Voorbeeld: maak een post voor een bedrijfsbezoek, kopieer een ander bedrijfsbezoek.
+- Plaats de fotos in de goede map (zie onderstaande). Draai daarna `npm run process-images`. Dit doet twee dingen:
+  - alle foto's groter dan 1080p terugschalen naar 1080p om de grootte behapbaar te houden
+  - Alle fotos die 'verkeerd gedraaid' zijn, goed zetten. Dit werkt niet altijd goed, zie onderstaande. Heeft te maken met [deze](https://discourse.gohugo.io/t/why-is-hugo-rotating-my-image/23329/5) en [deze](https://github.com/golang/go/issues/4341) bug
+  - Als een foto na het runnen van `npm run process-image` nog steeds gedraaid is, is de oplossing is simpel: draai een paar keer de foto een een foto-edit programma (denk niet te moeilijk: pak windows photos of iets dergelijks, maar geen oldschool Photo Viewer!) en draai de foto een paar keer. Als de rotation metadata verandert is en de foto klopt, is het gefixed.
 - Vul de volgende velden in:
 ```yaml
-Als een foto gedraaid is heeft dat te maken met [deze](https://discourse.gohugo.io/t/why-is-hugo-rotating-my-image/23329/5) en [deze](https://github.com/golang/go/issues/4341) bug. Oplossing is simpel: draai een paar keer de foto een een foto-edit programma (denk niet te moeilijk: pak windows photos of iets dergelijks) en draai de foto een paar keer. Als de rotation metadata verandert is en de foto klopt, is het gefixed.
-
 ### Activity template
 ---
 # Title shown at the top of the page.
