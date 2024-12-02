@@ -61,7 +61,7 @@ show_categories = true
 # seo module: https://github.com/gethugothemes/hugo-modules/tree/master/seo-tools/basic-seo
 [metadata]
 keywords = ["Studievereniging"]
-description = "Studieveriniging Promptus Imperii"
+description = "Studievereniging Promptus Imperii"
 author = "Promptus Imperii"
 image = "images/og-image.png"
 
