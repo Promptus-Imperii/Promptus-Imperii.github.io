@@ -31,8 +31,12 @@
         </a>
       {{ end }}
     </li>
+    <li class="mr-4 inline-block">
+      <i class="fa-regular fa-clock mr-2"></i>
+      {{ time.Format ":date_long" .PublishDate }}
+    </li>
   </ul>
-  <p class="mb-6">{{ .Summary }}</p>
+  <div class="mb-6">{{ .Summary }}</div>
   <a class="btn btn-outline-primary btn-sm" href="{{ .RelPermalink }}">
     {{ i18n "read_more" }}
   </a>

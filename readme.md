@@ -20,8 +20,8 @@ This website is built on the following libraries/frameworks are used in this pro
 
 ## Developing with the backend
 When testing the backend, start the backend by following the instructions on that repo. Change the following variables:
-- `serverURL` in config/params.toml
-- `URL` in assets/js/submit.js and assets/js/email.js
+- `serverURL` in [config/params.toml](config/params.toml)
+- `URL` in [assets/js/submit.js](assets/js/submit.js) and [assets/js/email.js](assets/js/email.js)
 
 Tip: use `http://www.randomiban.com/?country=Netherlands` to test with IBAN numbers.
 

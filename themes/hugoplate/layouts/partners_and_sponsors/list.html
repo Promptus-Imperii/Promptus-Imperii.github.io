@@ -7,21 +7,47 @@
       <!-- sponsors -->
       <h2 id="sponsors" class="flex justify-center">{{ i18n "sponsors" }}</h2>
       <p class="mb-10 mt-4">{{ .Params.sponsorText }}</p>
-      {{/*  TLDR: Pagination is cursed in this set-up, better just set the limit very high (to 99)  */}}
-      {{/*  https://stackoverflow.com/questions/74574527/using-multiple-paginate-ranges-with-hugo  */}}
-      {{/*  https://discourse.gohugo.io/t/need-to-render-two-paginate-sections-on-main-page/6627/3  */}}
-      {{ $paginator:= .Paginate .RegularPages 99}}
-      {{ range where $paginator.Pages "Params.type" "sponsor" }}
-      <div class="flex md:col-6 lg:col-4 mb-14">
-        {{ partial "components/sponsor-card" . }}
-      </div>
+
+      {{/* Get all sponsor pages */}}
+      {{ $sponsors := where .RegularPages "Params.type" "sponsor" }}
+      
+      {{/* Create a new slice to hold sponsors with a custom numeric sort key */}}
+      {{ $sortedSponsors := slice }}
+      {{ range $sponsors }}
+        {{/* Convert sponsor_type to lowercase, to make it case insensitive */}}
+        {{ $type := .Params.sponsor_type | lower }}
+        {{ $sortKey := 0 }}
+
+        {{/* Assign numeric value to sponsor types for sorting */}}
+        {{ if eq $type "platinum" }}
+          {{ $sortKey = 1 }}
+        {{ else if eq $type "goud" }}
+          {{ $sortKey = 2 }}
+        {{ else if eq $type "zilver" }}
+          {{ $sortKey = 3 }}
+        {{ end }}
+
+        {{/* Add the sponsor and its sortKey to the new slice */}}
+        {{ $sortedSponsors = $sortedSponsors | append (dict "Page" . "SortKey" $sortKey) }}
       {{ end }}
+
+      {{/* Sort sponsors by the custom SortKey */}}
+      {{ $sortedSponsors = sort $sortedSponsors ".SortKey" }}
+
+      {{/* Render sorted sponsors */}}
+      {{ range $sortedSponsors }}
+        <div class="flex md:col-6 lg:col-4 mb-14">
+          {{ partial "components/sponsor-card" .Page }}
+        </div>
+      {{ end }}
+
       {{ partial "components/pagination.html" . }}
 
       <!-- partners -->
       <h2 id="partners" class="flex justify-center">{{ i18n "partners" }}</h2>
       <p class="mb-10 mt-4">{{ .Params.partnerText }}</p>
-      {{ $paginator:= .Paginate .RegularPages }}
+
+      {{ $paginator := .Paginate .RegularPages }}
       {{ range where $paginator.Pages "Params.type" "partner" }}
       <div class="flex md:col-6 lg:col-4 mb-14">
         {{ partial "components/sponsor-card" . }}
@@ -29,5 +55,6 @@
       {{ end }}
       {{ partial "components/pagination.html" . }}
     </div>
+  </div>
 </section>
 {{ end }}
