@@ -45,37 +45,27 @@ Check every once in a while if the dependencies are still maintained and switch 
 
 ## Adding new activity posts
 - Adding a new activity happens in two folders: [content/nl/activities](content/nl/activities) and [assets/images/activities](assets/images/activities).
-- To create a new activity post: use the template provided below or copy an existing file in the linked **content** folder. Warning: folder and file names may not contain capital letters. Use the `yyyy-mm-dd-my-activity` template to prevent duplicate activity entries over time and allow for sorting the files by date.
-- To add pictures: create a folder with the same name as the corresponding file in the linked **assets** folder. All of the activity's images are placed here. To force a specific image order in the gallery: prefix the filenames with `N__` where **N** indicates the position of an image. Downscale de foto's eerst naar 1080p als ze 4k zijn (gebruik bijv. https://imageresizer.com/), om de grootte van de Git repo laag te houden (without Git Large File Storage). Comprimeer ze hier niet! Dit doet de website zelf al.
+- To create a new activity post: use the template provided below or copy an existing file in the linked **content** folder.
+  - Warning: folder and file names may not contain capital letters.
+  - Use the `yyyy-mm-dd-my-activity` template to prevent duplicate activity entries over time and allow for sorting the files by date.
+- To add pictures: create a folder with the same name as the corresponding file in the linked **assets** folder. All of the activity's images are placed here.
+  - To force a specific image order in the gallery: prefix the filenames with `N__` where **N** indicates the position of an image.
+- After adding pictures, run `npm run process-images`. This process alters the images in two ways:
+  - All pictures larger than 1080p are scaled down to 1080p to keep the size of the repository small (without Git Large File Storage).
+  - If you manually need to scale the images down: do not compress them! The website already takes care of compression.
+  - Alle foto's die 'verkeerd gedraaid' zijn, goed zetten. Dit werkt niet altijd goed: zie het volgende punt. Dit heeft te maken met [deze](https://discourse.gohugo.io/t/why-is-hugo-rotating-my-image/23329/5) en [deze](https://github.com/golang/go/issues/4341) bug.
+  - Als een foto na het runnen van dit proces nog steeds gedraaid is, is de oplossing simpel: draai de foto een paar keer met een bewerkingsprogramma (denk niet te moeilijk: pak Windows Photos, Paint.NET of iets dergelijks, maar let op: old school Windows Photo Viewer geeft problemen). Als de rotation metadata is veranderd en de oriëntatie van de foto klopt, is het probleem opgelost.
 - When finished: start the website and check if
   - The gallery works
-  - Pictures are not rotated*
-  - The tag overview is correct and does not contain duplicate entries
+  - Pictures are not rotated
+  - The category and tag overview are correct and do not contain duplicate entries
   - The dates are correct
+  - There are no content mismatches
   - Any links are working
 - When making significant changes to the template: make sure to update it everywhere using a text replacement tool.
 
-# Maintainance
-
-## Frontend
-- `npm update` and test the website. TODO: Migrate to masonary layout when it is stable
-
-## Backend
-- `go get -u -all` and test the endpoint by submitting a form with the frontend
-
-## Both
-Check every once in a while if the dependencies are still maintained and switch to update ones where possible (especially with the backend)
-
-
-# Post instructies
-- Om een post te maken, kopieer een bestaande post die lijkt op degene die je wilt maken. Voorbeeld: maak een post voor een bedrijfsbezoek, kopieer een ander bedrijfsbezoek.
-- Plaats de fotos in de goede map (zie onderstaande). Draai daarna `npm run process-images`. Dit doet twee dingen:
-  - alle foto's groter dan 1080p terugschalen naar 1080p om de grootte behapbaar te houden
-  - Alle fotos die 'verkeerd gedraaid' zijn, goed zetten. Dit werkt niet altijd goed, zie onderstaande. Heeft te maken met [deze](https://discourse.gohugo.io/t/why-is-hugo-rotating-my-image/23329/5) en [deze](https://github.com/golang/go/issues/4341) bug
-  - Als een foto na het runnen van `npm run process-image` nog steeds gedraaid is, is de oplossing is simpel: draai een paar keer de foto een een foto-edit programma (denk niet te moeilijk: pak windows photos of iets dergelijks, maar geen oldschool Photo Viewer!) en draai de foto een paar keer. Als de rotation metadata verandert is en de foto klopt, is het gefixed.
-- Vul de volgende velden in:
-```yaml
 ### Activity template
+```
 ---
 # Title shown at the top of the page.
 title: "My Activity"
@@ -95,7 +85,7 @@ tags: ["MyCompany"]
 # If this is set to true, the content is not published
 draft: false
 ---
-```
+
 Write about your activity here!
 
 Another line with my conclusion.
