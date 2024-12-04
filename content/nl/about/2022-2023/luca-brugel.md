@@ -4,4 +4,4 @@ title: "Luca Brugel - vice-voorzitter"
 image: "/images/about-us/luca-brugel-22_23.jpg"
 image_alt: "Een foto van vice-voorzitter Luca Brugel"
 ---
-Derde jaar student Technische Informatica. Ik hoop door middel van de studievereniging onze studie te verbeteren en te verbinden.
+Derdejaars student Technische Informatica. Ik hoop door middel van de studievereniging onze studie te verbeteren en te verbinden.
