@@ -64,7 +64,7 @@ async function processImage(filePath) {
             // Resize and crop the image
             console.log(`Resizing image: ${path.basename(filePath)}`);
             await sharpInstance
-                .resize(MAX_WIDTH, MAX_HEIGHT, { fit: 'cover' }) // Resize and crop
+                .resize(MAX_WIDTH, MAX_HEIGHT, { fit: 'outside' }) // Resize and crop
                 .toFile(tempFilePath); // Save to a temporary file
             imageProcessed = true; // Set flag to indicate that the image was processed
             console.log(`Processed and resized ${path.basename(filePath)} and saved to temporary file`);
