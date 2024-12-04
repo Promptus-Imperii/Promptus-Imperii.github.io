@@ -1,10 +1,9 @@
 ---
-title: "FMI Improvia"
+title: "FMI ImProvia"
 type: "sponsor"
 sponsor_type: "Goud"
 sponsor_time: ["2021 ", "Heden"]
 link: "https://www.fmi-improvia.com/"
 ---
 
-Prodrive Technologies uit Eindhoven is één van onze eerste sponsoren sinds het studiejaar 2022/2023.
-Creating meaningful technologies that make the world work.
+Trouwe sponsor sinds het studiejaar 2021-2022. Tomorrow engineered today: FMI ImProvia kijkt verder dan de vraag van de opdrachtgever. Want alleen zo kunnen we technologie zo intelligent mogelijk inzetten.
