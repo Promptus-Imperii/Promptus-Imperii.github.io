@@ -50,14 +50,14 @@ Check every once in a while if the dependencies are still maintained and switch 
   - Use the `yyyy-mm-dd-my-activity` template to prevent duplicate activity entries over time and allow for sorting the files by date.
 - To add pictures: create a folder with the same name as the corresponding file in the linked **assets** folder. All of the activity's images are placed here.
   - To force a specific image order in the gallery: prefix the filenames with `N__` where **N** indicates the position of an image.
-- After adding pictures, run `npm run process-images`. This process alters the images in two ways:
-  - All pictures larger than 1080p are scaled down to 1080p to keep the size of the repository small (without Git Large File Storage).
+- After adding pictures, run `npm run process-images` (before comitting!). This process alters the images in two ways:
+  - All pictures larger than 1080p are scaled down to 1080p to keep the size of the repository small.
+  - All images are "rotated" in order to mitigate these bugs: https://discourse.gohugo.io/t/why-is-hugo-rotating-my-image/23329/5 and https://github.com/golang/go/issues/4341.
   - If you manually need to scale the images down: do not compress them! The website already takes care of compression.
-  - Alle foto's die 'verkeerd gedraaid' zijn, goed zetten. Dit werkt niet altijd goed: zie het volgende punt. Dit heeft te maken met [deze](https://discourse.gohugo.io/t/why-is-hugo-rotating-my-image/23329/5) en [deze](https://github.com/golang/go/issues/4341) bug.
-  - Als een foto na het runnen van dit proces nog steeds gedraaid is, is de oplossing simpel: draai de foto een paar keer met een bewerkingsprogramma (denk niet te moeilijk: pak Windows Photos, Paint.NET of iets dergelijks, maar let op: old school Windows Photo Viewer geeft problemen). Als de rotation metadata is veranderd en de oriëntatie van de foto klopt, is het probleem opgelost.
+  - If a photo is still rotated after running the script, the solution is simple: rotate the photo a few times with an editing program (don't think too hard: grab Windows Photos, Paint.NET or something similar, but beware: old school Windows Photo Viewer gives problems). If the rotation metadata is changed and the orientation of the photo is correct, the problem is solved.
 - When finished: start the website and check if
   - The gallery works
-  - Pictures are not rotated
+  - Pictures are not rotated or clipped
   - The category and tag overview are correct and do not contain duplicate entries
   - The dates are correct
   - There are no content mismatches
