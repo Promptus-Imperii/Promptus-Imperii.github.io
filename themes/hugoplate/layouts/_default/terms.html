@@ -6,11 +6,12 @@
     <div class="container">
       <ul class="text-center">
         {{/* categories */}}
-        {{ if eq .Permalink (`categories/` | absLangURL) }}
+        {{ if eq .RelPermalink "/categories/" }}
           {{ range site.Taxonomies.categories.ByCount }}
             <li class="m-3 inline-block">
+              hhai
               <a
-                href="{{ .Page.Permalink }}"
+                href="{{ .Page.RelPermalink }}"
                 class="bg-theme-light text-dark dark:bg-darkmode-theme-light dark:text-darkmode-dark block rounded px-4 py-2 text-xl">
                 {{ .Page.Title }}
                 <span class="bg-body dark:bg-darkmode-body ml-2 rounded px-2">
@@ -21,11 +22,11 @@
           {{ end }}
         {{ end }}
         {{/* tags */}}
-        {{ if eq .Permalink (`tags/` | absLangURL) }}
+        {{ if eq .RelPermalink "/tags/" }}
           {{ range site.Taxonomies.tags.ByCount }}
             <li class="m-3 inline-block">
               <a
-                href="{{ .Page.Permalink }}"
+                href="{{ .Page.RelPermalink }}"
                 class="bg-theme-light text-dark dark:bg-darkmode-theme-light dark:text-darkmode-dark block rounded px-4 py-2 text-xl">
                 {{ .Page.Title }}
                 <span class="bg-body dark:bg-darkmode-body ml-2 rounded px-2">
