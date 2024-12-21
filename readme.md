@@ -50,7 +50,7 @@ Check every once in a while if the dependencies are still maintained and switch 
   - Use the `yyyy-mm-dd-my-activity` template to prevent duplicate activity entries over time and allow for sorting the files by date.
 - To add pictures: create a folder with the same name as the corresponding file in the linked **assets** folder. All of the activity's images are placed here.
   - To force a specific image order in the gallery: prefix the filenames with `N__` where **N** indicates the position of an image.
-- After adding pictures, run `npm run process-images` (before comitting!). This process alters the images in two ways:
+- After adding pictures, run `npm run process-images` (before committing!). This process alters the images in two ways:
   - All pictures larger than 1080p are scaled down to 1080p to keep the size of the repository small.
   - All images are "rotated" in order to mitigate these bugs: https://discourse.gohugo.io/t/why-is-hugo-rotating-my-image/23329/5 and https://github.com/golang/go/issues/4341.
   - If you manually need to scale the images down: do not compress them! The website already takes care of compression.
