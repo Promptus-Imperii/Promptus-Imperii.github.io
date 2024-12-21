@@ -9,4 +9,4 @@ tags: ["ASML"]
 draft: false
 ---
 
-Afgelopen woensdag waren we te gast bij ASML! Met een bus zijn we vanaf Avans naar het hoofdkantoor in Veldhoven gereden. Na een presentatie van een voormalig HBO-ICT student over zijn anderhalf jaar bij het bedrijf hebben we in groepen een rondleiding gekregen. Naast een bezoek aan het Experience Centre kregen we ook de kans om de campus te ontdekken. Erg indrukwekkend! Ten slotte hebben we de middag afgesloten met een borrel. Aan alle betrokkenen: bedankt voor deze mogelijkheid!
+Op woensdag 20 november waren we te gast bij ASML! Met een bus zijn we vanaf Avans naar het hoofdkantoor in Veldhoven gereden. Na een presentatie van een voormalig HBO-ICT student over zijn anderhalf jaar bij het bedrijf hebben we in groepen een rondleiding gekregen. Naast een bezoek aan het Experience Centre kregen we ook de kans om de campus te ontdekken. Erg indrukwekkend! Ten slotte hebben we de middag afgesloten met een borrel. Aan alle betrokkenen: bedankt voor deze mogelijkheid!

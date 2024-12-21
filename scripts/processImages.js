@@ -3,8 +3,12 @@ const path = require('path');
 const sharp = require('sharp');
 
 // Define the maximum dimensions
-const MAX_WIDTH = 1920;
-const MAX_HEIGHT = 1080;
+const MAX_WIDTH_LANDSCAPE = 1920;
+const MAX_HEIGHT_LANDSCAPE = 1080;
+
+// Invert Width and Height for portrait
+const MAX_WIDTH_PORTRAIT = MAX_HEIGHT_LANDSCAPE;
+const MAX_HEIGHT_PORTRAIT = MAX_WIDTH_LANDSCAPE;
 
 // Path to the assets folder
 const assetsFolder = path.join(__dirname, '..', 'assets/images');
@@ -13,10 +17,8 @@ const assetsFolder = path.join(__dirname, '..', 'assets/images');
 async function processFolder(folder) {
     try {
         const entries = await fs.readdir(folder, { withFileTypes: true });
-
         for (const entry of entries) {
             const fullPath = path.join(folder, entry.name);
-
             if (entry.isDirectory()) {
                 // If entry is a directory, recurse into it
                 await processFolder(fullPath);
@@ -35,10 +37,8 @@ async function processFolder(folder) {
 // Function to process a single image
 async function processImage(filePath) {
     try {
-        const metadata = await sharp(filePath).metadata();
-
         // Create a sharp instance with EXIF data
-        const sharpInstance = sharp(filePath).withMetadata();
+        let sharpInstance = sharp(filePath).withMetadata();
 
         // Create a temporary file path for the processed image
         const tempFilePath = path.join(
@@ -46,40 +46,51 @@ async function processImage(filePath) {
             `${path.basename(filePath, path.extname(filePath))}_temp${path.extname(filePath)}`
         );
 
-        // Check if the image needs rotation based on EXIF data
-        let imageProcessed = false;  // Flag to check if the image needs to be written
+        const replaceFile = async (action) => {
+            // Replace the original file with the processed file
+            await fs.unlink(filePath); // Delete the original file
+            await fs.rename(tempFilePath, filePath); // Rename processed file to original file name
+            console.log(`Replaced original file with ${action} version: ${path.basename(filePath)}`);
+        }
 
-        if (metadata.orientation && metadata.orientation !== 1) {
+        // Check if the image needs rotation based on EXIF data
+        if (sharpInstance.metadata.orientation && sharpInstance.metadata.orientation !== 1) {
             // If rotation is needed (orientation is not "1", which means no rotation), apply rotation
             console.log(`Rotating image: ${path.basename(filePath)}`);
             await sharpInstance
                 .rotate() // Rotate the image based on EXIF orientation
                 .toFile(tempFilePath); // Save to a temporary file
-            imageProcessed = true; // Set flag to indicate that the image was processed
-            console.log(`Processed and rotated ${path.basename(filePath)} and saved to temporary file`);
+            await replaceFile("rotated")
+            //Refresh sharpInstance to load new metadata
+            sharpInstance = sharp(filePath).withMetadata();
+            console.log(`Processed and rotated ${path.basename(filePath)}`);
         }
 
-        // If the image is larger than the maximum dimensions, resize and crop it
-        if ((metadata.width > MAX_WIDTH || metadata.height > MAX_HEIGHT) && !imageProcessed) {
+        const resizeImage = async (width, height) => {
             // Resize and crop the image
             console.log(`Resizing image: ${path.basename(filePath)}`);
             await sharpInstance
-                .resize(MAX_WIDTH, MAX_HEIGHT, { fit: 'outside' }) // Resize and crop
+                .resize(width, height, { fit: 'outside' }) // Resize and crop
                 .toFile(tempFilePath); // Save to a temporary file
-            imageProcessed = true; // Set flag to indicate that the image was processed
-            console.log(`Processed and resized ${path.basename(filePath)} and saved to temporary file`);
+            await replaceFile("resized")
+            console.log(`Processed and resized ${path.basename(filePath)}`);
         }
 
-        // If no processing was done (no rotation, no resizing), skip writing to the file
-        if (!imageProcessed) {
-            console.log(`No processing needed for image: ${path.basename(filePath)}`);
-            return;  // Exit the function if no changes were made
+        // If landscape mode and larger than 1080p, resize it
+        if (
+            sharpInstance.metadata.width > sharpInstance.metadata.height &&
+            sharpInstance.metadata.width > MAX_WIDTH_LANDSCAPE || sharpInstance.metadata.height > MAX_HEIGHT_LANDSCAPE
+        ) {
+            // Image is landscape mode
+            resizeImage(MAX_WIDTH_LANDSCAPE, MAX_HEIGHT_LANDSCAPE)
         }
-
-        // Replace the original file with the processed file
-        await fs.unlink(filePath); // Delete the original file
-        await fs.rename(tempFilePath, filePath); // Rename processed file to original file name
-        console.log(`Replaced original file with processed version: ${path.basename(filePath)}`);
+        // If portrait mode and larger than 1080p
+        if(
+            sharpInstance.metadata.width < sharpInstance.metadata.height &&
+            sharpInstance.metadata.width > MAX_WIDTH_PORTRAIT || sharpInstance.metadata.height > MAX_HEIGHT_PORTRAIT
+        ) {
+            resizeImage(MAX_WIDTH_PORTRAIT, MAX_HEIGHT_PORTRAIT)
+        }
 
     } catch (error) {
         console.error(`Error processing ${path.basename(filePath)}:`, error);
