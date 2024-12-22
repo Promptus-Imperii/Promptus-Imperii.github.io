@@ -33,6 +33,9 @@ Tip: use `http://www.randomiban.com/?country=Netherlands` to test with IBAN numb
 
 **Make sure to not commit these changes!**
 
+## Environment Variables
+- When deploying, set `HUGO_BASEURL` variable (Docker Build variable) to the full url of the page, e.g `https://example.com`. In Coolify, this is set at Configuration -> Environment Variables. Check the `Build Variable` box.
+
 ## Maintainance
 ### Frontend
 - `npm update` and test the website. TODO: Migrate to masonary layout when it is stable.
