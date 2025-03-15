@@ -42,7 +42,7 @@ path = "github.com/gethugothemes/hugo-modules/tab"
 path = "github.com/gethugothemes/hugo-modules/modal"
 
 [[imports]]
-# TODO! Please replace once this is merged: https://github.com/gethugothemes/hugo-modules/pull/56
+# Won't ever get merged. Ask me (teadrinkingprogrammer) to sync the fork: https://github.com/gethugothemes/hugo-modules/pull/56
 path = "github.com/teadrinkingprogrammer/hugo-modules/gallery-slider"
 
 [[imports]]
