@@ -9,7 +9,6 @@ This website is built on the following libraries/frameworks are used in this pro
     - The pages have been changed to suit the needs of the study association.
     - All tracking has been stripped out.
     - A signup page was added (see the backend project).
-- Tailwind with a few plug-ins (see tailwind.config.js)
 - Some build tools to build the [Tailwind CSS](https://tailwindcss.com/).
 - The hosting uses [Coolify](https://coolify.io/).
 
