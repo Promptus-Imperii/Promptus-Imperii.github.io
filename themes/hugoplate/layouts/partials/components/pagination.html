@@ -15,7 +15,7 @@
     <!-- Previous page. -->
     {{ if $paginator.HasPrev }}
       <a
-        class="text-dark hover:bg-theme-light dark:text-darkmode-dark dark:hover:bg-darkmode-theme-light rounded px-2 py-1.5"
+        class="text-dark hover:bg-light dark:text-darkmode-text-dark dark:hover:bg-darkmode-light rounded px-2 py-1.5"
         href="{{ $paginator.Prev.URL }}"
         aria-label="Previous page"
         role="button">
@@ -33,7 +33,7 @@
         </svg>
       </a>
     {{ else }}
-      <span class="text-dark dark:text-darkmode-dark rounded px-2 py-1.5 opacity-50">
+      <span class="text-dark dark:text-darkmode-text-dark rounded px-2 py-1.5 opacity-50">
         <span class="sr-only">Previous</span>
         <svg
           viewBox="0 0 20 20"
@@ -92,7 +92,7 @@
           <a
             href="{{ .URL }}"
             aria-current="page"
-            class="text-dark hover:bg-theme-light dark:text-darkmode-dark dark:hover:bg-darkmode-theme-light rounded px-4 py-2">
+            class="text-dark hover:bg-light dark:text-darkmode-text-dark dark:hover:bg-darkmode-light rounded px-4 py-2">
             {{ .PageNumber }}
           </a>
         {{ end }}
@@ -103,7 +103,7 @@
     <!-- Next page. -->
     {{ if $paginator.HasNext }}
       <a
-        class="text-dark hover:bg-theme-light dark:text-darkmode-dark dark:hover:bg-darkmode-theme-light rounded px-2 py-1.5"
+        class="text-text-dark hover:bg-light dark:text-darkmode-text-dark dark:hover:bg-darkmode-light rounded px-2 py-1.5"
         href="{{ $paginator.Next.URL }}"
         aria-label="Next page">
         <span class="sr-only">Next</span>
@@ -120,7 +120,7 @@
         </svg>
       </a>
     {{ else }}
-      <span class="text-dark dark:text-darkmode-dark rounded px-2 py-1.5 opacity-50">
+      <span class="text-text-dark dark:text-darkmode-text-dark rounded px-2 py-1.5 opacity-50">
         <span class="sr-only">Next</span>
         <svg
           viewBox="0 0 20 20"
