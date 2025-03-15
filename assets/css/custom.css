@@ -1,0 +1,66 @@
+/* Add your own custom styles here */
+/* Banner custom styles: https://codepen.io/onebrightlight/details/RQmRYg */
+.object-fit-fill {
+  object-fit: fill;
+}
+
+.object-fit-contain {
+  object-fit: contain;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+
+.object-fit-none {
+  object-fit: none;
+}
+
+.object-fit-scale-down {
+  object-fit: scale-down;
+}
+
+/* Form style */
+.form-input {
+  @apply bg-light text-dark placeholder:text-light dark:placeholder:text-darkmode-text-dark placeholder:opacity-30 focus:border-primary dark:border-darkmode-border dark:bg-darkmode-light dark:text-darkmode-text-light w-full rounded border-transparent px-6 py-4 hover:ring;
+}
+.form-input[type="checkbox"] {
+  @apply bg-transparent text-transparent w-2
+}
+
+.form-label {
+  @apply font-secondary text-dark dark:text-darkmode-text-light mb-4 block text-xl font-normal;
+}
+
+/* Swiper variables */
+/* Light theme */
+:root {
+  /* Same as h-28 */
+  --swiper-navigation-size: 7rem;
+  /* Changes the colors of the navigation chevrons */
+  --swiper-theme-color: black;
+  --swiper-navigation-sides-offset: 0px;
+}
+/* Dark theme */
+:root :is(.dark body){
+  --swiper-theme-color: white;
+}
+.swiper {
+  @apply z-0 absolute inset-0 h-auto
+}
+.banner-slider-pagination {
+  @apply mt-9 flex items-center justify-center text-center
+}
+.swiper-button-next {
+  right: -10px !important;
+  left: auto !important;
+}
+
+.swiper-button-prev {
+  right: auto !important;
+  left: -10px !important;
+}
+
+.swiper-button-prev, .swiper-button-next {
+  @apply z-30;
+}
