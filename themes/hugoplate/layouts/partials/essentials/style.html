@@ -31,18 +31,22 @@
 
 <!-- plugins + stylesheet -->
 {{ $styles := slice }}
+{{ $stylesLazy := slice }}
+
 {{ range site.Params.plugins.css }}
   {{ if findRE "^http" .link }}
     <link
       crossorigin="anonymous"
       media="all"
-      async
-      defer
       rel="stylesheet"
       href="{{ .link | relURL }}"
       {{ .attributes | safeHTMLAttr }} />
   {{ else }}
-    {{ $styles = $styles | append (resources.Get .link) }}
+    {{ if not .lazy }}
+      {{ $styles = $styles | append (resources.Get .link) }}
+    {{ else }}
+      {{ $stylesLazy = $stylesLazy | append (resources.Get .link) }}
+    {{ end }}
   {{ end }}
 {{ end }}
 
@@ -53,14 +57,26 @@
 {{ $styles = $styles | append $tailwindCSS }}
 {{ $styles = $styles | resources.Concat "css/style.css" }}
 
+{{ $stylesLazy = $stylesLazy | resources.Concat "css/style-lazy.css" }}
+
 {{ if hugo.IsProduction }}
   {{ $styles = $styles | minify | fingerprint }}
+  {{ $stylesLazy = $stylesLazy | minify | fingerprint }}
 {{ end }}
 
 
+<!-- link main style -->
 <link
   href="{{ $styles.RelPermalink }}"
   integrity="{{ $styles.Data.Integrity }}"
-  async
-  defer
   rel="stylesheet" />
+
+<!-- link lazy style -->
+<link
+  defer
+  async
+  rel="stylesheet"
+  href="{{ $stylesLazy.RelPermalink }}"
+  integrity="{{ $stylesLazy.Data.Integrity }}"
+  media="print"
+  onload="this.media='all'; this.onload=null;" />

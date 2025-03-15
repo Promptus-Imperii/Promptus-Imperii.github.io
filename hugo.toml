@@ -114,7 +114,7 @@ enable = false
 # CSS Plugins
 [[params.plugins.css]]
 link = "plugins/swiper/swiper-bundle.css"
-lazy = true
+lazy = false
 [[params.plugins.css]]
 link = "plugins/glightbox/glightbox.css"
 lazy = true
