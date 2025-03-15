@@ -6,6 +6,7 @@ const formElement = document.getElementById("signup-form");
 
 const errorsElement = document.getElementById("errorsDiv");
 
+const button = document.getElementById("submit-button")
 
 // attach event listener after DOM has loaded to prevent issues with browsers other than Firefox.
 document.addEventListener('DOMContentLoaded', function () {
@@ -16,6 +17,9 @@ function submitSignup(e) {
 
     e.preventDefault();
 
+    button.disabled = true;
+    button.classList.add("opacity-50");
+    
     let formData = new FormData(e.target);
 
     let data = {};
@@ -23,9 +27,7 @@ function submitSignup(e) {
         data[key] = value;
     });
 
-    if (data.altcha == null) {
-        return
-    }
+
     console.log(data)
     fetch(URL, {
         method: "POST",
@@ -57,9 +59,14 @@ function submitSignup(e) {
                 return
             }
             displayGenericError(body)
-        }).catch(displayGenericError)
+        }).catch(displayGenericError).finally(resetButton)
     }).catch(displayGenericError)
+    .finally(resetButton)
+}
 
+function resetButton() {
+    button.disabled = false;
+    button.classList.remove("opacity-50");
 }
 
 function displayGenericError(error) {
