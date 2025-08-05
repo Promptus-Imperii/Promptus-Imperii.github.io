@@ -1,0 +1,6 @@
+---
+title: "David van der Veer - vice-voorzitter"
+# Image aspect ration needs to be 1:1 and at least 200*200
+image: "/images/about-us/david-van-der-veer-24_25.jpg"
+image_alt: "Een foto van vice-voorzitter David van der Veer"
+---
