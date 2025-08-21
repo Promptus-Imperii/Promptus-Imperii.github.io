@@ -1,6 +1,6 @@
 ---
 title: "Bestuur 2022-2023"
-rank: 3
+rank: 2
 # Image aspect ration needs to be 1:1 and at least 600x400
 image: "/images/about-us/bestuur-22_23.jpg"
 image_alt: "Een foto van het bestuur in studiejaar 2022-2023."
