@@ -1,7 +1,7 @@
 ---
 title: "Over ons"
 image_path: "images/over-ons.jpg"
-image_caption: "Een foto van het huidige bestuur. Van links naar rechts: Stijn van Houwelingen (secretaris), Sam de Craen (voorzitter), Jesse Krijgsman (vice-voozitter) en Robin Luijten (penningmeester)."
+image_caption: "Een foto van het huidige bestuur. Van links naar rechts: Max Hager (commissieverantwoordelijke), David van der Veer (vice-voorzitter), Sam de Craen (voorzitter), Robin Luijten (penningmeester) en Stijn van Houwelingen (secretaris)."
 # Don't create a separate page
 _build:
   render: "never"
