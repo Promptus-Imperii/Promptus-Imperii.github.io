@@ -1,7 +1,7 @@
 #####################################################################
 #                            Build Stage                            #
 #####################################################################
-FROM hugomods/hugo:exts as builder
+FROM hugomods/hugo:exts-0.148.2 AS builder
 # Base URL
 ARG HUGO_BASEURL=http://localhost:8080
 ENV HUGO_BASEURL=${HUGO_BASEURL}
