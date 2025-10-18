@@ -3,6 +3,8 @@ title: "Jesse Krijgsman - vice-voorzitter"
 # Image aspect ration needs to be 1:1 and at least 200*200
 image: "/images/about-us/jesse-krijgsman-23_24.jpg"
 image_alt: "Een foto van vice-voorzitter Jesse Krijgsman"
+img_size_small: "300x200"
+img_size_large: "600x400"
 ---
 Hoi! Ik ben Jesse, ondertussen studeer ik al 4 jaar Technische Informatica aan Avans Hogeschool in Breda. Naast mijn studie zet ik mij in voor onze gave vereniging, S.V. Promptus Imperii, nu voor het tweede studiejaar op rij ben ik bestuurslid bij de verening.
 
