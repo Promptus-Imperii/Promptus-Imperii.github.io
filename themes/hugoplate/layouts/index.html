@@ -42,17 +42,17 @@
 
                   <div class="swiper-slide">
                     {{ $image := resources.Get $imagePath }}
-                    {{ $image_sm := $image.Fit "510x360 webp" }}
-                    {{ $image_md := $image.Fit "740x370 webp" }}
-                    {{ $image_lg := $image.Fit "992x370 webp" }}
-                    {{ $image_xl := $image.Fit "1250x370 webp" }}
+                    {{ $image_sm := $image.Resize "510x webp" }}
+                    {{ $image_md := $image.Resize "740x webp" }}
+                    {{ $image_lg := $image.Resize "992x webp" }}
+                    {{ $image_xl := $image.Resize "1320x webp" }}
                     {{/*  The style attribute makes sure that the alt text is hidden when the page is loading, but still remains visible for screen-readers  */}}
                     <picture style="color: rgba(0, 0, 0, 0) !important;">
-                      <source media="(max-width: 767px)" srcset="{{ $image_sm.RelPermalink }}">
-                      <source media="(max-width: 1023px)" srcset="{{ $image_md.RelPermalink }}">
-                      <source media="(max-width: 1280px)" srcset="{{ $image_lg.RelPermalink }}">
-                      <source media="(min-width: 1280px)" srcset="{{ $image_xl.RelPermalink }}">
-                      <img src="{{ $image_xl.RelPermalink }}" class="h-full w-full object-fit-cover" alt="Een foto van de vereniging"{{ if ne $index 0 }} loading="lazy" fetchpriority="low" {{ else }}} fetchpriority="high"{{ end }}>
+                      <source srcset="{{ $image_xl.RelPermalink }}" media="(min-width: 1320px)">
+                      <source srcset="{{ $image_lg.RelPermalink }}" media="(min-width: 992px)">
+                      <source srcset="{{ $image_md.RelPermalink }}" media="(min-width: 768px)">
+                      <source srcset="{{ $image_sm.RelPermalink }}" media="(max-width: 767px)">
+                      <img src="{{ $image_xl.RelPermalink }}" class="h-full w-full object-fit-cover" alt="Een foto van de vereniging"{{ if ne $index 0 }} loading="lazy" fetchpriority="low" {{ else }} fetchpriority="high"{{ end }}>
                     </picture>
                   </div>
                 {{ end }}                
