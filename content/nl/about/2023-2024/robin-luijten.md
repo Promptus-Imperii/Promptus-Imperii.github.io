@@ -3,6 +3,7 @@ title: "Robin Luijten - penningmeester"
 # Image aspect ration needs to be 1:1 and at least 200*200
 image: "/images/about-us/robin-luijten-23_24.jpg"
 image_alt: "Een foto van penningmeester Robin Luijten"
+orientation: "landscape"
 ---
 Hoi allemaal! 
 Ik ben Robin Luijten, 23 jaartjes jong, en ik ben de penningmeester van onze te gekke studievereniging. Mijn taak? Zorgen dat de centen kloppen, zodat we alle vette activiteiten kunnen blijven doen waar we zo van genieten.

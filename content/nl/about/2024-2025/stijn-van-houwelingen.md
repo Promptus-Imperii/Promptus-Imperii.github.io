@@ -3,6 +3,7 @@ title: "Stijn van Houwelingen - secretaris"
 # Image aspect ration needs to be 1:1 and at least 200*200
 image: "/images/about-us/stijn-van-houwelingen-24_25.jpg"
 image_alt: "Een foto van secretaris Stijn van Houwelingen"
+orientation: "landscape"
 ---
 Hoi, ik ben Stijn van Houwelingen en heb Informatica gestudeert. Vanuit het werkveld ben ik secretaris en bestuurslid van de vereniging.
 
