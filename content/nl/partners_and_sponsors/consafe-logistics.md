@@ -1,7 +1,7 @@
 ---
 title: Consafe Logistics
 type: "sponsor"
-sponsor_type: "Branch"
+sponsor_type: "Branch (Maatwerk)"
 sponsor_time: ["2023 ", "Heden"]
 link: "https://consafelogistics.nl/"
 ---
