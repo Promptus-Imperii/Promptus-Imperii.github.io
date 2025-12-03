@@ -10,7 +10,7 @@
 
       {{/* Get all sponsor pages */}}
       {{ $sponsors := where .RegularPages "Params.type" "sponsor" }}
-      
+
       {{/* Create a new slice to hold sponsors with a custom numeric sort key */}}
       {{ $sortedSponsors := slice }}
       {{ range $sponsors }}
@@ -19,11 +19,13 @@
         {{ $sortKey := 0 }}
 
         {{/* Assign numeric value to sponsor types for sorting */}}
-        {{ if eq $type "platinum" }}
+        {{ if eq $type "repository" }}
           {{ $sortKey = 1 }}
-        {{ else if eq $type "goud" }}
+        {{ else if eq $type "branch" }}
           {{ $sortKey = 2 }}
-        {{ else if eq $type "zilver" }}
+        {{ else if eq $type "branch (maatwerk)" }}
+          {{ $sortKey = 2 }}
+        {{ else if eq $type "commit" }}
           {{ $sortKey = 3 }}
         {{ end }}
 
