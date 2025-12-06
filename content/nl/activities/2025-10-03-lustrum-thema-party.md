@@ -9,7 +9,7 @@ date: 2025-10-03T00:00:00
 # IMPORTANT! The file name/folder name may not contain capital letters!
 image_folder: "images/activities/2025-10-03-lustrum-thema-party"
 # Use the original file name and prepend N__, where N is the order in which you want the image to show in the gallery. Make sure to downscale 4k images to 1080p to keep the size of the git repo manageable. Only use the .jp(e)g, .png and .gif file formats.
-image: "1__lustrum-thema-party-1.JPG"
+image: "1__lustrum-thema-party-1.jpg"
 # Don't forget capital letters in the categories and tags. Also check all categories and tags by loading the activities page and looking at the list.
 categories: ["Lustrum"]
 # Tags are more specific than categories, and are currently only used for sponsor/partner names

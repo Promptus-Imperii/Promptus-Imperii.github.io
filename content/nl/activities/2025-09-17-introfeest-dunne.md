@@ -9,7 +9,7 @@ date: 2025-09-17T00:00:00
 
 image_folder: "images/activities/2025-09-17-introfeest-dunne"
 
-image: "1__introfeest-dunne-1.JPG"
+image: "1__introfeest-dunne-1.jpg"
 
 categories: ["Sociaal"]
 
