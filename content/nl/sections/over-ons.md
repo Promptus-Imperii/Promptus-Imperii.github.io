@@ -1,7 +1,7 @@
 ---
 title: "Over ons"
 image_path: "images/over-ons.jpg"
-image_caption: "Een foto van bestuur 2025-2026 (DB5). Van links naar rechts: Sam de Craen (PR-manager), Robin Luijten (penningmeester), David van der Veer (voorzitter), Luc van Graefschepe (scretaris) en Simon de Cock (vice-voorzitter)."
+image_caption: "Een foto van bestuur 2025-2026 (DB5). Van links naar rechts: Sam de Craen (PR-manager), Robin Luijten (penningmeester), David van der Veer (voorzitter), Luc van Graefschepe (secretaris) en Simon de Cock (vice-voorzitter)."
 # Don't create a separate page
 _build:
   render: "never"
