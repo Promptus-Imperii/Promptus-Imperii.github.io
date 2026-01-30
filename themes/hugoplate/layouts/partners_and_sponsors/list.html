@@ -6,7 +6,33 @@
     <div class="row">
       <!-- sponsors -->
       <h2 id="sponsors" class="flex justify-center">{{ i18n "sponsors" }}</h2>
-      <p class="mb-10 mt-4">{{ .Params.sponsorText }}</p>
+      <p class="mb-20 mt-4">{{ .Params.sponsorText }}</p>
+
+      {{ if .Params.showMainSponsor }}
+
+      <h2 class="mb-4 flex justify-center">
+        <span>
+          <i class="fa-regular fa-medal text-pink-700"></i>
+          <span class=" text-m bg-gradient-to-r from-pink-700 to-yellow-600 bg-clip-text text-transparent">Lustrum hoofdsponsor</span>
+        </span>
+      </h2>
+      <div class="rounded-[1.2rem] bg-linear-to-br pr-4 pl-4 pt-1 pb-1 from-pink-700 to-amber-400 mb-10">
+        <div class="flex row gap-10 bg-white dark:bg-darkmode-body rounded-[calc(1.2rem-1px)] p-8">
+          <div class="flex flex-col lg:col justify-center">
+            {{ partial "image" (dict "Src" .Params.mainSponsorImage "Alt" .Params.mainSponsorName "Class" "rounded-lg" )}}
+          </div>
+          <div class="flex flex-col lg:col">
+            <h2 class="mb-2">{{ .Params.mainSponsorName }}</h2>
+            <span class="mb-4">
+              <i class="fa-regular fa-calendar"></i>
+              {{ .Params.mainSponsorPeriod }}
+            </span>
+            <p>{{ .Params.mainSponsorText }}</p>
+          </div>
+        </div>
+      </div>
+
+      {{ end}}
 
       {{/* Get all sponsor pages */}}
       {{ $sponsors := where .RegularPages "Params.type" "sponsor" }}
