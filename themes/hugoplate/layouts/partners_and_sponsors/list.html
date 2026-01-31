@@ -16,10 +16,12 @@
           <span class=" text-m bg-gradient-to-r from-pink-700 to-yellow-600 bg-clip-text text-transparent">Lustrum hoofdsponsor</span>
         </span>
       </h2>
-      <div class="rounded-[1.2rem] bg-linear-to-br pr-4 pl-4 pt-1 pb-1 from-pink-700 to-amber-400 mb-10">
+      <div class="rounded-[1.2rem] bg-linear-to-br pr-4 pl-4 pt-1 pb-1 from-pink-700 to-amber-400 mb-40">
         <div class="flex row gap-10 bg-white dark:bg-darkmode-body rounded-[calc(1.2rem-1px)] p-8">
           <div class="flex flex-col lg:col justify-center">
-            {{ partial "image" (dict "Src" .Params.mainSponsor.image "Alt" .Params.mainSponsor.name "Class" "rounded-lg" )}}
+            <a href="{{ .Params.mainSponsor.link }}" target="_blank">
+              {{ partial "image" (dict "Src" .Params.mainSponsor.image "Alt" .Params.mainSponsor.name "Class" "rounded-lg" )}}
+            </a>
           </div>
           <div class="flex flex-col lg:col">
             <h2 class="mb-2">{{ .Params.mainSponsor.name }}</h2>
@@ -27,7 +29,10 @@
               <i class="fa-regular fa-calendar"></i>
               {{ .Params.mainSponsor.period }}
             </span>
-            <p>{{ .Params.mainSponsor.text }}</p>
+            <p class="mb-6">{{ .Params.mainSponsor.text }}</p>
+            <span>
+              <a href="{{ .Params.mainSponsor.link }}" target="_blank" class="btn btn-outline-primary">Meer weten</a>
+            </span>
           </div>
         </div>
       </div>
