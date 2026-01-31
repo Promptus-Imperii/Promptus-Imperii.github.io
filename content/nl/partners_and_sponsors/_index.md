@@ -11,6 +11,7 @@ mainSponsor:
   image: "/images/sponsor-partner-images/pixelfarming.svg"
   period: "2025 - 2026"
   text: "Pixelfarming Robotics is een Nederlands bedrijf uit Almkerk dat slimme landbouwrobots ontwikkelt voor duurzame landbouw. Ze ontwerpen geavanceerde machines zoals Robot One om gewassen chemievrij te verzorgen en onkruid te bestrijden, met als doel gezonde bodem én gezonde voeding wereldwijd te bevorderen."
+  link: "https://pixelfarmingrobotics.com/"
 
 partnerText: "Als partner is het mogelijk om diensten met ons uit te wisselen. Bijvoorbeeld door het beschikbaar stellen van een locatie voor evenementen in ruil voor promotie onder onze leden."
 ---
