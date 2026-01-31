@@ -10,7 +10,7 @@ mainSponsor:
   name: "Pixelfarming Robotics"
   image: "/images/sponsor-partner-images/pixelfarming.svg"
   period: "2025 - 2026"
-  text: "Pixelfarming Robotics is een Nederlands bedrijf uit Almkerk dat slimme landbouwrobots ontwikkelt voor duurzame landbouw. Ze ontwerpen geavanceerde machines zoals Robot One om gewassen chemievrij te verzorgen en onkruid te bestrijden, met als doel gezonde bodem én gezonde voeding wereldwijd te bevorderen."
+  text: "Het Almkerkse bedrijf Pixelfarming Robotics ontwikkelt slimme landbouwrobots voor duurzame landbouw. Ze ontwerpen geavanceerde machines zoals de Robot One om gewassen chemievrij te verzorgen en onkruid te bestrijden. Hiermee bevorderen zij gezondere landbodem en gezonde voeding wereldwijd. Voor het vijfjarig bestaan van Promptus Imperii zijn zij de trotse hoofdsponsor."
   link: "https://pixelfarmingrobotics.com/"
 
 partnerText: "Als partner is het mogelijk om diensten met ons uit te wisselen. Bijvoorbeeld door het beschikbaar stellen van een locatie voor evenementen in ruil voor promotie onder onze leden."
