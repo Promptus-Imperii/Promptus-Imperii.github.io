@@ -20,7 +20,7 @@
       <div class="rounded-[1.2rem] bg-linear-to-br pr-4 pl-4 pt-1 pb-1 from-pink-700 to-amber-400 mb-40">
         <div class="flex row gap-10 bg-white dark:bg-darkmode-body rounded-[calc(1.2rem-1px)] p-8">
           <div class="flex flex-col lg:col justify-center">
-            <a href="{{ .Params.mainSponsor.link }}" target="_blank">
+            <a href="{{ .Params.mainSponsor.link }}" target="_blank" rel="noopener noreferrer">
               {{ partial "image" (dict "Src" .Params.mainSponsor.image "Alt" .Params.mainSponsor.name "Class" "rounded-lg" )}}
             </a>
           </div>
