@@ -8,7 +8,8 @@
       <h2 id="sponsors" class="flex justify-center">{{ i18n "sponsors" }}</h2>
       <p class="mb-20 mt-4">{{ .Params.sponsorText }}</p>
 
-      {{ if .Params.mainSponsor.showBanner }}
+      {{ with .Params.mainSponsor }}
+        {{ if .showBanner }}
 
       <h2 class="mb-4 flex justify-center">
         <span>
@@ -37,6 +38,7 @@
         </div>
       </div>
 
+        {{ end }}
       {{ end}}
 
       {{/* Get all sponsor pages */}}
