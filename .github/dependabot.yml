@@ -1,0 +1,23 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /site
+    schedule:
+      interval: weekly
+    groups:
+      npm:
+        patterns: ['*']
+  - package-ecosystem: gomod
+    directory: /backend
+    schedule:
+      interval: weekly
+    groups:
+      gomod:
+        patterns: ['*']
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    groups:
+      actions:
+        patterns: ['*']
