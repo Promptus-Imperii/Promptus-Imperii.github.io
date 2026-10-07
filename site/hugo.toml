@@ -154,3 +154,7 @@ lazy = true
 # [[params.plugins.js]]
 # link = "plugins/youtube-lite.js"
 # lazy = true
+
+############################# Security ##############################
+[security.exec]
+allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']

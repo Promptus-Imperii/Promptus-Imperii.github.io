@@ -23,6 +23,25 @@ This website is built on the following libraries/frameworks are used in this pro
 - To run the website locally, run `npm run dev` or equivalent. The first time can take a while.
 - To build the website, run `npm run build` or equivalent.
 
+## Troubleshooting
+
+### `npm run dev` fails with "tailwindcss is not whitelisted" error
+Hugo requires `tailwindcss` to be explicitly allowed in the security policy. Ensure your `hugo.toml` includes:
+```toml
+[security.exec]
+allow = ['^(dart-)?sass$', '^go$', '^git$', '^node$', '^postcss$', '^tailwindcss$']
+```
+
+### Build errors about deprecated `_build` front matter
+Hugo v0.145.0+ removed support for the `_build` front matter key. It has been replaced with `build`. Content files should use:
+```yaml
+---
+build:
+  render: "never"
+---
+```
+instead of `_build:`.
+
 ## Developing with the backend
 When testing the backend, start the backend by following the instructions on that repo. Change the following variables:
 - `serverURL` in [config/_default/params.toml](config/_default/params.toml)
