@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"net/mail"
+	"net/url"
 	"regexp"
 	"strings"
 	"time"
@@ -23,7 +24,12 @@ var (
 	CohortYearRegex        *regexp.Regexp = regexp.MustCompile(`^\d{4}\/\d{4}$`)
 	// I have given up on phone numbers. Fill in you national code and I am happy.
 	MobilePhoneRegex *regexp.Regexp = regexp.MustCompile(`^\+`)
+	// Only checks the general shape of an IBAN, openiban.com does the actual validation
+	IBANRegex *regexp.Regexp = regexp.MustCompile(`^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$`)
 )
+
+// Without a timeout a slow openiban.com would keep signup requests hanging forever
+var ibanHTTPClient = &http.Client{Timeout: 10 * time.Second}
 
 // ---
 // validation functions
@@ -80,8 +86,20 @@ func validateIBAN(iban string) error {
 		return errors.New("IBAN-nummer is niet ingevuld")
 	}
 
-	resp, err := http.Get("https://openiban.com/validate/" + iban)
+	// The IBAN ends up in the URL, so make sure it can't contain anything other than letters and digits
+	iban = strings.ToUpper(strings.ReplaceAll(iban, " ", ""))
+	if !IBANRegex.MatchString(iban) {
+		return errors.New("IBAN is ongeldig: controleer of je alles goed hebt overgenomen")
+	}
+
+	resp, err := ibanHTTPClient.Get("https://openiban.com/validate/" + url.PathEscape(iban))
 	if err != nil {
+		return errors.New("kon IBAN niet valideren, probeer het later opnieuw")
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		log.Println("openiban.com returned status", resp.StatusCode)
 		return errors.New("kon IBAN niet valideren, probeer het later opnieuw")
 	}
 	var ibanval IBANValidationResponse
