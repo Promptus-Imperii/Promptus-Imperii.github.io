@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strings"
 	"testing"
 
 	"github.com/gavv/httpexpect/v2"
@@ -205,6 +206,62 @@ func TestValidateCohortYearWithValidCohortYearFormat(t *testing.T) {
 func TestValidateCohortYearWithInvalidCohortYearFormat(t *testing.T) {
 	err := validateCohortYear("23/24")
 	if err == nil {
+		t.FailNow()
+	}
+}
+
+func TestIbanValidationAcceptsIbanWithSpaces(t *testing.T) {
+	err := validateIBAN("NL12 ABNA 8803 9263 72")
+	if err != nil {
+		t.FailNow()
+	}
+}
+
+func TestIbanValidationRejectsIbanWithUrlCharacters(t *testing.T) {
+	err := validateIBAN("NL12ABNA8803926372/../../?x=1")
+	if err == nil {
+		t.FailNow()
+	}
+}
+
+func TestSignupShouldRejectOversizedBody(t *testing.T) {
+	// Arrange
+	e := getGinHandler(t)
+	oversizedUser := map[string]interface{}{"legal_first_names": strings.Repeat("a", MAX_REQUEST_BODY_BYTES)}
+
+	// Act & Assert
+	e.POST("/api/signup").
+		WithJSON(oversizedUser).
+		Expect().
+		Status(http.StatusBadRequest)
+}
+
+func TestEscapeCSVFormulaEscapesFormulas(t *testing.T) {
+	for _, value := range []string{"=HYPERLINK(\"https://example.org\")", "+SUM(A1)", "-1+1", "@cmd", "\t=1"} {
+		if escapeCSVFormula(value) != "'"+value {
+			t.Fatalf("%q was not escaped", value)
+		}
+	}
+}
+
+func TestEscapeCSVFormulaKeepsNormalValues(t *testing.T) {
+	for _, value := range []string{"", "Jan", "+31612345678", "+32 466 11 71 60", "Lovensdijkstraat 16"} {
+		if escapeCSVFormula(value) != value {
+			t.Fatalf("%q should not be escaped", value)
+		}
+	}
+}
+
+func TestExportConvertsBelgium(t *testing.T) {
+	member := PISignUp{Country: "BE"}
+	if member.ToPISignUpExport().Land != "België" {
+		t.FailNow()
+	}
+}
+
+func TestExportUsesEmergencyContactInfix(t *testing.T) {
+	member := PISignUp{EmergencyContactFirstName: "Greetje", EmergencyContactInfix: "de", EmergencyContactSurname: "Vries"}
+	if member.ToPISignUpExport().Noodnummer_Naam != "Greetje de Vries" {
 		t.FailNow()
 	}
 }

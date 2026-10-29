@@ -1,5 +1,12 @@
 package main
 
+import (
+	"regexp"
+	"strings"
+)
+
+var PlainPhoneNumberRegex *regexp.Regexp = regexp.MustCompile(`^\+[0-9 ]+$`)
+
 type EmailRequest struct {
 	Altcha string `json:"altcha"`
 }
@@ -62,15 +69,15 @@ func (member *PISignUp) ToPISignUpExport() *PISignUpExport {
 	} else if member.Education == "I" {
 		member.Education = "Informatica"
 	}
-	// Convert TI and I to Technische Informatica and Informatica
+	// Convert NL and BE to Nederland and België
 	if member.Country == "NL" {
 		member.Country = "Nederland"
-	} else if member.Education == "BE" {
+	} else if member.Country == "BE" {
 		member.Country = "België"
 	}
 
 	var emergencyContactName string
-	if member.Infix != "" {
+	if member.EmergencyContactInfix != "" {
 		emergencyContactName = member.EmergencyContactFirstName + " " + member.EmergencyContactInfix + " " + member.EmergencyContactSurname
 	} else {
 		emergencyContactName = member.EmergencyContactFirstName + " " + member.EmergencyContactSurname
@@ -78,25 +85,38 @@ func (member *PISignUp) ToPISignUpExport() *PISignUpExport {
 
 	// Type is always "Lid"
 	return &PISignUpExport{
-		Voornamen:                 member.LegalFirstNames,
-		Roepnaam:                  member.Nickname,
-		Tussenvoegsel:             member.Infix,
-		Achternaam:                member.Surname,
-		Geboortedatum:             member.DateOfBirth,
-		Adres:                     member.Address,
-		Postcode:                  member.PostalCode,
-		Woonplaats:                member.City,
-		Land:                      member.Country,
-		E_mail:                    member.Email,
-		Opleiding:                 member.Education,
+		Voornamen:                 escapeCSVFormula(member.LegalFirstNames),
+		Roepnaam:                  escapeCSVFormula(member.Nickname),
+		Tussenvoegsel:             escapeCSVFormula(member.Infix),
+		Achternaam:                escapeCSVFormula(member.Surname),
+		Geboortedatum:             escapeCSVFormula(member.DateOfBirth),
+		Adres:                     escapeCSVFormula(member.Address),
+		Postcode:                  escapeCSVFormula(member.PostalCode),
+		Woonplaats:                escapeCSVFormula(member.City),
+		Land:                      escapeCSVFormula(member.Country),
+		E_mail:                    escapeCSVFormula(member.Email),
+		Opleiding:                 escapeCSVFormula(member.Education),
 		Type:                      "Lid",
-		Telefoonnummer:            member.Phone,
-		Cohortjaar:                member.CohortYear,
-		Noodnummer_Naam:           emergencyContactName,
-		Noodnummer_Telefoonnummer: member.EmergencyContactPhoneNumber,
-		IBAN:                      member.IBAN,
-		Naam_rekeninghouder:       member.AccountHolder,
+		Telefoonnummer:            escapeCSVFormula(member.Phone),
+		Cohortjaar:                escapeCSVFormula(member.CohortYear),
+		Noodnummer_Naam:           escapeCSVFormula(emergencyContactName),
+		Noodnummer_Telefoonnummer: escapeCSVFormula(member.EmergencyContactPhoneNumber),
+		IBAN:                      escapeCSVFormula(member.IBAN),
+		Naam_rekeninghouder:       escapeCSVFormula(member.AccountHolder),
 	}
+}
+
+// Excel and LibreOffice execute cells starting with = + - @ as formulas when the CSV is opened.
+// Prefixing those with ' makes them plain text, so a signup can't smuggle a formula into the export.
+// Phone numbers like +31612345678 are left alone, as they are harmless and are expected to start with +.
+func escapeCSVFormula(value string) string {
+	if value == "" || PlainPhoneNumberRegex.MatchString(value) {
+		return value
+	}
+	if strings.ContainsRune("=+-@\t\r", rune(value[0])) {
+		return "'" + value
+	}
+	return value
 }
 
 type IBANValidationResponse struct {
