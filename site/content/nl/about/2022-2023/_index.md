@@ -6,4 +6,4 @@ image: "/images/about-us/bestuur-22_23.jpg"
 image_alt: "Een foto van het bestuur in studiejaar 2022-2023."
 orientation: "landscape"
 ---
-Het bestuur van 2022-2023. Van links naar rechts: penningmeester Robin Luijten, secretaris Jesse Krijgsman, voorzitter Guilliam Lutz en vice-voorzitter Luca Brugel.
+Het bestuur van 2022-2023. Van links naar rechts: penningmeester Robin Luijten, secretaris Jesse Krijgsman, voorzitter Guilliam Lutz en vice-voorzitter Luca B.
