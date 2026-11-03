@@ -26,8 +26,12 @@ func SendMemberInfoEmail(member PISignUp, serverEmailCredentials ServerEmailCred
 	m := mail.NewMsg()
 
 	// Set sender and recipient
-	m.From(serverEmailCredentials.email)
-	m.To(correspondanceEmail)
+	if err := m.From(serverEmailCredentials.email); err != nil {
+		return fmt.Errorf("invalid sender address: %w", err)
+	}
+	if err := m.To(correspondanceEmail); err != nil {
+		return fmt.Errorf("invalid recipient address: %w", err)
+	}
 
 	// Set subject and body
 	m.Subject(fmt.Sprintf("[Server] Nieuwe aanmelding lid: %s", getFullName(member)))
@@ -57,8 +61,12 @@ func SendNotificationEmail(member PISignUp, serverEmailCredentials ServerEmailCr
 	m := mail.NewMsg()
 
 	// Set sender and recipient
-	m.From(serverEmailCredentials.email)
-	m.To(member.Email)
+	if err := m.From(serverEmailCredentials.email); err != nil {
+		return fmt.Errorf("invalid sender address: %w", err)
+	}
+	if err := m.To(member.Email); err != nil {
+		return fmt.Errorf("invalid recipient address: %w", err)
+	}
 
 	// Set subject and body
 	m.Subject("No-reply: Bevestiging aanmelding S.V Promptus Imperii.")

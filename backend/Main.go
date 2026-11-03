@@ -17,9 +17,13 @@ import (
 var CORRESPONDANCE_EMAIL = ""
 var SERVER_EMAIL_CREDENTIALS ServerEmailCredentials
 
+// Signup forms are a few hundred bytes, anything much larger is not a legitimate request
+const MAX_REQUEST_BODY_BYTES = 16 << 10
+
 func initRouter() *gin.Engine {
 	router := gin.Default()
 	router.SetTrustedProxies(nil)
+	router.Use(limitRequestBody(MAX_REQUEST_BODY_BYTES))
 	config := cors.DefaultConfig()
 
 	if gin.Mode() == gin.DebugMode {
@@ -56,7 +60,7 @@ func main() {
 	CORRESPONDANCE_EMAIL = correspondanceEmail
 
 	// Set logging to export to both a logfile and to stdout (the terminal)
-	f, err := os.OpenFile("logfile", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	f, err := os.OpenFile("logfile", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0640)
 	if err != nil {
 		log.Fatalf("error opening file: %v", err)
 	}
@@ -68,12 +72,14 @@ func main() {
 	log.Printf("App has started, logging to file and stdout. Gin running in %s mode", gin.Mode())
 	r := initRouter()
 
-	c := cors.DefaultConfig()
-	c.AllowAllOrigins = true
-
-	r.Use(cors.New(c))
-
 	r.Run(":3000")
+}
+
+func limitRequestBody(maxBytes int64) gin.HandlerFunc {
+	return func(context *gin.Context) {
+		context.Request.Body = http.MaxBytesReader(context.Writer, context.Request.Body, maxBytes)
+		context.Next()
+	}
 }
 
 func generateCaptchaChallenge(context *gin.Context) {
@@ -99,6 +105,7 @@ func getEmail(context *gin.Context) {
 	if !altchaGuard(context, req.Altcha) {
 		return
 	}
+	markCaptchaUsed(req.Altcha)
 
 	context.Data(http.StatusOK, "text/plain", []byte(CORRESPONDANCE_EMAIL))
 }
@@ -135,6 +142,7 @@ func handleSignUp(context *gin.Context) {
 		return
 	}
 
+	markCaptchaUsed(member.Altcha)
 	memberErr := SendMemberInfoEmail(member, SERVER_EMAIL_CREDENTIALS, CORRESPONDANCE_EMAIL)
 	confirmationErr := SendNotificationEmail(member, SERVER_EMAIL_CREDENTIALS, CORRESPONDANCE_EMAIL)
 
@@ -153,7 +161,8 @@ func handleSignUp(context *gin.Context) {
 }
 
 func altchaGuard(context *gin.Context, payload string) bool {
-	valid := altcha.ValidateResponse(payload, false)
+	// Replay prevention is done by markCaptchaUsed, so a signup with validation errors can be resubmitted with the same captcha
+	valid := altcha.ValidateResponse(payload, false) && !isCaptchaUsed(payload)
 
 	if !valid && gin.Mode() != gin.TestMode {
 		log.Println("Invalid Altcha payload", valid)
@@ -161,8 +170,20 @@ func altchaGuard(context *gin.Context, payload string) bool {
 		return false
 	}
 
-	log.Println("Valid Altcha payload", valid, payload)
+	log.Println("Valid Altcha payload", valid)
 	return true
+}
+
+// Ban the captcha solution so it can't be replayed to send more emails
+func markCaptchaUsed(payload string) {
+	if msg, err := altcha.DecodeResponse(payload); err == nil {
+		altcha.BanSignature(msg.Signature)
+	}
+}
+
+func isCaptchaUsed(payload string) bool {
+	msg, err := altcha.DecodeResponse(payload)
+	return err == nil && altcha.IsSignatureBanned(msg.Signature)
 }
 
 func appendError(errorList []string, err error) []string {
