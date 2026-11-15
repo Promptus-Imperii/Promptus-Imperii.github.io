@@ -1,4 +1,10 @@
 {{ define "main" }}
+  {{/* Swiper is only used for this banner, so only the home page loads it. */}}
+  {{ $swiperCSS := resources.Get "plugins/swiper/swiper-bundle.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $swiperCSS.RelPermalink }}" integrity="{{ $swiperCSS.Data.Integrity }}" />
+  {{ $swiperJS := slice (resources.Get "plugins/swiper/swiper-bundle.js") (resources.Get "js/banner-slider.js") | resources.Concat "js/banner.js" | minify | fingerprint }}
+  <script defer src="{{ $swiperJS.RelPermalink }}" integrity="{{ $swiperJS.Data.Integrity }}"></script>
+
   <!-- New Banner -->
   <section class="section">
     <div class="container">
@@ -27,7 +33,7 @@
             <div class="z-10 absolute inset-0 h-auto dark:bg-gray-600/60 bg-gray-50/60"></div>
 
             {{/* Slideshow */}}
-            {{/*  Swiperjs is ✨special✨ so changing it is a bit of a hassle. Change the javascript in themes/hugoplate/assets/js/main.js.
+            {{/*  Swiperjs is ✨special✨ so changing it is a bit of a hassle. Change the javascript in themes/hugoplate/assets/js/banner-slider.js.
             Change the css in assets/scss/custom.scss under "Swiper variables." 
             Use the docs to see what options to use for the JS and what CSS variables to override in the SCSS file. https://swiperjs.com/swiper-api 
             */}}

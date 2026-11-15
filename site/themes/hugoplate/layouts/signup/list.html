@@ -6,7 +6,9 @@
   <div class="container">
     <div class="row">
       <div class="md:col-10 lg:col-6 mx-auto">
-        <form class="flex flex-col gap-5" id="signup-form">
+        {{/* The backend answers with a new #errors, or redirects to the success page. */}}
+        <form class="flex flex-col gap-5" id="signup-form"
+          hx-post="/api/signup" hx-disable="find button">
           <div>
             <label for="legal_first_names" class="form-label">
               {{ i18n "legal_first_names" }}
@@ -63,7 +65,7 @@
             </label>
             <div class="flex flex-col justify-around rounded-md  w-full" role="group">
               <div class="inline-flex items-center gap-2 rounded-md  w-full">
-                <input value="NL" name="country" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-3-blue-500 dark:focus:ring-3-blue-600 dark:ring-3-offset-gray-800 focus:ring-3-2 dark:bg-gray-700 dark:border-gray-600"/>
+                <input value="NL" name="country" type="radio" required class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-3-blue-500 dark:focus:ring-3-blue-600 dark:ring-3-offset-gray-800 focus:ring-3-2 dark:bg-gray-700 dark:border-gray-600"/>
                 <label for="country">{{ i18n "NL" }}</label>
               </div>
               <div class="inline-flex items-center gap-2 rounded-md  w-full">
@@ -79,31 +81,17 @@
             <input name="email" class="form-input" placeholder="hendrikdejong@gmail.com" type="email" required />
           </div>
           <div>
-            <label for="education" class="form-label">
-              {{ i18n "education" }}
-            </label>
-            <div class="flex flex-col justify-around rounded-md  w-full" role="group">
-              <div class="inline-flex items-center gap-2 rounded-md  w-full">
-                <input value="I" name="education" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-3-blue-500 dark:focus:ring-3-blue-600 dark:ring-3-offset-gray-800 focus:ring-3-2 dark:bg-gray-700 dark:border-gray-600"/>
-                <label for="education">{{ i18n "software_engineering" }}</label>
-              </div>
-              <div class="inline-flex items-center gap-2 rounded-md  w-full">
-                <input value="TI" name="education" type="radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-3-blue-500 dark:focus:ring-3-blue-600 dark:ring-3-offset-gray-800 focus:ring-3-2 dark:bg-gray-700 dark:border-gray-600"/>
-                <label for="education">{{ i18n "computer_science" }}</label>
-              </div>
-            </div>
-          </div>
-          <div>
             <label for="phone" class="form-label">
               {{ i18n "phone" }}
             </label>
-            <input name="phone" class="form-input" placeholder="+31612345678" type="tel" />
+            <input name="phone" class="form-input" placeholder="+31612345678" type="tel" required
+              pattern="\s*\+.*" title="Begin met de landcode, bijvoorbeeld +31612345678" />
           </div>
           <div>
             <label for="cohort_year" class="form-label">
               {{ i18n "cohort_year" }}
             </label>
-            <input name="cohort_year" class="form-input" placeholder="2023/2024" type="text" />
+            <input name="cohort_year" class="form-input" placeholder="2023/2024" type="text" required />
             <p>{{ i18n "cohort_explanation" }}</p>
           </div>
           <div>
@@ -132,7 +120,8 @@
               {{ i18n "emergency_contact_phone_number" }}
             </label>
             <input name="emergency_contact_phone_number" class="form-input"
-              placeholder="+31612345678" type="tel" required />
+              placeholder="+31612345678" type="tel" required
+              pattern="\s*\+.*" title="Begin met de landcode, bijvoorbeeld +31612345678" />
           </div>
           <div>
             <label for="iban" class="form-label">
@@ -163,20 +152,16 @@
             <p>{{ i18n "terms_and_conditions_link" }}</p>
             <a href="/terms-and-conditions/" class="underline decoration-2">{{ i18n "terms_and_conditions" }}</a>
           </div>
-          <div id="errorsDiv" class="flex flex-col text-red-400 hidden">
-            <label>{{ i18n "errors" }}</label>
-            <div id="errorsText">
-
-            </div>
-          </div>
+          <div id="errors" class="flex flex-col text-red-400"></div>
+          <p id="failed" class="text-red-400" hidden>Er is iets fout gegaan. Probeer het later opnieuw.</p>
           <div>
             <altcha-widget
-            id="altcha"
-            challengeurl="{{ .Site.Params.serverURL }}/api/captcha-challenge"
+            challenge="/api/captcha-challenge"
+            language="nl"
           ></altcha-widget>
           </div>
           <div>
-            <button id="submit-button" type="submit" class="btn btn-primary cursor-pointer">Submit</button>
+            <button type="submit" class="btn btn-primary cursor-pointer disabled:opacity-50">Submit</button>
           </div>
         </form>
       </div>
@@ -216,17 +201,12 @@
 {{ end }}
 {{ end }}
 
-{{ $altcha := resources.Get "js/altcha.js" }}
-<script src="{{ $altcha.RelPermalink }}" type="module"></script>
+{{ $altcha := resources.Get "js/altcha.js" | fingerprint }}
+{{ $altchaNL := resources.Get "js/altcha-nl.js" | minify | fingerprint }}
+<script type="module" src="{{ $altcha.RelPermalink }}" integrity="{{ $altcha.Data.Integrity }}"></script>
+<script type="module" src="{{ $altchaNL.RelPermalink }}" integrity="{{ $altchaNL.Data.Integrity }}"></script>
 
-{{ $formScript := resources.Get "js/submit.js" }}
-{{ if hugo.IsProduction }}
-  {{ $formScript = $formScript | minify | fingerprint }}
-{{ end }}
-<script 
-  crossorigin="anonymous"
-  integrity="{{ $formScript.Data.Integrity }}" 
-  src="{{ $formScript.RelPermalink }}"></script>
+{{ partial "htmx.html" . }}
 
 {{ if site.Params.google_map.enable }}
 {{ $gmap:= resources.Get "plugins/maps/google-map.js" }}

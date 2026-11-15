@@ -52,13 +52,14 @@ target = 'css'
 
 ############################# Outputs ############################
 [outputs]
-home = ["HTML", "RSS", "WebAppManifest", "SearchIndex"]
+# Add "SearchIndex" back when search is enabled in params.toml.
+home = ["HTML", "RSS", "WebAppManifest"]
 
 ############################# Imaging ############################
 [imaging]
 # See https://github.com/disintegration/imaging
 # Default JPEG or WebP quality setting. Default is 75.
-quality = 90
+quality = 80
 resampleFilter = "Lanczos"
   [imaging.exif]
     disableDate = true
@@ -112,20 +113,9 @@ notAlternative = true
 enable = false
 
 # CSS Plugins
-[[params.plugins.css]]
-link = "plugins/swiper/swiper-bundle.css"
-lazy = false
+# Swiper is only used by the home page banner, so layouts/index.html loads it there.
 [[params.plugins.css]]
 link = "plugins/glightbox/glightbox.css"
-lazy = true
-[[params.plugins.css]]
-link = "plugins/font-awesome/v6/brands.css"
-lazy = true
-[[params.plugins.css]]
-link = "plugins/font-awesome/v6/solid.css"
-lazy = true
-[[params.plugins.css]]
-link = "plugins/font-awesome/v6/icons.css"
 lazy = true
 
 # JS Plugins
@@ -134,16 +124,10 @@ lazy = true
 # link = "js/search.js"
 # lazy = false
 [[params.plugins.js]]
-link = "plugins/swiper/swiper-bundle.js"
-lazy = false
-[[params.plugins.js]]
 link = "plugins/glightbox/glightbox.js"
 lazy = true
 [[params.plugins.js]]
 link = "js/gallery-slider.js"
-lazy = true
-[[params.plugins.js]]
-link = "js/accordion.js"
 lazy = true
 # [[params.plugins.js]]
 # link = "js/tab.js"

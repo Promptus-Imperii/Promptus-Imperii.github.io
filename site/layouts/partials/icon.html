@@ -1,0 +1,26 @@
+{{/* Renders a Font Awesome icon as inline SVG from assets/icons/, so only the icons the site uses
+  are shipped. Takes the usual class notation, which data/social.json also uses:
+    {{ partial "icon" (dict "Name" "fa-solid fa-clock" "Class" "mr-2") }}
+  "Label" is optional and makes the icon readable for screen readers.
+  Regular icons are drawn with the solid set: the free regular set misses icons like medal.
+  To add an icon, copy its SVG from @fortawesome/fontawesome-free/svgs/ into assets/icons/. */}}
+{{ $style := "solid" }}
+{{ $name := "" }}
+{{ range split .Name " " }}
+  {{ if in (slice "fa-brands" "fab") . }}
+    {{ $style = "brands" }}
+  {{ else if and (hasPrefix . "fa-") (not (in (slice "fa-solid" "fas" "fa-regular" "far") .)) }}
+    {{ $name = strings.TrimPrefix "fa-" . }}
+  {{ end }}
+{{ end }}
+{{ with resources.Get (printf "icons/%s/%s.svg" $style $name) }}
+  {{ $attrs := printf `class="icon %s"` ($.Class | default "") }}
+  {{ with $.Label }}
+    {{ $attrs = printf `%s role="img" aria-label="%s"` $attrs (htmlEscape .) }}
+  {{ else }}
+    {{ $attrs = printf `%s aria-hidden="true"` $attrs }}
+  {{ end }}
+  {{ replace .Content "<svg " (printf "<svg %s " $attrs) 1 | safeHTML }}
+{{ else }}
+  {{ errorf "icon %q not found: add assets/icons/%s/%s.svg" $.Name $style $name }}
+{{ end }}

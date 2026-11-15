@@ -1,23 +1,48 @@
 version: 2
+
+# cooldown: only propose versions that are at least a week old, so malicious releases
+# are usually found and pulled before they reach us.
 updates:
   - package-ecosystem: npm
     directory: /site
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     groups:
-      npm:
-        patterns: ['*']
+      production-dependencies:
+        dependency-type: production
+      dev-dependencies:
+        dependency-type: development
+
+  # Go modules have no development/production split: everything in go.mod ends up in the binary.
   - package-ecosystem: gomod
     directory: /backend
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     groups:
       gomod:
         patterns: ['*']
+
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
+    cooldown:
+      default-days: 7
     groups:
-      actions:
+      github-actions:
+        patterns: ['*']
+
+  # Base images in the Dockerfiles are pinned by digest; this keeps the digests current.
+  - package-ecosystem: docker
+    directories: [/backend, /site]
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 7
+    groups:
+      docker:
         patterns: ['*']

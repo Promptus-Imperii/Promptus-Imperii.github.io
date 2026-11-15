@@ -13,22 +13,17 @@
   </head>
 
   <body id="body">
-    <!-- cache partial only in production -->
-    {{ if hugo.IsProduction }}
-      {{ partialCached "preloader.html" . }}
-      {{/*  {{ partialCached "gtm-noscript.html" . }}  */}}
-    {{ else }}
-      {{ partial "preloader.html" . }}
-
-
-      <!-- tailwind size indicator -->
+    {{/* Only in development: shows the active Tailwind breakpoint in a corner of the page. */}}
+    {{ if not hugo.IsProduction }}
       {{ partial "components/tw-size-indicator.html" . }}
     {{ end }}
 
 
     <!-- header (don't cache it) -->
     {{ partial "essentials/header.html" . }}
-    {{ partial "search-modal.html" (dict "Context" . ) }}
+    {{ if site.Params.search.enable }}
+      {{ partial "search-modal.html" (dict "Context" . ) }}
+    {{ end }}
 
 
     <main>

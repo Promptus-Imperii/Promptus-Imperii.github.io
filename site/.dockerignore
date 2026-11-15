@@ -1,0 +1,5 @@
+# Local build output and dependencies; the Docker build makes its own.
+node_modules
+public
+resources
+.hugo_build.lock

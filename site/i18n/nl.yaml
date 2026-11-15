@@ -74,19 +74,8 @@
 - id: BE
   translation: België
 
-
-
 - id: email
   translation: E-mail
-
-- id: education
-  translation: Opleiding
-
-- id: computer_science
-  translation: Technische Informatica
-
-- id: software_engineering
-  translation: Informatica
 
 - id: phone
   translation: Telefoonnummer
@@ -132,6 +121,3 @@
 
 - id: terms_and_conditions_link
   translation: "De algemene voorwaarden zijn hier te vinden: "
-
-- id: errors
-  translation: "Je hebt een aantal velden verkeerd ingevuld:"

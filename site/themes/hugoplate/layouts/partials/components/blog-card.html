@@ -14,12 +14,12 @@
     {{if .Params.author}}
     <li class="mr-4 inline-block">
       <a href="{{ `authors/` | relLangURL }}{{ .Params.Author | urlize }}/">
-        <i class="fa-regular fa-circle-user mr-2"></i>{{ .Params.author }}
+        {{ partial "icon" (dict "Name" "fa-regular fa-circle-user" "Class" "mr-2") }}{{ .Params.author }}
       </a>
     </li>
     {{end}}
     <li class="mr-4 inline-block">
-      <i class="fa-regular fa-folder mr-2" aria-label="Categorieën"></i>
+      {{ partial "icon" (dict "Name" "fa-regular fa-folder" "Class" "mr-2" "Label" "Categorieën") }}
       {{ $categories:= .Params.categories }}
       {{ range $i,$p:= $categories }}
         <a
@@ -32,7 +32,7 @@
       {{ end }}
     </li>
     <li class="mr-4 inline-block">
-      <i class="fa-regular fa-clock mr-2"></i>
+      {{ partial "icon" (dict "Name" "fa-regular fa-clock" "Class" "mr-2") }}
       {{ time.Format ":date_long" .PublishDate }}
     </li>
   </ul>

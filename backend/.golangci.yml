@@ -1,0 +1,26 @@
+version: "2"
+
+linters:
+  # On top of the standard set: errcheck, govet, ineffassign, staticcheck, unused.
+  enable:
+    - bodyclose
+    - errorlint
+    - gocritic
+    - gosec
+    - nilerr
+    - noctx
+    - perfsprint
+    - revive
+    - unconvert
+    - unparam
+    - usestdlibvars
+  exclusions:
+    rules:
+      # Test servers echo request paths on purpose; gosec's taint checks flag that as XSS.
+      - path: _test\.go
+        linters: [gosec]
+
+formatters:
+  enable:
+    - gofumpt
+    - goimports

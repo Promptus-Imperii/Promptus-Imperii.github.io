@@ -1,0 +1,10 @@
+{{/* htmx for the signup and contact forms.
+  noSwap: htmx 4 swaps every response into the page by default, also error pages from the proxy
+  in front of the backend. Here 4xx and 5xx responses are not swapped. The backend's own errors
+  still arrive, because they come as <hx-partial>, which htmx places regardless.
+  htmx reads this config when it starts, so the meta tag must come before the script. */}}
+<meta name="htmx-config" content='{"noSwap": [204, 304, "4xx", "5xx"]}' />
+{{ $htmx := resources.Get "js/htmx.min.js" | fingerprint }}
+<script defer src="{{ $htmx.RelPermalink }}" integrity="{{ $htmx.Data.Integrity }}"></script>
+{{ $forms := resources.Get "js/forms.js" | minify | fingerprint }}
+<script defer src="{{ $forms.RelPermalink }}" integrity="{{ $forms.Data.Integrity }}"></script>

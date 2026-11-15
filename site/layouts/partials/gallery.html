@@ -1,0 +1,33 @@
+{{/* Gallery for an image folder under assets/, such as images/activities/<activity>.
+  Replaces the gallery-slider module's partial, which published every original image plus a
+  full-size copy in the original format. Here each photo becomes one WebP of at most 1920 pixels
+  on the long side (never enlarged), used for both the thumbnail and the lightbox. GIFs are
+  published as they are, so they stay animated. */}}
+{{ $images := resources.Match (printf "%s/*" .Dir) }}
+{{ with $images }}
+  <div class="gallery zoomable">
+    {{ range . }}
+      {{ $ext := path.Ext .Name | lower }}
+      {{ $src := "" }}
+      {{ if in (slice ".jpg" ".jpeg" ".png" ".webp") $ext }}
+        {{ $src = .Fit "1920x1920 webp" }}
+      {{ else if eq $ext ".gif" }}
+        {{ $src = . }}
+      {{ end }}
+      {{ with $src }}
+        <div class="gallery-item">
+          <a href="{{ .RelPermalink }}" style="display: block;" class="glightbox">
+            <img
+              loading="lazy"
+              src="{{ .RelPermalink }}"
+              width="{{ .Width }}"
+              height="{{ .Height }}"
+              class="img"
+              style="margin: 0;"
+              alt="{{ path.Base .Name }}" />
+          </a>
+        </div>
+      {{ end }}
+    {{ end }}
+  </div>
+{{ end }}
