@@ -14,13 +14,13 @@
   <ul class="mb-4">
     {{if .Params.sponsor_type}}
     <li class="mr-4 inline-block">
-        <i class="fa-regular fa-medal mr-2"></i>{{ .Params.sponsor_type }}
+        {{ partial "icon" (dict "Name" "fa-regular fa-medal" "Class" "mr-2") }}{{ .Params.sponsor_type }}
     </li>
     {{end}}
 
     {{if .Params.sponsor_time}}
     <li class="mr-4 inline-block">
-      <i class="fa-regular fa-calendar mr-2"></i>
+      {{ partial "icon" (dict "Name" "fa-regular fa-calendar" "Class" "mr-2") }}
       {{ $time:= .Params.sponsor_time }}
       {{ range $i,$p:= $time }}
         <a

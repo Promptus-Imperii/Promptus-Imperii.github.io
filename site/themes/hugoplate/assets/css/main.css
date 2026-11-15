@@ -8,6 +8,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @import "./fonts.css";
+@import "./icons.css";
 @import "./safe.css";
 @import "./utilities.css";
 

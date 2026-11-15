@@ -1,0 +1,13 @@
+/*! Icons: Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com
+    License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Code: MIT License)
+    Copyright 2024 Fonticons, Inc. */
+/* Inline SVG icons from layouts/partials/icon.html, sized and coloured like the text around them,
+   the same way Font Awesome sizes its icons. */
+.icon {
+  display: inline-block;
+  height: 1em;
+  width: auto;
+  overflow: visible;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}

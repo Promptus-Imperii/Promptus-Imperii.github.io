@@ -17,8 +17,9 @@ path = "github.com/gethugothemes/hugo-modules/images"
 [[imports]]
 path = "github.com/gethugothemes/hugo-modules/videos"
 
-[[imports]]
-path = "github.com/gethugothemes/hugo-modules/icons/font-awesome"
+# Icons are inline SVGs from assets/icons/, see layouts/partials/icon.html.
+# [[imports]]
+# path = "github.com/gethugothemes/hugo-modules/icons/font-awesome"
 
 # [[imports]]
 # path = "github.com/gethugothemes/hugo-modules/icons/themify-icons"

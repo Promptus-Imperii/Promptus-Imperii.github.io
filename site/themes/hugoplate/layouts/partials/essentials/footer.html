@@ -44,7 +44,7 @@
                 aria-label="{{ .name }}"
                 rel="nofollow noopener"
                 href="{{ .link | safeURL }}">
-                <i class="{{ .icon }}"></i>
+                {{ partial "icon" (dict "Name" .icon) }}
               </a>
             </li>
           {{ end }}

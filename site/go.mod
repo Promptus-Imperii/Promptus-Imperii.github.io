@@ -9,7 +9,6 @@ require (
 	github.com/gethugothemes/hugo-modules/components/render-link v0.0.0-20250306074534-f5c3a047e69c // indirect
 	github.com/gethugothemes/hugo-modules/components/social-share v0.0.0-20250306074534-f5c3a047e69c // indirect
 	github.com/gethugothemes/hugo-modules/gzip-caching v0.0.0-20250306074534-f5c3a047e69c // indirect
-	github.com/gethugothemes/hugo-modules/icons/font-awesome v0.0.0-20250306074534-f5c3a047e69c // indirect
 	github.com/gethugothemes/hugo-modules/images v0.0.0-20250306074534-f5c3a047e69c // indirect
 	github.com/gethugothemes/hugo-modules/modal v0.0.0-20250306074534-f5c3a047e69c // indirect
 	github.com/gethugothemes/hugo-modules/pwa v0.0.0-20250306074534-f5c3a047e69c // indirect
