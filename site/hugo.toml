@@ -112,9 +112,7 @@ notAlternative = true
 enable = false
 
 # CSS Plugins
-[[params.plugins.css]]
-link = "plugins/swiper/swiper-bundle.css"
-lazy = false
+# Swiper is only used by the home page banner, so layouts/index.html loads it there.
 [[params.plugins.css]]
 link = "plugins/glightbox/glightbox.css"
 lazy = true
@@ -124,9 +122,6 @@ lazy = true
 # [[params.plugins.js]]
 # link = "js/search.js"
 # lazy = false
-[[params.plugins.js]]
-link = "plugins/swiper/swiper-bundle.js"
-lazy = false
 [[params.plugins.js]]
 link = "plugins/glightbox/glightbox.js"
 lazy = true
