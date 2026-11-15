@@ -31,10 +31,7 @@ copyright = "Made with ❤️ by Webcommissie"
 
 
 # Preloader
-# preloader module: https://github.com/gethugothemes/hugo-modules/tree/master/components/preloader
-[preloader]
-enable = true
-preloader = "" # use jpg, png, svg or gif format.
+# The preloader module is not imported: its full-screen overlay delayed the first paint.
 
 # Navigation button
 [navigation_button]

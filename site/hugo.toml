@@ -52,13 +52,14 @@ target = 'css'
 
 ############################# Outputs ############################
 [outputs]
-home = ["HTML", "RSS", "WebAppManifest", "SearchIndex"]
+# Add "SearchIndex" back when search is enabled in params.toml.
+home = ["HTML", "RSS", "WebAppManifest"]
 
 ############################# Imaging ############################
 [imaging]
 # See https://github.com/disintegration/imaging
 # Default JPEG or WebP quality setting. Default is 75.
-quality = 90
+quality = 80
 resampleFilter = "Lanczos"
   [imaging.exif]
     disableDate = true
@@ -127,9 +128,6 @@ link = "plugins/glightbox/glightbox.js"
 lazy = true
 [[params.plugins.js]]
 link = "js/gallery-slider.js"
-lazy = true
-[[params.plugins.js]]
-link = "js/accordion.js"
 lazy = true
 # [[params.plugins.js]]
 # link = "js/tab.js"
