@@ -10,19 +10,17 @@
             <div class="content">
               {{ .Content }}
             </div>
+            {{/* The backend's answer says where it goes: a new #email-block, or a new #errors. */}}
             <div class="pt-2" id="email-block">
-              <form class="flex flex-col gap-5" id="email-form">
+              <form class="flex flex-col gap-5">
                 <altcha-widget
-                id="altcha"
-                challengeurl="{{ .Site.Params.serverURL }}/api/captcha-challenge"
-                strings="{&quot;label&quot;:&quot;Verkrijg email&quot;}"
+                challenge="/api/captcha-challenge"
+                language="nl"
+                hx-post="/api/email" hx-trigger="verified"
                 ></altcha-widget>
               </form>
-            </div>
-            <div id="errorsDiv" class="flex flex-col text-red-400 hidden">
-              <label>{{ i18n "errors" }}</label>
-              <div id="errorsText">
-              </div>
+              <div id="errors" class="flex flex-col text-red-400"></div>
+              <p id="failed" class="text-red-400" hidden>Er is iets fout gegaan. Probeer het later opnieuw.</p>
             </div>
           </div>
         </div>
@@ -30,16 +28,11 @@
     </div>
   </section>
 
-  {{ $altcha := resources.Get "js/altcha.js" }}
-  <script src="{{ $altcha.RelPermalink }}" type="module"></script>
+  {{ $altcha := resources.Get "js/altcha.js" | fingerprint }}
+  {{ $altchaNL := resources.Get "js/altcha-nl.js" | minify | fingerprint }}
+  <script type="module" src="{{ $altcha.RelPermalink }}" integrity="{{ $altcha.Data.Integrity }}"></script>
+  <script type="module" src="{{ $altchaNL.RelPermalink }}" integrity="{{ $altchaNL.Data.Integrity }}"></script>
 
-  {{ $formScript := resources.Get "js/email.js" }}
-  {{ if hugo.IsProduction }}
-    {{ $formScript = $formScript | minify | fingerprint }}
-  {{ end }}
-  <script 
-    crossorigin="anonymous"
-    integrity="{{ $formScript.Data.Integrity }}"
-    src="{{ $formScript.RelPermalink }}"></script>
+  {{ partial "htmx.html" . }}
 
 {{ end }}
