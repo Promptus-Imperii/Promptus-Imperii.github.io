@@ -10,8 +10,15 @@ const MAX_HEIGHT_LANDSCAPE = 1080;
 const MAX_WIDTH_PORTRAIT = MAX_HEIGHT_LANDSCAPE;
 const MAX_HEIGHT_PORTRAIT = MAX_WIDTH_LANDSCAPE;
 
+// Resizing or rotating always encodes a JPEG again. 90 loses nothing visible; Hugo makes its own
+// smaller copies for the website anyway.
+const JPEG_QUALITY = 90;
+
 // Path to the assets folder
 const assetsFolder = path.join(__dirname, '..', 'assets/images');
+
+// Set when any folder or image fails, so the script exits with an error code.
+let failed = false;
 
 // Recursive function to process files in directories
 async function processFolder(folder) {
@@ -31,80 +38,74 @@ async function processFolder(folder) {
         }
     } catch (err) {
         console.error(`Error reading folder ${folder}:`, err);
+        failed = true;
     }
 }
 
-// Function to process a single image
+// Rotates an image according to its EXIF orientation and scales it down to fit within 1080p.
 async function processImage(filePath) {
     try {
-        // Create a sharp instance with EXIF data
-        let sharpInstance = sharp(filePath).withMetadata();
-
-        // Create a temporary file path for the processed image
-        const tempFilePath = path.join(
-            path.dirname(filePath),
-            `${path.basename(filePath, path.extname(filePath))}_temp${path.extname(filePath)}`
-        );
-
-        const replaceFile = async (action) => {
-            // Replace the original file with the processed file
-            await fs.unlink(filePath); // Delete the original file
-            await fs.rename(tempFilePath, filePath); // Rename processed file to original file name
-            console.log(`Replaced original file with ${action} version: ${path.basename(filePath)}`);
+        const { width, height, orientation = 1, chromaSubsampling } = await sharp(filePath).metadata();
+        // Orientations 5 to 8 turn the image by 90°, so the displayed width and height are swapped.
+        const [displayWidth, displayHeight] = orientation >= 5 ? [height, width] : [width, height];
+        const [maxWidth, maxHeight] = displayWidth >= displayHeight
+            ? [MAX_WIDTH_LANDSCAPE, MAX_HEIGHT_LANDSCAPE]
+            : [MAX_WIDTH_PORTRAIT, MAX_HEIGHT_PORTRAIT];
+        const rotate = orientation !== 1;
+        const resize = displayWidth > maxWidth || displayHeight > maxHeight;
+        if (!rotate && !resize) {
+            return;
         }
 
-        // Check if the image needs rotation based on EXIF data
-        if (sharpInstance.metadata.orientation && sharpInstance.metadata.orientation !== 1) {
-            // If rotation is needed (orientation is not "1", which means no rotation), apply rotation
-            console.log(`Rotating image: ${path.basename(filePath)}`);
-            await sharpInstance
-                .rotate() // Rotate the image based on EXIF orientation
-                .toFile(tempFilePath); // Save to a temporary file
-            await replaceFile("rotated")
-            //Refresh sharpInstance to load new metadata
-            sharpInstance = sharp(filePath).withMetadata();
-            console.log(`Processed and rotated ${path.basename(filePath)}`);
+        // autoOrient turns the pixels and resets the EXIF orientation, so every viewer shows the same thing.
+        let image = sharp(filePath).autoOrient().keepMetadata();
+        if (resize) {
+            image = image.resize(maxWidth, maxHeight, { fit: 'inside' });
         }
-
-        const resizeImage = async (width, height) => {
-            // Resize and crop the image
-            console.log(`Resizing image: ${path.basename(filePath)}`);
-            await sharpInstance
-                .resize(width, height, { fit: 'outside' }) // Resize and crop
-                .toFile(tempFilePath); // Save to a temporary file
-            await replaceFile("resized")
-            console.log(`Processed and resized ${path.basename(filePath)}`);
+        const ext = path.extname(filePath).toLowerCase();
+        if (ext === '.jpg' || ext === '.jpeg') {
+            image = image.jpeg({
+                quality: JPEG_QUALITY,
+                // Keep full colour detail if the original has it (sharp would reduce it to 4:2:0).
+                chromaSubsampling: chromaSubsampling === '4:4:4' ? '4:4:4' : '4:2:0',
+            });
+        } else if (ext === '.png') {
+            // sharp's default PNG compression is lighter than most tools use, which can make files grow.
+            image = image.png({ compressionLevel: 9, adaptiveFiltering: true });
         }
-
-        // If landscape mode and larger than 1080p, resize it
-        if (
-            sharpInstance.metadata.width > sharpInstance.metadata.height &&
-            sharpInstance.metadata.width > MAX_WIDTH_LANDSCAPE || sharpInstance.metadata.height > MAX_HEIGHT_LANDSCAPE
-        ) {
-            // Image is landscape mode
-            resizeImage(MAX_WIDTH_LANDSCAPE, MAX_HEIGHT_LANDSCAPE)
+        // Write next to the original first, so a failure never leaves a half-written image behind.
+        const tempFilePath = tempPath(filePath);
+        try {
+            const { size } = await image.toFile(tempFilePath);
+            // A resize that only makes the file bigger isn't worth it (this happens when the original
+            // was saved at a lower quality). A rotation is always kept: otherwise the image shows sideways.
+            if (!rotate && size > (await fs.stat(filePath)).size) {
+                console.log(`Kept ${path.basename(filePath)}: the resized version was larger than the original`);
+                return;
+            }
+            await fs.rename(tempFilePath, filePath);
+        } finally {
+            await fs.rm(tempFilePath, { force: true });
         }
-        // If portrait mode and larger than 1080p
-        if(
-            sharpInstance.metadata.width < sharpInstance.metadata.height &&
-            sharpInstance.metadata.width > MAX_WIDTH_PORTRAIT || sharpInstance.metadata.height > MAX_HEIGHT_PORTRAIT
-        ) {
-            resizeImage(MAX_WIDTH_PORTRAIT, MAX_HEIGHT_PORTRAIT)
-        }
-
+        console.log(`Processed ${path.basename(filePath)}:${rotate ? ' rotated' : ''}${resize ? ' resized' : ''}`);
     } catch (error) {
         console.error(`Error processing ${path.basename(filePath)}:`, error);
+        failed = true;
     }
 }
 
-
+function tempPath(filePath) {
+    const ext = path.extname(filePath);
+    return path.join(path.dirname(filePath), `${path.basename(filePath, ext)}_temp${ext}`);
+}
 
 // Helper function to check if a file is an image
 // HEIC cannot be processed
 function isImage(filePath) {
     const imageExtensions = ['.jpg', '.jpeg', '.png', '.webp'];
     const ext = path.extname(filePath).toLowerCase();
-    return imageExtensions.includes(ext);
+    // Skip temporary files from an interrupted earlier run.
+    return imageExtensions.includes(ext) && !path.basename(filePath, path.extname(filePath)).endsWith('_temp');
 }
 
 // Start the recursive processing
@@ -114,4 +115,7 @@ function isImage(filePath) {
         process.exit(1);
     }
     await processFolder(assetsFolder);
+    if (failed) {
+        process.exit(1);
+    }
 })();
