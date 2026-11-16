@@ -2,7 +2,14 @@
   {{/*  printf "%s%s" concatinates the string. GetMatch matches the file on '/images/sponsor-partner-images/sponsor-name.*' which means that any extention is valid */}}
   {{ $imagePath := resources.GetMatch (printf "%s%s" (path.Join "/images/sponsor-partner-images" .File.ContentBaseName) ".*") }}
   {{ if $imagePath }}
-    {{ partial "image" (dict "Src" $imagePath "Alt" .Title "Class" "mb-6 w-full rounded") }}
+    {{/*  Optional front matter `white_background: true` puts the logo on a white backing, for logos that are unreadable on the dark theme */}}
+    {{ if .Params.white_background }}
+      <div class="mb-6 rounded bg-white p-4">
+        {{ partial "image" (dict "Src" $imagePath "Alt" .Title "Class" "w-full rounded") }}
+      </div>
+    {{ else }}
+      {{ partial "image" (dict "Src" $imagePath "Alt" .Title "Class" "mb-6 w-full rounded") }}
+    {{ end }}
   {{ else }}
     {{ errorf "Cannot find the logo for partner or sponser %s. Please place the logo in images/sponsor-partner-images and give it the same name as your markdown file." .File.ContentBaseName }}
   {{ end }}
